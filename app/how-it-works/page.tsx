@@ -1,175 +1,87 @@
 import type { Metadata } from "next";
-import {
-  CheckCircle2,
-  Ear,
-  PanelsTopLeft,
-  PhoneCall,
-  Settings2,
-  Users,
-} from "lucide-react";
-import { FAQ } from "@/components/faq";
-import { FinalCTA } from "@/components/final-cta";
-import { ProductMockup } from "@/components/product-mockup";
-import {
-  ButtonLink,
-  Container,
-  PageHero,
-  SectionHeading,
-} from "@/components/ui";
-import { faqs } from "@/lib/content";
+import { AudioLines, Radio, UserRound } from "lucide-react";
+import { LanguagePair, TranscriptTurn } from "@/components/conversation-card";
+import { ButtonLink, Container, PageHero, SectionHeading } from "@/components/ui";
 import { createMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = createMetadata(
-  "How It Works: Kits & Phone Line",
-  "See how Phontus works through Clinical and Frontline interpreting kits with open-ear bone-conduction headsets, plus the Phontus Phone Line for customers who call in directly.",
+  "How it works",
+  "A Phontus conversation from language selection through real-time interpreting and human escalation.",
   "/how-it-works",
 );
+
+const steps = [
+  {
+    title: "Confirm the two languages",
+    copy: "The screen shows both languages in words. Confirm them and press start. There is no code to look up, no menu to search, and no flag to interpret.",
+    mock: (
+      <div className="start-session-mock">
+        <LanguagePair active={false} />
+        <button type="button"><Radio aria-hidden="true" /> Start session</button>
+      </div>
+    ),
+  },
+  {
+    title: "Speak out loud, one turn at a time",
+    copy: "Nobody wears anything. The kit's external directional microphone focuses on the two people speaking and eliminates the sound of the room around them. Say one clear thought, then let the other person answer.",
+    mock: (
+      <div className="speaking-mock">
+        <span>Listening</span>
+        <AudioLines aria-hidden="true" />
+        <small>Speak one clear thought at a time.</small>
+      </div>
+    ),
+  },
+  {
+    title: "Read the turn, or ask for a person",
+    copy: "Every turn shows who said it and in which language, so both people can follow the exchange to the end. If the conversation needs more, request a certified human interpreter without restarting anything.",
+    mock: (
+      <div className="request-human-mock">
+        <TranscriptTurn line={{ speaker: "Visitor", language: "Spanish (US)", time: "02:02", original: "¿Necesito traer algo mañana?", translation: "Do I need to bring anything tomorrow?" }} />
+        <button type="button"><UserRound aria-hidden="true" /> Request human interpreter</button>
+      </div>
+    ),
+  },
+];
 
 export default function HowItWorksPage() {
   return (
     <>
       <PageHero
-        eyebrow="How Phontus works"
-        title="A simple rhythm for a clearer conversation."
-        copy="Begin from the Clinical Kit, Frontline Kit, or the Phontus Phone Line. Phontus keeps the Spanish–English exchange clear so your team can stay focused on the conversation."
-      >
-        <div className="hero__actions">
-          <ButtonLink href="/contact">Request a Demo</ButtonLink>
-        </div>
-      </PageHero>
+        eyebrow="How it works"
+        title="A conversation, from the moment someone walks up."
+        copy="Where the conversation starts changes with the room. What the two people do never does: confirm the languages, speak out loud, take turns."
+      />
 
       <section className="section">
+        <Container className="how-steps">
+          {steps.map((step, index) => (
+            <article className="how-step" key={step.title} data-reveal>
+              <div>
+                <span className="step-number">0{index + 1}</span>
+                <h2>{step.title}</h2>
+                <p>{step.copy}</p>
+              </div>
+              {step.mock}
+            </article>
+          ))}
+        </Container>
+      </section>
+
+      <section className="section section--white section--bordered">
         <Container>
           <SectionHeading
-            eyebrow="From connection to conversation"
-            title="Three steps, wherever your team starts"
-            copy="Choose the access point for the setting, get connected, and follow a consistent turn-by-turn exchange."
-            align="left"
+            eyebrow="Same flow, three ways in"
+            title="Where the conversation starts changes. What it feels like does not."
           />
-          <div className="steps-list">
-            <article>
-              <h3>Choose the right access point</h3>
-              <p>
-                Begin with the mobile Clinical Kit, compact Frontline Kit, or
-                the Phontus Phone Line based on where the conversation is
-                happening.
-              </p>
-            </article>
-            <article>
-              <h3>Get ready to talk</h3>
-              <p>
-                For a kit session, each participant uses an open-ear
-                bone-conduction headset. Confirm Spanish and English, then begin
-                without creating a separate participant account.
-              </p>
-            </article>
-            <article>
-              <h3>Speak one turn at a time</h3>
-              <p>
-                Clear speaker and language cues help both people follow the
-                interpreted exchange until the interaction is complete.
-              </p>
-            </article>
+          <div className="hairline-grid hairline-grid--three" data-reveal>
+            <div className="plain-tile"><strong>Clinical Kit</strong><span>Roll the cart in. The screen is already awake.</span></div>
+            <div className="plain-tile"><strong>Frontline Kit</strong><span>It is already on the counter between you.</span></div>
+            <div className="plain-tile"><strong>Phone Line</strong><span>The caller dials. Interpreting starts on the line.</span></div>
           </div>
+          <div className="center-action"><ButtonLink href="/product">Explore the product</ButtonLink></div>
         </Container>
       </section>
-
-      <section className="section section--solutions">
-        <Container>
-          <div className="split-section">
-            <div className="split-section__copy">
-              <p className="eyebrow">Choose how to connect</p>
-              <h2>Start from the access point that fits.</h2>
-              <p>
-                The Clinical Kit moves between hospital and clinic spaces. The
-                Frontline Kit fits counters, offices, and worksites. The
-                Phontus Phone Line lets customers reach your team by phone,
-                wherever they’re calling from.
-              </p>
-              <ul className="check-list">
-                <li><PanelsTopLeft /> Clinical and Frontline Kits</li>
-                <li><Ear /> Open-ear headsets for in-person kit sessions</li>
-                <li><PhoneCall /> Phontus Phone Line for inbound calls</li>
-              </ul>
-            </div>
-            <div className="showcase-visual showcase-visual--mint">
-              <ProductMockup />
-            </div>
-          </div>
-        </Container>
-      </section>
-
-      <section className="section">
-        <Container>
-          <div className="split-section split-section--reverse">
-            <div className="split-section__copy">
-              <p className="eyebrow">Steps two and three</p>
-              <h2>Keep context visible as the dialogue moves.</h2>
-              <p>
-                Speaker labels, language labels, and translated turns form a
-                clear bilingual record of the active exchange. The transcript
-                concept is designed to support orientation, not pull attention
-                away from the conversation.
-              </p>
-            </div>
-            <div className="showcase-visual showcase-visual--sun">
-              <ProductMockup mode="transcript" />
-            </div>
-          </div>
-        </Container>
-      </section>
-
-      <section className="section section--solutions">
-        <Container>
-          <SectionHeading
-            eyebrow="Deployment"
-            title="From kit placement to staff confidence"
-            copy="The product workflow is only one part of responsible implementation."
-          />
-          <div className="feature-grid feature-grid--four">
-            {[
-              {
-                icon: PanelsTopLeft,
-                title: "Choose the access mix",
-                copy: "Match Clinical Kits, Frontline Kits, and the Phontus Phone Line to each team and environment.",
-              },
-              {
-                icon: Settings2,
-                title: "Place and maintain kits",
-                copy: "Plan placement, charging, headset storage and handling, cleaning, and phone availability.",
-              },
-              {
-                icon: Users,
-                title: "Orient the team",
-                copy: "Set expectations for appropriate use, turn-taking, and session handling.",
-              },
-              {
-                icon: CheckCircle2,
-                title: "Keep handoffs clear",
-                copy: "Maintain pathways to qualified human interpreters when a complex or high-stakes situation calls for one.",
-              },
-            ].map(({ icon: Icon, title, copy }) => (
-              <article className="feature-card" key={title}>
-                <Icon aria-hidden="true" />
-                <h3>{title}</h3>
-                <p>{copy}</p>
-              </article>
-            ))}
-          </div>
-        </Container>
-      </section>
-
-      <section className="section">
-        <Container>
-          <SectionHeading
-            eyebrow="Frequently asked questions"
-            title="A few practical answers"
-          />
-          <FAQ items={faqs} />
-        </Container>
-      </section>
-
-      <FinalCTA />
     </>
   );
 }

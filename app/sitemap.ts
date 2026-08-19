@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 import { siteConfig } from "@/lib/config";
-import { solutions } from "@/lib/content";
+import { solutions } from "@/lib/redesign-content";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const routes = [
@@ -13,6 +13,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/contact",
     "/privacy",
     "/terms",
+    "/accessibility",
     ...solutions.map((solution) => `/solutions/${solution.slug}`),
   ];
 

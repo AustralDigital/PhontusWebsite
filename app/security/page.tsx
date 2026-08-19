@@ -1,141 +1,53 @@
 import type { Metadata } from "next";
-import {
-  DatabaseZap,
-  KeyRound,
-  LockKeyhole,
-  MessageSquareLock,
-  Network,
-  ShieldCheck,
-} from "lucide-react";
-import { FinalCTA } from "@/components/final-cta";
-import {
-  ButtonLink,
-  Container,
-  PageHero,
-  SectionHeading,
-} from "@/components/ui";
-import { siteConfig } from "@/lib/config";
+import Link from "next/link";
+import { ShieldCheck, Timer, Users, Wifi } from "lucide-react";
+import { Container, PageHero } from "@/components/ui";
 import { createMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = createMetadata(
   "Security",
-  "Learn about Phontus’ developing approach to access controls, data minimization, secure transmission architecture, kit handling, and responsible deployment.",
+  "How Phontus approaches controlled access, encrypted transmission, and configurable session handling.",
   "/security",
 );
 
-const principles = [
-  {
-    icon: KeyRound,
-    title: "Controlled access",
-    description:
-      "We are building toward clear control over who can begin and manage sessions in each environment.",
-  },
-  {
-    icon: DatabaseZap,
-    title: "Data minimization",
-    description:
-      "Product decisions should reduce unnecessary data collection and keep each session focused on its purpose.",
-  },
-  {
-    icon: Network,
-    title: "Secure transmission architecture",
-    description:
-      "Our architecture direction includes encrypted transport and careful separation of product services.",
-  },
-  {
-    icon: MessageSquareLock,
-    title: "Thoughtful session handling",
-    description:
-      "Session state, transcript behavior, and retention choices are treated as deliberate security decisions.",
-  },
-  {
-    icon: ShieldCheck,
-    title: "Ongoing development",
-    description:
-      "Security practices mature alongside the product through review, testing, and implementation work.",
-  },
-  {
-    icon: LockKeyhole,
-    title: "Clear deployment boundaries",
-    description:
-      "Organizations need guidance about kit access, headset handling, phone use, physical placement, and appropriate use.",
-  },
+const practices = [
+  { icon: ShieldCheck, title: "Controlled access", copy: "Sites, staff accounts and device enrollment are managed by the administrators you designate. Access is granted per site, not per organization." },
+  { icon: Wifi, title: "Secure transmission", copy: "Session traffic is encrypted in transit between the kit, the phone line and the interpreting service." },
+  { icon: Timer, title: "Session handling you set", copy: "Transcript retention is configured per site in the admin console. What is kept, for how long, and who can read it is your decision." },
+  { icon: Users, title: "Nothing for a visitor to install", copy: "A visitor never creates an account, installs anything, or hands over a device. The fewer things a person has to touch, the less there is to protect." },
 ];
 
 export default function SecurityPage() {
   return (
     <>
       <PageHero
-        eyebrow="Security and responsible deployment"
-        title="A security approach grounded in careful product decisions."
-        copy="Phontus is being designed around privacy-conscious workflows, thoughtful session handling, and secure architecture goals. We’ll be clear about what’s available, what’s in progress, and what your organization should consider before deployment."
-      >
-        <div className="hero__actions">
-          <ButtonLink href={`mailto:${siteConfig.email}`}>
-            Ask a Security Question
-          </ButtonLink>
-        </div>
-      </PageHero>
-
+        eyebrow="Security"
+        title="Security is a practice, not a claim."
+        copy="Phontus is built around controlled access, encrypted transmission and session handling you configure. This page describes where things stand today, and it changes as the work does."
+      />
       <section className="section">
         <Container>
-          <SectionHeading
-            eyebrow="Our approach"
-            title="Principles shaping the Phontus platform"
-            copy="These are product and architecture directions—not claims of completed certification."
-          />
-          <div className="feature-grid">
-            {principles.map(({ icon: Icon, title, description }) => (
-              <article className="feature-card" key={title}>
-                <Icon aria-hidden="true" />
-                <h3>{title}</h3>
-                <p>{description}</p>
+          <div className="hairline-grid hairline-grid--two" data-reveal>
+            {practices.map(({ icon: Icon, title, copy }) => (
+              <article className="change-card" key={title}>
+                <span className="icon-tile"><Icon aria-hidden="true" /></span>
+                <h3>{title}</h3><p>{copy}</p>
               </article>
             ))}
           </div>
-        </Container>
-      </section>
-
-      <section className="section section--solutions">
-        <Container>
-          <div className="split-section">
-            <div className="split-section__copy">
-              <p className="eyebrow">Deployment considerations</p>
-              <h2>Responsible use extends beyond the software.</h2>
+          <div className="split-grid split-grid--start security-review" data-reveal>
+            <div>
+              <h2>Where we are today</h2>
+              <p>Phontus is built for organizations that have to answer security questions before they can say yes. Rather than list certifications, this page sets out what is in place, what is in progress, and what a review with your team would cover. Ask us and we will tell you exactly where we stand.</p>
+              <Link className="text-link" href="/contact">Request our current security summary →</Link>
             </div>
-            <div className="split-section__copy">
-              <p>
-                Kit placement, headset handling, phone use, audio levels, staff
-                access, physical privacy, network configuration, and escalation
-                policies all shape how an interpretation service behaves in
-                practice. We work with organizations to understand those
-                realities without assuming every access channel has identical
-                operational considerations.
-              </p>
-              <ButtonLink href="/contact" variant="secondary">
-                Discuss Your Environment
-              </ButtonLink>
+            <div className="review-list">
+              <strong>What a review covers</strong>
+              {["Data flow for a kit session and a phone session", "Retention configuration and deletion behavior", "Administrator roles and access boundaries", "Device enrollment and loss handling", "Subprocessors, and where each one sits in the flow"].map((item) => <span key={item}>{item}</span>)}
             </div>
           </div>
         </Container>
       </section>
-
-      <section className="section">
-        <Container>
-          <div className="content-band">
-            <p className="eyebrow">Questions and review</p>
-            <h2>Start a direct security conversation.</h2>
-            <p>
-              For security, privacy, or architecture questions, contact{" "}
-              <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>.
-              We’ll respond with the level of detail appropriate to the current
-              product stage.
-            </p>
-          </div>
-        </Container>
-      </section>
-
-      <FinalCTA />
     </>
   );
 }

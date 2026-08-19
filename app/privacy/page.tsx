@@ -1,83 +1,27 @@
 import type { Metadata } from "next";
-import { Container, PageHero } from "@/components/ui";
-import { siteConfig } from "@/lib/config";
+import { LegalPage, ReviewNote } from "@/components/legal-page";
 import { createMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = createMetadata(
-  "Privacy Policy",
-  "Phontus website privacy policy.",
-  "/privacy",
-);
+export const metadata: Metadata = createMetadata("Privacy", "How Phontus handles information from interpreted sessions.", "/privacy");
 
 export default function PrivacyPage() {
   return (
-    <>
-      <PageHero
-        eyebrow="Legal"
-        title="Privacy Policy"
-        copy="This policy explains the limited information collected through the Phontus public website and how it is handled."
-      />
-      <section className="section">
-        <Container className="legal-content">
-          <p><strong>Last updated:</strong> July 25, 2026</p>
-          <p>
-            This policy applies to the public Phontus marketing website. It does
-            not describe product data practices for a future contracted
-            deployment, which would be governed by separate agreements and
-            documentation.
-          </p>
-
-          <h2>Information you provide</h2>
-          <p>
-            When you submit a contact or demo request, we may receive your name,
-            work contact information, organization details, expected use case,
-            and the message you choose to send.
-          </p>
-
-          <h2>How information is used</h2>
-          <p>
-            We use this information to respond to your request, understand
-            interest in Phontus, maintain business records, protect the website,
-            and improve our communications.
-          </p>
-
-          <h2>Website operations</h2>
-          <p>
-            Hosting and infrastructure providers may process basic technical
-            information needed to deliver and protect the site, such as IP
-            address, browser information, request time, and diagnostic logs. We
-            do not use this page to promise a particular analytics or cookie
-            setup that is not currently configured.
-          </p>
-
-          <h2>Service providers</h2>
-          <p>
-            We may use service providers to host the website, deliver contact
-            messages, and maintain business systems. They may process
-            information only for the services they provide to us.
-          </p>
-
-          <h2>Retention and security</h2>
-          <p>
-            We retain information for as long as reasonably needed for the
-            purposes above and apply safeguards appropriate to the nature of
-            the information. No internet transmission or storage system can be
-            guaranteed completely secure.
-          </p>
-
-          <h2>Your choices</h2>
-          <p>
-            You may ask us to update or delete contact information you provided,
-            subject to legal or operational retention needs.
-          </p>
-
-          <h2>Contact</h2>
-          <p>
-            Questions about this policy can be sent to{" "}
-            <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>.
-          </p>
-        </Container>
-      </section>
-    </>
+    <LegalPage
+      eyebrow="Legal"
+      title="Privacy"
+      intro="How Phontus handles what is said in an interpreted session, and who decides what happens to it."
+      notice="Draft for legal review. This page states how the product is designed to work; it has not been reviewed by counsel and the flagged items below need confirming before publication."
+      sections={[
+        { title: "What this covers", body: <><p>This policy covers Phontus interpreting sessions started on a Clinical Kit or Frontline Kit, calls interpreted on the Phontus Phone Line, and use of the Phontus admin console.</p><p>It does not cover the separate systems your organization already uses — your phone provider, your records system, or anything a member of staff types somewhere else after a conversation.</p></> },
+        { title: "Who decides what happens to a session", body: <><p>The organization operating Phontus decides which sites are enabled, who may read a transcript, and how long transcripts are kept. Phontus processes session information on that organization&apos;s behalf and according to those settings.</p><p>If you spoke with someone using Phontus and want to know what was kept, the organization you were speaking to holds that answer. We will help them find it.</p></> },
+        { title: "What a session produces", body: <><p>Speech is interpreted between Spanish and English as the conversation happens. A transcript of the exchange may be created so both people can follow it during the session and so the organization can review it afterwards, subject to its own retention settings.</p><p>A visitor or caller is never asked to create an account, install anything, or identify themselves to Phontus in order to be understood.</p><ReviewNote>To confirm: how session audio is handled — whether it is processed only in transit or retained at any point, and for how long.</ReviewNote></> },
+        { title: "What we do not do with session content", body: <p>Phontus does not sell session content, does not use it for advertising, and does not share it with anyone outside the processing needed to interpret the conversation and provide the service to the operating organization.</p> },
+        { title: "Retention and deletion", body: <><p>Transcript retention is configured per site in the admin console. Administrators designated by the operating organization can change those rules and request deletion.</p><ReviewNote>To confirm: default retention period for a new site, and how quickly a deletion request takes effect.</ReviewNote></> },
+        { title: "Who else is involved", body: <><p>Delivering interpreting involves a small number of service providers — for speech processing, telephony, and hosting. A current list is available on request.</p><ReviewNote>To confirm: the subprocessor list, each one&apos;s role, and where it processes data.</ReviewNote></> },
+        { title: "Certified human interpreters", body: <p>When a session is escalated, a certified human interpreter joins the conversation and hears it in order to interpret it. Interpreters work under confidentiality obligations.</p> },
+        { title: "Changes to this policy", body: <p>When this policy changes materially we will say what changed and when, rather than only moving the date at the top.</p> },
+        { title: "Contact", body: <><p>Questions about this policy, or a request about information from a session: <a href="mailto:hello@phontus.live">hello@phontus.live</a>.</p><ReviewNote>To confirm: legal entity name, registered address, and the jurisdictions this policy needs to address.</ReviewNote></> },
+      ]}
+    />
   );
 }

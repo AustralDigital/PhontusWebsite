@@ -1,83 +1,28 @@
 import type { Metadata } from "next";
-import { Container, PageHero } from "@/components/ui";
-import { siteConfig } from "@/lib/config";
+import { LegalPage, ReviewNote } from "@/components/legal-page";
 import { createMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = createMetadata(
-  "Terms of Service",
-  "Terms for using the Phontus public website.",
-  "/terms",
-);
+export const metadata: Metadata = createMetadata("Terms of service", "What Phontus provides, what it does not, and what each party agrees to.", "/terms");
 
 export default function TermsPage() {
   return (
-    <>
-      <PageHero
-        eyebrow="Legal"
-        title="Terms of Service"
-        copy="These terms govern use of the public Phontus marketing website."
-      />
-      <section className="section">
-        <Container className="legal-content">
-          <p><strong>Last updated:</strong> July 25, 2026</p>
-
-          <h2>Website purpose</h2>
-          <p>
-            This website provides general information about Phontus and allows
-            visitors to contact us. It does not provide medical, legal, safety,
-            or other professional advice and is not a substitute for a qualified
-            interpreter when one is required.
-          </p>
-
-          <h2>No product commitment</h2>
-          <p>
-            Product descriptions on this site explain current direction and
-            concepts. Availability, specifications, and deployment terms may
-            change. Planned features are not commitments to deliver on a
-            particular date.
-          </p>
-
-          <h2>Acceptable use</h2>
-          <p>
-            You may not interfere with the website, attempt unauthorized
-            access, submit unlawful or harmful content, misrepresent your
-            identity, or use the site in a way that infringes the rights of
-            others.
-          </p>
-
-          <h2>Intellectual property</h2>
-          <p>
-            The Phontus name, logos, site design, product concepts, and original
-            content are owned by Phontus or used with permission. These terms do
-            not grant a license to use our marks or copy the site.
-          </p>
-
-          <h2>Third-party services</h2>
-          <p>
-            The site may rely on hosting, email, or other service providers.
-            Their availability and operation may be outside our control.
-          </p>
-
-          <h2>Disclaimers</h2>
-          <p>
-            The public website is provided on an “as is” and “as available”
-            basis to the extent permitted by law. We do not guarantee that it
-            will be uninterrupted or error-free.
-          </p>
-
-          <h2>Changes</h2>
-          <p>
-            We may update these terms as the website and business evolve. The
-            updated date above indicates the current version.
-          </p>
-
-          <h2>Contact</h2>
-          <p>
-            Questions about these terms can be sent to{" "}
-            <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>.
-          </p>
-        </Container>
-      </section>
-    </>
+    <LegalPage
+      eyebrow="Legal"
+      title="Terms of service"
+      intro="What Phontus provides, what it does not, and what we each agree to."
+      notice="Draft for legal review. Written to be readable and to state the product honestly; the commercial and liability sections are placeholders and must be drafted by counsel before publication."
+      sections={[
+        { title: "Who this is between", body: <><p>These terms are between Phontus and the organization that agrees to them. Individual members of staff use Phontus under their organization&apos;s account, and visitors or callers who are interpreted are not asked to agree to anything.</p><ReviewNote>To confirm: legal entity, contracting model, and whether an order form or MSA sits above these terms.</ReviewNote></> },
+        { title: "What Phontus provides", body: <p>AI-assisted interpreting between Spanish and English, started on a Clinical Kit, a Frontline Kit, or the Phontus Phone Line; escalation to a certified human interpreter on request; and an admin console for sites, staff accounts, retention rules and session history.</p> },
+        { title: "What AI interpreting is, and is not", body: <><p>AI interpreting is an aid to a conversation between two people. It is fast and it is useful for the everyday exchanges this product is built for: checking in, giving directions, confirming an appointment, taking a service request.</p><p>It is not a substitute for a certified human interpreter where one is required by law, by policy, or by the seriousness of the conversation — consent, diagnosis, legal instruction, anything a person will act on in a way that is hard to undo. In those situations, escalate to a human interpreter.</p></> },
+        { title: "Not for emergencies", body: <p>Phontus is not an emergency service and must not be relied on to summon help. In an emergency, use your local emergency number and your organization&apos;s emergency procedures.</p> },
+        { title: "Your responsibilities", body: <p>Keeping site and staff account details accurate, using Phontus lawfully and for the conversations it is intended for, telling participants that a conversation is being interpreted where your policies or local law require it, and looking after the equipment while it is with you.</p> },
+        { title: "Equipment", body: <><p>Kits are configured for the sites they are sent to and remain subject to the terms under which they were supplied.</p><ReviewNote>To confirm: whether kits are sold, leased or loaned, who insures them, and what happens on damage, loss or termination.</ReviewNote></> },
+        { title: "Fees and term", body: <><p>Fees, billing period, and the length of the agreement are set out in your order.</p><ReviewNote>To confirm: pricing model, payment terms, renewal and notice periods.</ReviewNote></> },
+        { title: "Availability", body: <><p>We aim to keep Phontus available and to be straight with you when it is not.</p><ReviewNote>To confirm: whether you are committing to an uptime figure or support response times.</ReviewNote></> },
+        { title: "Ending the agreement", body: <p>Either side may end the agreement in line with the notice in your order. On termination, we help you export or delete session history and arrange the return of equipment.</p> },
+        { title: "Liability and governing law", body: <><p>These sections must be drafted by counsel.</p><ReviewNote>To confirm: limitation of liability, indemnities, warranty disclaimers, governing law and venue. Do not publish this page without them.</ReviewNote></> },
+      ]}
+    />
   );
 }

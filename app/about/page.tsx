@@ -1,22 +1,10 @@
 import type { Metadata } from "next";
-import {
-  HeartHandshake,
-  MessageCircleMore,
-  MoveRight,
-  PanelsTopLeft,
-} from "lucide-react";
-import { FinalCTA } from "@/components/final-cta";
-import {
-  ButtonLink,
-  Container,
-  PageHero,
-  SectionHeading,
-} from "@/components/ui";
+import { Container, Eyebrow, PageHero, SectionHeading } from "@/components/ui";
 import { createMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = createMetadata(
   "About",
-  "Phontus is building approachable Spanish–English interpretation through purpose-built kits, open-ear headsets, and the Phontus Phone Line.",
+  "Phontus brings interpreting closer to the room, counter, campus, and worksite.",
   "/about",
 );
 
@@ -24,98 +12,41 @@ export default function AboutPage() {
   return (
     <>
       <PageHero
-        eyebrow="About Phontus"
-        title="Technology should help people meet each other in the conversation."
-        copy="Phontus is building an approachable interpretation service for real-world frontline interactions, delivered through purpose-built kits and the Phontus Phone Line, informed by our early work in healthcare."
-      >
-        <div className="hero__actions">
-          <ButtonLink href="/contact">Talk With Our Team</ButtonLink>
-        </div>
-      </PageHero>
-
+        eyebrow="About"
+        title="Language barriers should not slow service down."
+        copy="Routine needs move faster than a complicated workflow can respond. Phontus brings interpreting closer to the room, the counter, the campus and the worksite, so the conversation can start when the person does."
+      />
       <section className="section">
-        <Container>
-          <div className="split-section">
-            <div className="split-section__copy">
-              <p className="eyebrow">Our point of view</p>
-              <h2>Good technology protects the human moment.</h2>
-            </div>
-            <div className="split-section__copy">
-              <p>
-                Language differences can add friction to interactions that are
-                already time-sensitive, personal, or unfamiliar. We believe
-                interpretation tools should be easier to reach, simpler to use,
-                and more thoughtfully integrated into the environment.
-              </p>
-              <p>
-                That means designing the software, kit experience, open-ear
-                headset workflow, the Phontus Phone Line, staff guidance, and
-                deployment plan as one connected service.
-              </p>
-            </div>
+        <Container className="split-grid split-grid--center" data-reveal>
+          <div>
+            <Eyebrow>Where we started</Eyebrow>
+            <h2>Shaped in demanding real-world settings</h2>
+            <p>Our earliest testing took place with clinical teams, including dental and women&apos;s health settings. Those rooms taught us what to remove: headsets to hand out, devices to clean, decisions to make before a session can begin.</p>
+            <p>What is left is a kit that is already on, a microphone pointed at the two people talking, and a screen that says what is happening in words.</p>
+          </div>
+          <div className="hairline-grid hairline-grid--two facts-grid">
+            <div className="plain-tile"><strong>Early field testing</strong><span>Learning inside real workflows</span></div>
+            <div className="plain-tile"><strong>Spanish ⇄ English</strong><span>A focused launch, more languages coming</span></div>
+            <div className="plain-tile"><strong>Two kit formats</strong><span>Clinical and frontline delivery</span></div>
+            <div className="plain-tile"><strong>Phone Line</strong><span>Interpreting on your business number</span></div>
           </div>
         </Container>
       </section>
-
-      <section className="section section--solutions">
+      <section className="section section--white section--bordered">
         <Container>
-          <SectionHeading
-            eyebrow="What guides us"
-            title="Calm, credible, and grounded in how people work"
-          />
-          <div className="feature-grid feature-grid--four">
+          <SectionHeading eyebrow="What we hold to" title="What we will not compromise on." />
+          <div className="hairline-grid hairline-grid--four" data-reveal>
             {[
-              {
-                icon: HeartHandshake,
-                title: "Human connection",
-                copy: "The product should support eye contact, attention, and dignity.",
-              },
-              {
-                icon: PanelsTopLeft,
-                title: "Purpose-built access points",
-                copy: "The kit or phone line has to fit the room, team, and moment of need.",
-              },
-              {
-                icon: MessageCircleMore,
-                title: "Conversation clarity",
-                copy: "Each screen should make the current speaker and next action understandable.",
-              },
-              {
-                icon: MoveRight,
-                title: "Operational momentum",
-                copy: "A useful workflow reduces friction while respecting responsible-use boundaries.",
-              },
-            ].map(({ icon: Icon, title, copy }) => (
-              <article className="feature-card" key={title}>
-                <Icon aria-hidden="true" />
-                <h3>{title}</h3>
-                <p>{copy}</p>
-              </article>
+              ["The person stays at the center", "Technology supports the dialogue instead of becoming it."],
+              ["Languages are words", "Spelled out on screen, so nobody has to decode an abbreviation."],
+              ["The screen says what is happening", "In words, not just a color, so it reads from across a room."],
+              ["Fewer things to touch", "Nothing to hand over, install, or clean between visits."],
+            ].map(([title, copy], index) => (
+              <div className="principle-tile" key={title}><span className="mono">0{index + 1}</span><strong>{title}</strong><p>{copy}</p></div>
             ))}
           </div>
         </Container>
       </section>
-
-      <section className="section">
-        <Container>
-          <div className="content-band">
-            <p className="eyebrow">Where we are starting</p>
-            <h2>Learn in real environments. Build for more of them.</h2>
-            <p>
-              Our earliest testing has taken place with clinical teams,
-              including dental and women’s health settings. We use those
-              lessons to refine the product experience while learning how the
-              same clear workflow—and a more compact kit—can support frontline
-              teams in other sectors.
-            </p>
-            <ButtonLink href="/product" variant="secondary">
-              Explore the Product
-            </ButtonLink>
-          </div>
-        </Container>
-      </section>
-
-      <FinalCTA />
     </>
   );
 }

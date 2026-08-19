@@ -2,10 +2,10 @@ import type { Metadata } from "next";
 import { siteConfig } from "@/lib/config";
 
 const socialImage = {
-  url: "/images/phontus-kits-og.webp",
+  url: "/images/phontus-kits-og-v2.webp",
   width: 1200,
   height: 630,
-  alt: "A frontline employee and customer use a Phontus interpretation kit while wearing open-ear bone-conduction headsets.",
+  alt: "Two people speak naturally with a Phontus interpretation kit between them.",
 };
 
 export function createMetadata(

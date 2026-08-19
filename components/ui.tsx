@@ -1,12 +1,14 @@
+import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
-import type { MouseEventHandler, ReactNode } from "react";
+import { ArrowRight, Check } from "lucide-react";
+import type { HTMLAttributes, MouseEventHandler, ReactNode } from "react";
 
 type ButtonLinkProps = {
   href: string;
   children: ReactNode;
-  variant?: "primary" | "secondary" | "yellow" | "light";
+  variant?: "primary" | "secondary" | "accent" | "inverse";
   className?: string;
+  arrow?: boolean;
   onClick?: MouseEventHandler<HTMLAnchorElement>;
 };
 
@@ -15,6 +17,7 @@ export function ButtonLink({
   children,
   variant = "primary",
   className = "",
+  arrow = true,
   onClick,
 }: ButtonLinkProps) {
   return (
@@ -24,7 +27,7 @@ export function ButtonLink({
       onClick={onClick}
     >
       <span>{children}</span>
-      <ArrowRight aria-hidden="true" size={17} strokeWidth={1.8} />
+      {arrow ? <ArrowRight aria-hidden="true" size={17} strokeWidth={1.75} /> : null}
     </Link>
   );
 }
@@ -32,29 +35,40 @@ export function ButtonLink({
 export function Container({
   children,
   className = "",
-}: {
-  children: ReactNode;
-  className?: string;
-}) {
-  return <div className={`container ${className}`}>{children}</div>;
+  ...props
+}: HTMLAttributes<HTMLDivElement>) {
+  return (
+    <div className={`container ${className}`} {...props}>
+      {children}
+    </div>
+  );
+}
+
+export function Eyebrow({ children }: { children: ReactNode }) {
+  return (
+    <div className="eyebrow">
+      <span aria-hidden="true" />
+      <span>{children}</span>
+    </div>
+  );
 }
 
 export function SectionHeading({
   eyebrow,
   title,
   copy,
-  align = "center",
+  className = "",
 }: {
-  eyebrow?: string;
+  eyebrow: string;
   title: string;
   copy?: string;
-  align?: "left" | "center";
+  className?: string;
 }) {
   return (
-    <div className={`section-heading section-heading--${align}`}>
-      {eyebrow ? <p className="eyebrow">{eyebrow}</p> : null}
+    <div className={`section-heading ${className}`} data-reveal>
+      <Eyebrow>{eyebrow}</Eyebrow>
       <h2>{title}</h2>
-      {copy ? <p className="section-heading__copy">{copy}</p> : null}
+      {copy ? <p>{copy}</p> : null}
     </div>
   );
 }
@@ -72,14 +86,68 @@ export function PageHero({
 }) {
   return (
     <section className="page-hero">
-      <Container>
-        <div className="page-hero__content reveal">
-          <p className="eyebrow">{eyebrow}</p>
-          <h1>{title}</h1>
-          <p className="page-hero__copy">{copy}</p>
-          {children}
-        </div>
+      <Container className="page-hero__inner" data-reveal>
+        <Eyebrow>{eyebrow}</Eyebrow>
+        <h1>{title}</h1>
+        <p>{copy}</p>
+        {children}
       </Container>
     </section>
+  );
+}
+
+export function Tag({ children, icon }: { children: ReactNode; icon?: ReactNode }) {
+  return (
+    <span className="tag">
+      {icon}
+      {children}
+    </span>
+  );
+}
+
+export function Badge({
+  children,
+  tone = "brand",
+}: {
+  children: ReactNode;
+  tone?: "brand" | "neutral" | "live" | "human";
+}) {
+  return <span className={`badge badge--${tone}`}>{children}</span>;
+}
+
+export function CheckList({ items }: { items: string[] }) {
+  return (
+    <ul className="check-list">
+      {items.map((item) => (
+        <li key={item}>
+          <Check aria-hidden="true" size={18} strokeWidth={1.75} />
+          <span>{item}</span>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+export function PhotoFrame({
+  src,
+  alt,
+  className = "",
+  priority = false,
+}: {
+  src: string;
+  alt: string;
+  className?: string;
+  priority?: boolean;
+}) {
+  return (
+    <div className={`photo-frame ${className}`}>
+      <Image
+        src={src}
+        alt={alt}
+        fill
+        priority={priority}
+        sizes="(max-width: 760px) 100vw, 50vw"
+      />
+    </div>
   );
 }

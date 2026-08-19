@@ -1,66 +1,34 @@
 import type { Metadata } from "next";
-import { Building2, Mail, MessagesSquare } from "lucide-react";
 import { ContactForm } from "@/components/contact-form";
-import { Container, PageHero } from "@/components/ui";
+import { Container, Eyebrow } from "@/components/ui";
 import { siteConfig } from "@/lib/config";
 import { createMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = createMetadata(
-  "Contact",
-  "Request a personalized Phontus demo and explore Clinical Kits, Frontline Kits, and the Phontus Phone Line for your organization.",
+  "Request a demo",
+  "Tell Phontus where language comes up and see a real interpreting session with your team.",
   "/contact",
 );
 
 export default function ContactPage() {
   return (
-    <>
-      <PageHero
-        eyebrow="Contact Phontus"
-        title="Let’s explore the communication needs in your environment."
-        copy="Tell us where your teams encounter language barriers. We’ll explore the right mix of Clinical Kits, Frontline Kits, and the Phontus Phone Line for your setting—and keep the conversation practical and specific."
-      />
-
-      <section className="section">
-        <Container className="contact-layout">
-          <aside className="contact-aside">
-            <p className="eyebrow">Book a conversation</p>
-            <h2>A product demo shaped around your workflow.</h2>
-            <p>
-              We’ll walk through the current product experience, discuss which
-              kit or Phone Line model best fits your workflow, and answer with
-              clear detail about what is available today and what is planned for
-              launch.
-            </p>
-            <div className="contact-aside__details">
-              <div>
-                <Mail aria-hidden="true" />
-                <p>
-                  <strong>Email</strong>
-                  <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>
-                </p>
-              </div>
-              <div>
-                <MessagesSquare aria-hidden="true" />
-                <p>
-                  <strong>What to expect</strong>
-                  <span>A focused, no-pressure product and rollout conversation.</span>
-                </p>
-              </div>
-              <div>
-                <Building2 aria-hidden="true" />
-                <p>
-                  <strong>Who it’s for</strong>
-                  <span>
-                    Healthcare, business and field operations, school systems,
-                    hospitality, and other frontline teams.
-                  </span>
-                </p>
-              </div>
-            </div>
-          </aside>
-          <ContactForm />
-        </Container>
-      </section>
-    </>
+    <section className="contact-page">
+      <Container className="split-grid split-grid--start">
+        <div className="contact-page__intro" data-reveal>
+          <Eyebrow>Request a demo</Eyebrow>
+          <h1>Tell us where language comes up.</h1>
+          <p>We will bring the setup that fits your setting — a Clinical Kit, a Frontline Kit, the Phone Line — and run a real session with your team on the call.</p>
+          <div className="contact-steps">
+            {[
+              "You tell us the setting and where the conversations happen.",
+              "We run a twenty-minute call and show a session end to end.",
+              "If it fits, we configure a kit for one site and start there.",
+            ].map((step, index) => <div key={step}><span className="mono">0{index + 1}</span><p>{step}</p></div>)}
+          </div>
+          <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>
+        </div>
+        <ContactForm />
+      </Container>
+    </section>
   );
 }

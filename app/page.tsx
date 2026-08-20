@@ -126,7 +126,8 @@ export default function HomePage() {
         </Container>
       </section>
 
-      <section className="trust-strip" aria-label="Early field testing">
+      {/* Temporarily hidden until partner logos are ready to publish. */}
+      <section className="trust-strip" aria-label="Early field testing" hidden>
         <Container>
           <p>Early field testing with clinical teams, including dental and women&apos;s health settings.</p>
           <div className="logo-marquee" aria-hidden="true">
@@ -246,7 +247,8 @@ export default function HomePage() {
         </Container>
       </section>
 
-      <section className="section section--bordered">
+      {/* Temporarily hidden until testimonials are ready to publish. */}
+      <section className="section section--bordered" hidden>
         <Container>
           <div className="section-heading-row">
             <SectionHeading eyebrow="What teams tell us" title="From the rooms where we tested." />

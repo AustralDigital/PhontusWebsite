@@ -1,35 +1,42 @@
 "use client";
-
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 
 export function SiteBehavior() {
   const pathname = usePathname();
-
   useEffect(() => {
-    const root = document.documentElement;
-    root.dataset.revealReady = "true";
-    const items = Array.from(document.querySelectorAll<HTMLElement>("[data-reveal]"));
+    const media = window.matchMedia("(prefers-reduced-motion: reduce)");
+    if (media.matches || !("IntersectionObserver" in window)) return;
+    const items = Array.from(
+      document.querySelectorAll<HTMLElement>("[data-reveal]"),
+    );
+    // Only animate below-fold content. The default and no-JS states stay visible.
+    items.forEach((item) => {
+      if (item.getBoundingClientRect().top > window.innerHeight)
+        item.classList.add("reveal-pending");
+    });
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            (entry.target as HTMLElement).classList.add("is-revealed");
+            entry.target.classList.remove("reveal-pending");
             observer.unobserve(entry.target);
           }
         });
       },
-      { rootMargin: "0px 0px -6% 0px", threshold: 0.05 },
+      { threshold: 0.03 },
     );
-    items.forEach((item, index) => {
-      item.style.setProperty("--reveal-delay", `${Math.min(index % 5, 4) * 70}ms`);
-      observer.observe(item);
-    });
+    items.forEach((item) => observer.observe(item));
+    const revealAll = () => {
+      if (media.matches)
+        items.forEach((item) => item.classList.remove("reveal-pending"));
+    };
+    media.addEventListener("change", revealAll);
     return () => {
       observer.disconnect();
-      delete root.dataset.revealReady;
+      media.removeEventListener("change", revealAll);
+      items.forEach((item) => item.classList.remove("reveal-pending"));
     };
   }, [pathname]);
-
   return null;
 }

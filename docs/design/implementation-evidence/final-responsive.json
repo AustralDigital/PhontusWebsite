@@ -1,0 +1,80 @@
+[
+  {
+    "width": 1920,
+    "overflow": false,
+    "vitals": {
+      "lcp": 200,
+      "cls": 0
+    },
+    "heroImage": {
+      "current": "http://127.0.0.1:3001/_next/image?url=%2Fimages%2Fphontus-frontline-kit-v2.webp&w=1080&q=75",
+      "complete": true
+    },
+    "resources": 31562
+  },
+  {
+    "width": 1440,
+    "overflow": false,
+    "vitals": {
+      "lcp": 120,
+      "cls": 0
+    },
+    "heroImage": {
+      "current": "http://127.0.0.1:3001/_next/image?url=%2Fimages%2Fphontus-frontline-kit-v2.webp&w=1080&q=75",
+      "complete": true
+    },
+    "resources": 31562
+  },
+  {
+    "width": 1280,
+    "overflow": false,
+    "vitals": {
+      "lcp": 136,
+      "cls": 0
+    },
+    "heroImage": {
+      "current": "http://127.0.0.1:3001/_next/image?url=%2Fimages%2Fphontus-frontline-kit-v2.webp&w=1080&q=75",
+      "complete": true
+    },
+    "resources": 31562
+  },
+  {
+    "width": 768,
+    "overflow": false,
+    "vitals": {
+      "lcp": 100,
+      "cls": 0
+    },
+    "heroImage": {
+      "current": "http://127.0.0.1:3001/_next/image?url=%2Fimages%2Fphontus-frontline-kit-v2.webp&w=1080&q=75",
+      "complete": true
+    },
+    "resources": 17942
+  },
+  {
+    "width": 390,
+    "overflow": false,
+    "vitals": {
+      "lcp": 108,
+      "cls": 0
+    },
+    "heroImage": {
+      "current": "http://127.0.0.1:3001/_next/image?url=%2Fimages%2Fphontus-frontline-kit-v2.webp&w=1080&q=75",
+      "complete": true
+    },
+    "resources": 17942
+  },
+  {
+    "width": 360,
+    "overflow": false,
+    "vitals": {
+      "lcp": 128,
+      "cls": 0
+    },
+    "heroImage": {
+      "current": "http://127.0.0.1:3001/_next/image?url=%2Fimages%2Fphontus-frontline-kit-v2.webp&w=1080&q=75",
+      "complete": true
+    },
+    "resources": 24382
+  }
+]

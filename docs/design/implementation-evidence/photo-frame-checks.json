@@ -1,0 +1,107 @@
+[
+  {
+    "width": 1440,
+    "id": "workplace-healthcare",
+    "frameWidth": 1304.0625,
+    "parentWidth": 1304.0625,
+    "overflow": false
+  },
+  {
+    "width": 1440,
+    "id": "workplace-education",
+    "frameWidth": 720,
+    "parentWidth": 720,
+    "overflow": false
+  },
+  {
+    "width": 1440,
+    "id": "workplace-field",
+    "frameWidth": 880.25,
+    "parentWidth": 880.25,
+    "overflow": false
+  },
+  {
+    "width": 1440,
+    "id": "workplace-business",
+    "frameWidth": 640,
+    "parentWidth": 640,
+    "overflow": false
+  },
+  {
+    "width": 1440,
+    "id": "workplace-hospitality",
+    "frameWidth": 1069.328125,
+    "parentWidth": 1069.328125,
+    "overflow": false
+  },
+  {
+    "width": 768,
+    "id": "workplace-healthcare",
+    "frameWidth": 713,
+    "parentWidth": 713,
+    "overflow": false
+  },
+  {
+    "width": 768,
+    "id": "workplace-education",
+    "frameWidth": 713,
+    "parentWidth": 713,
+    "overflow": false
+  },
+  {
+    "width": 768,
+    "id": "workplace-field",
+    "frameWidth": 753,
+    "parentWidth": 753,
+    "overflow": false
+  },
+  {
+    "width": 768,
+    "id": "workplace-business",
+    "frameWidth": 713,
+    "parentWidth": 713,
+    "overflow": false
+  },
+  {
+    "width": 768,
+    "id": "workplace-hospitality",
+    "frameWidth": 713,
+    "parentWidth": 713,
+    "overflow": false
+  },
+  {
+    "width": 390,
+    "id": "workplace-healthcare",
+    "frameWidth": 350,
+    "parentWidth": 350,
+    "overflow": false
+  },
+  {
+    "width": 390,
+    "id": "workplace-education",
+    "frameWidth": 350,
+    "parentWidth": 350,
+    "overflow": false
+  },
+  {
+    "width": 390,
+    "id": "workplace-field",
+    "frameWidth": 390,
+    "parentWidth": 390,
+    "overflow": false
+  },
+  {
+    "width": 390,
+    "id": "workplace-business",
+    "frameWidth": 350,
+    "parentWidth": 350,
+    "overflow": false
+  },
+  {
+    "width": 390,
+    "id": "workplace-hospitality",
+    "frameWidth": 350,
+    "parentWidth": 350,
+    "overflow": false
+  }
+]

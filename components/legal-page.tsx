@@ -16,7 +16,7 @@ export function LegalPage({
 }) {
   return (
     <>
-      <section className="legal-hero">
+      <section className="page-hero legal-hero">
         <Container>
           <Eyebrow>{eyebrow}</Eyebrow>
           <h1>{title}</h1>

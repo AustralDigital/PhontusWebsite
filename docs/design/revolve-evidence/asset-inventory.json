@@ -1,0 +1,206 @@
+[
+  {
+    "file": "public/images/hero-clinic-v2.webp",
+    "width": 1536,
+    "height": 1024,
+    "size": 147118
+  },
+  {
+    "file": "public/images/hero-clinic.webp",
+    "width": 1536,
+    "height": 1024,
+    "size": 147118
+  },
+  {
+    "file": "public/images/hero-organizations-v2.webp",
+    "width": 1536,
+    "height": 1024,
+    "size": 80748
+  },
+  {
+    "file": "public/images/hero-organizations.webp",
+    "width": 1536,
+    "height": 1024,
+    "size": 80748
+  },
+  {
+    "file": "public/images/og-phontus.webp",
+    "width": 1200,
+    "height": 630,
+    "size": 57278
+  },
+  {
+    "file": "public/images/phontus-clinical-kit-healthcare-v2.webp",
+    "width": 1200,
+    "height": 900,
+    "size": 122164
+  },
+  {
+    "file": "public/images/phontus-clinical-kit-healthcare.webp",
+    "width": 1200,
+    "height": 900,
+    "size": 122164
+  },
+  {
+    "file": "public/images/phontus-clinical-kit-v2.webp",
+    "width": 1200,
+    "height": 900,
+    "size": 79224
+  },
+  {
+    "file": "public/images/phontus-clinical-kit.webp",
+    "width": 1200,
+    "height": 900,
+    "size": 79224
+  },
+  {
+    "file": "public/images/phontus-frontline-kit-business-v2.webp",
+    "width": 1200,
+    "height": 900,
+    "size": 117364
+  },
+  {
+    "file": "public/images/phontus-frontline-kit-business.webp",
+    "width": 1200,
+    "height": 900,
+    "size": 117364
+  },
+  {
+    "file": "public/images/phontus-frontline-kit-education-v2.webp",
+    "width": 1200,
+    "height": 900,
+    "size": 108790
+  },
+  {
+    "file": "public/images/phontus-frontline-kit-education.webp",
+    "width": 1200,
+    "height": 900,
+    "size": 108790
+  },
+  {
+    "file": "public/images/phontus-frontline-kit-hero-v2.webp",
+    "width": 1536,
+    "height": 1024,
+    "size": 134244
+  },
+  {
+    "file": "public/images/phontus-frontline-kit-hero.webp",
+    "width": 1536,
+    "height": 1024,
+    "size": 134244
+  },
+  {
+    "file": "public/images/phontus-frontline-kit-hospitality-v2.webp",
+    "width": 1200,
+    "height": 900,
+    "size": 109494
+  },
+  {
+    "file": "public/images/phontus-frontline-kit-hospitality.webp",
+    "width": 1200,
+    "height": 900,
+    "size": 109494
+  },
+  {
+    "file": "public/images/phontus-frontline-kit-v2.webp",
+    "width": 1200,
+    "height": 900,
+    "size": 70382
+  },
+  {
+    "file": "public/images/phontus-frontline-kit.webp",
+    "width": 1200,
+    "height": 900,
+    "size": 70382
+  },
+  {
+    "file": "public/images/phontus-kits-og-v2.webp",
+    "width": 1200,
+    "height": 630,
+    "size": 77346
+  },
+  {
+    "file": "public/images/phontus-kits-og.webp",
+    "width": 1200,
+    "height": 630,
+    "size": 77346
+  },
+  {
+    "file": "public/images/solution-business-operations.webp",
+    "width": 1200,
+    "height": 900,
+    "size": 81556
+  },
+  {
+    "file": "public/images/solution-clinics.webp",
+    "width": 1000,
+    "height": 750,
+    "size": 68822
+  },
+  {
+    "file": "public/images/solution-dental.webp",
+    "width": 1000,
+    "height": 750,
+    "size": 63926
+  },
+  {
+    "file": "public/images/solution-education.webp",
+    "width": 1200,
+    "height": 900,
+    "size": 80786
+  },
+  {
+    "file": "public/images/solution-front-desks.webp",
+    "width": 1000,
+    "height": 750,
+    "size": 62436
+  },
+  {
+    "file": "public/images/solution-hospitality.webp",
+    "width": 1200,
+    "height": 900,
+    "size": 99822
+  },
+  {
+    "file": "public/images/solution-hospitals.webp",
+    "width": 1000,
+    "height": 750,
+    "size": 46988
+  },
+  {
+    "file": "references/ClinicalKit1.png",
+    "width": 1122,
+    "height": 1402,
+    "size": 1114337
+  },
+  {
+    "file": "references/ClinicalKit2.png",
+    "width": 1122,
+    "height": 1402,
+    "size": 1022120
+  },
+  {
+    "file": "references/ClinicalKit3.png",
+    "width": 1122,
+    "height": 1402,
+    "size": 1221388
+  },
+  {
+    "file": "references/Frontline Kit.png",
+    "width": 1448,
+    "height": 1086,
+    "size": 1080516
+  },
+  {
+    "file": "references/live-interpretation-screen.png",
+    "width": 1130,
+    "height": 848,
+    "size": 91242
+  },
+  {
+    "file": "public/reference/reference_image.png",
+    "width": 941,
+    "height": 1672,
+    "size": 1508168
+  }
+]

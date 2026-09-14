@@ -1,32 +1,32 @@
 export const siteConfig = {
   name: "Phontus",
   description:
-    "AI-assisted Spanish ⇄ English interpreting through purpose-built kits and the Phontus Phone Line, for the teams people talk to first.",
+    "Purpose-built hardware, AI interpretation and human support. One system for conversations in the physical world.",
   email: "hello@phontus.live",
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://phontus.live",
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.phontus.live",
   nav: [
-    { label: "Product", href: "/product" },
-    { label: "How it works", href: "/how-it-works" },
-    { label: "Solutions", href: "/solutions" },
-    { label: "Security", href: "/security" },
-    { label: "About", href: "/about" },
+    { label: "Products", href: "/product" },
+    { label: "Platform", href: "/product#platform" },
+    { label: "Industries", href: "/solutions" },
+    { label: "Technology", href: "/how-it-works" },
+    { label: "Company", href: "/about" },
   ],
 } as const;
 
 export const productLinks = [
   {
     label: "Clinical Kit",
-    href: "/product?tab=clinical",
+    href: "/product?tab=clinical#details",
     copy: "A mobile cart for the point of care.",
   },
   {
-    label: "Frontline Kit",
-    href: "/product?tab=frontline",
+    label: "Interpreting Kit",
+    href: "/product?tab=frontline#details",
     copy: "A compact kit for counters and desks.",
   },
   {
     label: "Phone Line",
-    href: "/product?tab=phone",
+    href: "/product?tab=phone#details",
     copy: "Interpreting on your business number.",
   },
 ] as const;
@@ -59,9 +59,9 @@ export const footerColumns = [
     title: "Product",
     links: [
       { label: "Overview", href: "/product" },
-      { label: "Clinical Kit", href: "/product?tab=clinical" },
-      { label: "Frontline Kit", href: "/product?tab=frontline" },
-      { label: "Phone Line", href: "/product?tab=phone" },
+      { label: "Clinical Kit", href: "/product?tab=clinical#details" },
+      { label: "Interpreting Kit", href: "/product?tab=frontline#details" },
+      { label: "Phone Line", href: "/product?tab=phone#details" },
       { label: "How it works", href: "/how-it-works" },
     ],
   },

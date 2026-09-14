@@ -2,163 +2,156 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { Menu, X } from "lucide-react";
+import { Menu, X, ArrowUpRight } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { ButtonLink } from "@/components/ui";
-import { productLinks, siteConfig, solutionLinks } from "@/lib/config";
-
-type MenuName = "product" | "solutions" | null;
+import { siteConfig } from "@/lib/config";
 
 export function SiteHeader() {
   const pathname = usePathname();
-  const [menu, setMenu] = useState<MenuName>(null);
-  const [navOpen, setNavOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-  const [progress, setProgress] = useState(0);
-  const closeButton = useRef<HTMLButtonElement>(null);
-
+  const [open, setOpen] = useState(false);
+  const dialog = useRef<HTMLDivElement>(null);
+  const trigger = useRef<HTMLButtonElement>(null);
+  const close = useRef<HTMLButtonElement>(null);
   useEffect(() => {
-    const update = () => {
-      setScrolled(window.scrollY > 40);
-      const max = document.documentElement.scrollHeight - window.innerHeight;
-      setProgress(max > 0 ? Math.min(100, (window.scrollY / max) * 100) : 0);
-    };
-    update();
-    window.addEventListener("scroll", update, { passive: true });
-    window.addEventListener("resize", update);
-    return () => {
-      window.removeEventListener("scroll", update);
-      window.removeEventListener("resize", update);
-    };
-  }, []);
-
-  useEffect(() => {
-    if (!navOpen) return;
-    const previous = document.activeElement as HTMLElement | null;
+    if (!open) return;
+    const opener = trigger.current;
+    const originalOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
-    closeButton.current?.focus();
-    const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setNavOpen(false);
+    const background = Array.from(
+      document.querySelectorAll<HTMLElement>(
+        "main, body > footer, body > .final-cta",
+      ),
+    );
+    background.forEach((el) => {
+      el.inert = true;
+    });
+    close.current?.focus();
+    const handleKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setOpen(false);
+        return;
+      }
+      if (event.key !== "Tab") return;
+      const focusable = dialog.current?.querySelectorAll<HTMLElement>(
+        "a[href],button:not([disabled])",
+      );
+      if (!focusable?.length) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
     };
-    document.addEventListener("keydown", onKeyDown);
+    const desktop = window.matchMedia("(min-width: 1101px)");
+    const onResize = () => {
+      if (desktop.matches) setOpen(false);
+    };
+    desktop.addEventListener("change", onResize);
+    document.addEventListener("keydown", handleKey);
     return () => {
-      document.body.style.overflow = "";
-      document.removeEventListener("keydown", onKeyDown);
-      previous?.focus();
+      document.body.style.overflow = originalOverflow;
+      background.forEach((el) => {
+        el.inert = false;
+      });
+      document.removeEventListener("keydown", handleKey);
+      desktop.removeEventListener("change", onResize);
+      opener?.focus();
     };
-  }, [navOpen]);
-
-  const active = (href: string) =>
-    pathname === href || (href !== "/" && pathname.startsWith(`${href}/`));
-  const closeAll = () => {
-    setMenu(null);
-    setNavOpen(false);
-  };
-
+  }, [open]);
   return (
     <>
-      <header
-        className={`site-header ${scrolled && !navOpen ? "site-header--compact" : ""}`}
-        onMouseLeave={() => setMenu(null)}
-      >
-        <span className="site-header__progress" style={{ width: `${progress}%` }} />
+      <header className="site-header">
         <div className="container site-header__inner">
-          <Link className="brand-link" href="/" aria-label="Phontus home" onClick={closeAll}>
-            <Image src="/brand/phontus-logo.svg" width={177} height={24} alt="Phontus" priority />
+          <Link href="/" className="brand-link" aria-label="Phontus home">
+            <Image
+              src="/brand/phontus-logo.svg"
+              width={177}
+              height={24}
+              alt="Phontus"
+              priority
+            />
           </Link>
-
           <nav className="desktop-nav" aria-label="Primary navigation">
-            {siteConfig.nav.map((item) => {
-              const menuName: MenuName =
-                item.href === "/product"
-                  ? "product"
-                  : item.href === "/solutions"
-                    ? "solutions"
-                    : null;
-              return (
-                <span className="desktop-nav__item" key={item.href}>
-                  <Link
-                    href={item.href}
-                    aria-current={active(item.href) ? "page" : undefined}
-                    className={active(item.href) ? "is-active" : ""}
-                    onMouseEnter={() => setMenu(menuName)}
-                    onFocus={() => setMenu(menuName)}
-                  >
-                    {item.label}
-                  </Link>
-                </span>
-              );
-            })}
+            {siteConfig.nav.map((item) => (
+              <Link
+                key={item.label}
+                href={item.href}
+                aria-current={pathname === item.href ? "page" : undefined}
+              >
+                {item.label}
+              </Link>
+            ))}
           </nav>
-
-          <div className="site-header__actions">
-            <Link className="header-contact" href="/contact">Contact</Link>
-            <ButtonLink className="header-cta" href="/contact">Request a demo</ButtonLink>
-            <button
-              className="menu-button"
-              type="button"
-              aria-label={navOpen ? "Close navigation menu" : "Open navigation menu"}
-              aria-expanded={navOpen}
-              aria-controls="mobile-navigation"
-              onClick={() => setNavOpen((value) => !value)}
-            >
-              {navOpen ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}
-            </button>
-          </div>
+          <Link href="/contact" className="button button--primary header-cta">
+            Request a demo <ArrowUpRight aria-hidden="true" size={17} />
+          </Link>
+          <button
+            ref={trigger}
+            type="button"
+            className="menu-button"
+            aria-expanded={open}
+            aria-controls="mobile-navigation"
+            aria-label="Open navigation"
+            onClick={() => setOpen(true)}
+          >
+            <Menu aria-hidden="true" />
+          </button>
         </div>
-
-        {menu ? (
-          <div className="mega-menu" aria-label={`${menu} menu`}>
-            <div className="container mega-menu__outer">
-              <div className={`mega-menu__grid mega-menu__grid--${menu}`}>
-                {(menu === "product" ? productLinks : solutionLinks).map((item) => (
-                  <Link href={item.href} key={item.href} onClick={closeAll}>
-                    <strong>{item.label}</strong>
-                    <span>{item.copy}</span>
-                  </Link>
-                ))}
-              </div>
-            </div>
-          </div>
-        ) : null}
       </header>
-
-      {navOpen ? (
-        <div className="mobile-nav" id="mobile-navigation" role="dialog" aria-modal="true">
-          <div className="mobile-nav__inner">
-            <button ref={closeButton} className="sr-only" type="button" onClick={() => setNavOpen(false)}>
-              Close menu
+      {open && (
+        <div
+          ref={dialog}
+          className="mobile-nav"
+          id="mobile-navigation"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Navigation"
+        >
+          <div className="mobile-nav__head">
+            <Image
+              src="/brand/phontus-logo.svg"
+              width={177}
+              height={24}
+              alt="Phontus"
+            />
+            <button
+              ref={close}
+              type="button"
+              className="menu-button"
+              aria-label="Close navigation"
+              onClick={() => setOpen(false)}
+            >
+              <X aria-hidden="true" />
             </button>
-            <nav className="mobile-nav__primary" aria-label="Mobile navigation">
-              {[
-                { label: "Home", href: "/" },
-                { label: "How it works", href: "/how-it-works" },
-                { label: "Security", href: "/security" },
-                { label: "About", href: "/about" },
-                { label: "Contact", href: "/contact" },
-              ].map((item) => (
-                <Link href={item.href} key={item.href} onClick={closeAll}>{item.label}</Link>
-              ))}
-            </nav>
-            <div className="mobile-nav__group">
-              <span>Product</span>
-              {productLinks.map((item) => (
-                <Link href={item.href} key={item.href} onClick={closeAll}>{item.label}</Link>
-              ))}
-            </div>
-            <div className="mobile-nav__group">
-              <span>Solutions</span>
-              {solutionLinks.map((item) => (
-                <Link href={item.href} key={item.href} onClick={closeAll}>{item.label}</Link>
-              ))}
-            </div>
-            <ButtonLink href="/contact" className="mobile-nav__cta" onClick={closeAll}>
-              Request a demo
-            </ButtonLink>
           </div>
+          <nav aria-label="Mobile navigation">
+            {siteConfig.nav.map((item, index) => (
+              <Link
+                key={item.label}
+                href={item.href}
+                onClick={() => setOpen(false)}
+              >
+                <span className="index-number">0{index + 1}</span>
+                {item.label}
+                <ArrowUpRight aria-hidden="true" />
+              </Link>
+            ))}
+          </nav>
+          <Link
+            className="button button--primary"
+            href="/contact"
+            onClick={() => setOpen(false)}
+          >
+            Request a demo <ArrowUpRight aria-hidden="true" />
+          </Link>
+          <p>Interpretation for the physical world.</p>
         </div>
-      ) : null}
+      )}
     </>
   );
 }

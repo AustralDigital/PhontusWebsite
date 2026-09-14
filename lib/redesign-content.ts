@@ -1,3 +1,4 @@
+import { photography } from "@/lib/photography";
 import type { TranscriptLine } from "@/components/conversation-card";
 
 export type ProductTab = "clinical" | "frontline" | "phone" | "human" | "console";
@@ -12,6 +13,7 @@ export const productPanels: Array<{
   features: string[];
   image?: string;
   imageAlt?: string;
+  imageMobile?: string;
 }> = [
   {
     id: "clinical",
@@ -25,23 +27,25 @@ export const productPanels: Array<{
       "Organized storage and space for cleaning supplies",
       "Nothing worn, nothing handed to a patient",
     ],
-    image: "/images/phontus-clinical-kit-v2.webp",
-    imageAlt: "The mobile Phontus Clinical Kit in a patient room.",
+    image: photography.clinicalCorridor.src,
+    imageMobile: photography.clinicalCorridor.mobileSrc,
+    imageAlt: photography.clinicalCorridor.alt,
   },
   {
     id: "frontline",
-    label: "Frontline Kit",
+    label: "Interpreting Kit",
     badge: "For counters, offices and desks",
-    title: "Phontus Frontline Kit",
+    title: "Phontus Interpreting Kit",
     copy: "A compact tabletop kit that lives where the conversation already happens: a service counter, a school office, a hotel desk, a worksite trailer. It sits between the two people and stays plugged in.",
     features: [
-      "Small enough for a shared counter, visible from both sides",
+      "Compact format for a shared counter",
       "External directional microphone that rejects lobby noise",
       "No setup between conversations, nothing to reset",
       "Arrives pre-configured for the site it is going to",
     ],
-    image: "/images/phontus-frontline-kit-v2.webp",
-    imageAlt: "The compact Phontus Frontline Kit on a service counter.",
+    image: photography.officeKit.src,
+    imageMobile: photography.officeKit.mobileSrc,
+    imageAlt: photography.officeKit.alt,
   },
   {
     id: "phone",
@@ -59,10 +63,10 @@ export const productPanels: Array<{
   {
     id: "human",
     label: "Human interpreter",
-    badge: "Included with every session",
+    badge: "Part of the Phontus system",
     badgeTone: "human",
     title: "Human interpreter escalation",
-    copy: "Not a separate product and not a separate purchase. When a conversation needs a person, ask for one from the session screen. AI interpreting keeps going until the interpreter connects, and the transcript carries straight through the handover.",
+    copy: "When a conversation needs a person, request a human interpreter from the session screen. Keep the support your team needs connected to the conversation.",
     features: [
       "Requested from the session screen, mid-conversation",
       "AI interpreting continues while the interpreter joins",
@@ -73,7 +77,7 @@ export const productPanels: Array<{
   {
     id: "console",
     label: "Admin console",
-    badge: "Included with every session",
+    badge: "Part of the Phontus system",
     title: "Admin console",
     copy: "One place to run Phontus across every site. Kit sessions and phone calls land in the same history, so whoever runs the service sees the whole picture, not half of it.",
     features: [
@@ -95,6 +99,7 @@ export type Solution = {
   tags: string[];
   image: string;
   imageAlt: string;
+  imageMobile?: string;
   coverage: string[];
   recommendationTitle: string;
   recommendations: { product: string; role: string; copy: string }[];
@@ -118,8 +123,9 @@ export const solutions: Solution[] = [
     lead: "A patient arrives, checks in, is told where to go and what happens next. When those exchanges stall, everything scheduled after them runs late.",
     overviewCopy: "Check-in, care coordination, directions to the right department, scheduling and follow-up. The Clinical Kit rolls to where the patient is; the Phone Line covers the calls that come in before the visit.",
     tags: ["Clinical Kit", "Phone Line"],
-    image: "/images/phontus-clinical-kit-healthcare-v2.webp",
-    imageAlt: "A clinician and patient speaking with a Phontus Clinical Kit nearby.",
+    image: photography.healthcare.src,
+    imageMobile: photography.healthcare.mobileSrc,
+    imageAlt: photography.healthcare.alt,
     coverage: [
       "Check-in and registration",
       "Directions to the right department",
@@ -169,10 +175,10 @@ export const solutions: Solution[] = [
     eyebrow: "Solutions · Business and field operations",
     title: "Work that cannot wait for a callback.",
     lead: "A customer at the counter, a driver at the dock, an installer at a door. These conversations happen once, in person, and there is no second attempt on the schedule.",
-    overviewCopy: "Customer service, pickup and delivery, installations, safety briefings and shift coordination. The Frontline Kit sits at the counter or in the trailer; the Phone Line handles the dispatch calls.",
-    tags: ["Frontline Kit", "Phone Line"],
+    overviewCopy: "Customer service, pickup and delivery, installations, safety briefings and shift coordination. The Interpreting Kit sits at the counter or in the trailer; the Phone Line handles the dispatch calls.",
+    tags: ["Interpreting Kit", "Phone Line"],
     image: "/images/phontus-frontline-kit-business-v2.webp",
-    imageAlt: "Two operations team members speaking near a Phontus Frontline Kit.",
+    imageAlt: "Two operations team members speaking near a Phontus Interpreting Kit.",
     coverage: [
       "Counter questions, returns and warranty",
       "Pickup, delivery and dispatch calls",
@@ -183,7 +189,7 @@ export const solutions: Solution[] = [
     ],
     recommendationTitle: "The kit where people meet, the line where they call",
     recommendations: [
-      { product: "Frontline Kit", role: "At the counter or in the trailer", copy: "Compact enough for a shared counter and visible from both sides. The directional microphone is the reason it works in a loud room: it listens to the two people in front of it and rejects the rest." },
+      { product: "Interpreting Kit", role: "At the counter or in the trailer", copy: "Compact enough for a shared counter and visible from both sides. The directional microphone is the reason it works in a loud room: it listens to the two people in front of it and rejects the rest." },
       { product: "Phone Line", role: "For dispatch and inbound calls", copy: "Delivery windows, service calls and schedule changes arrive by phone. Interpreting on your existing number means the caller does not have to find someone who speaks English first." },
     ],
     exchangeTitle: "Confirming a delivery window at the counter",
@@ -201,9 +207,9 @@ export const solutions: Solution[] = [
     ],
     questionsTitle: "Asked in counters and worksites",
     faqs: [
-      { question: "Does it work in a loud environment?", answer: "That is what the external directional microphone is for. It focuses on the two people speaking and eliminates the background sound around them, which is why the kits no longer use headsets." },
+      { question: "Does it work in a loud environment?", answer: "That is what the external directional microphone is for. It focuses on the two people speaking and helps reduce surrounding sound, which is why the kits no longer use headsets." },
       { question: "Can we run kits across several locations?", answer: "Yes. Sites, devices and staff accounts are managed together in the admin console, and usage by site tells you where to add the next kit." },
-      { question: "What if there is no counter, just a truck?", answer: "The Frontline Kit is a tabletop format, so it needs a surface and power. Where neither exists, the Phone Line covers the conversation instead." },
+      { question: "What if there is no counter, just a truck?", answer: "The Interpreting Kit is a tabletop format, so it needs a surface and power. Where neither exists, the Phone Line covers the conversation instead." },
     ],
     ctaTitle: "Put a kit on your busiest counter.",
     ctaCopy: "Tell us where the queue backs up and we will show a session in that exact setting.",
@@ -214,14 +220,15 @@ export const solutions: Solution[] = [
     eyebrow: "Solutions · Schools and districts",
     title: "Families reached the first time.",
     lead: "Enrollment, an attendance question, a bus change, a form that has to come back signed. Reaching a family once is worth more than leaving three messages.",
-    overviewCopy: "Enrollment, front-office questions, attendance, transportation, events and routine family communication. A Frontline Kit at the office window, the Phone Line for the calls home.",
-    tags: ["Frontline Kit", "Phone Line"],
-    image: "/images/phontus-frontline-kit-education-v2.webp",
-    imageAlt: "A school staff member and parent speaking near a Phontus Frontline Kit.",
+    overviewCopy: "Enrollment, front-office questions, attendance, transportation, events and routine family communication. A Interpreting Kit at the office window, the Phone Line for the calls home.",
+    tags: ["Interpreting Kit", "Phone Line"],
+    image: photography.education.src,
+    imageMobile: photography.education.mobileSrc,
+    imageAlt: photography.education.alt,
     coverage: ["Enrollment and registration", "Front-office questions", "Attendance and tardiness", "Transportation changes", "Events, permissions and forms", "Routine calls home"],
     recommendationTitle: "Where families actually reach you",
     recommendations: [
-      { product: "Frontline Kit", role: "At the front office window", copy: "A parent arrives with a question and an hour of their day. The kit sits on the office counter so the exchange finishes at the window instead of becoming an appointment." },
+      { product: "Interpreting Kit", role: "At the front office window", copy: "A parent arrives with a question and an hour of their day. The kit sits on the office counter so the exchange finishes at the window instead of becoming an appointment." },
       { product: "Phone Line", role: "For calls home", copy: "Attendance, transport and event calls go out by phone. Interpreting on the line means staff can make the call themselves rather than routing it to whoever in the building speaks Spanish." },
     ],
     exchangeTitle: "A registration question at the office window",
@@ -253,13 +260,14 @@ export const solutions: Solution[] = [
     title: "Service that does not need a translator app.",
     lead: "A guest at check-in, a request at eleven at night, a housekeeping question between shifts. Hospitality is judged on exchanges that take under a minute.",
     overviewCopy: "Check-in, directions, service requests and coordination between shifts and departments. The kit stays on the desk, in view of both the guest and the agent.",
-    tags: ["Frontline Kit", "Phone Line"],
-    image: "/images/phontus-frontline-kit-hospitality-v2.webp",
-    imageAlt: "A hotel agent and guest speaking near a Phontus Frontline Kit.",
+    tags: ["Interpreting Kit", "Phone Line"],
+    image: photography.hospitality.src,
+    imageMobile: photography.hospitality.mobileSrc,
+    imageAlt: photography.hospitality.alt,
     coverage: ["Check-in and check-out", "Directions and recommendations", "Service and housekeeping requests", "Billing questions", "Coordination between departments", "Calls to the front desk"],
-    recommendationTitle: "The desk and the line, both always staffed",
+    recommendationTitle: "At the desk and on the line",
     recommendations: [
-      { product: "Frontline Kit", role: "At the front desk", copy: "It sits on the desk in view of both the guest and the agent, so nobody reaches for a phone and holds it up to a stranger. The exchange stays a conversation between two people." },
+      { product: "Interpreting Kit", role: "At the front desk", copy: "It sits on the desk in view of both the guest and the agent, so nobody reaches for a phone and holds it up to a stranger. The exchange stays a conversation between two people." },
       { product: "Phone Line", role: "For in-house and inbound calls", copy: "Requests come from rooms and from outside the building at every hour. Interpreting on the line means the overnight agent handles them without waking anyone up." },
     ],
     exchangeTitle: "A late check-out request at the desk",
@@ -279,7 +287,7 @@ export const solutions: Solution[] = [
     faqs: [
       { question: "Does the guest have to interact with the device?", answer: "No. They speak to the agent. The screen shows what is happening so both people can follow it, but only the agent operates it." },
       { question: "Can we put kits at more than one desk?", answer: "Yes. Each desk is a site in the admin console, with its own device and usage view." },
-      { question: "Does it work in a busy lobby?", answer: "The external directional microphone focuses on the guest and the agent and eliminates the noise around them. That is why the kits no longer use headsets." },
+      { question: "Does it work in a busy lobby?", answer: "The external directional microphone focuses on the guest and the agent and helps reduce surrounding noise. That is why the kits no longer use headsets." },
     ],
     ctaTitle: "See a check-in run in Spanish.",
     ctaCopy: "Twenty minutes on a call, using the conversations your front desk actually has.",
@@ -287,10 +295,9 @@ export const solutions: Solution[] = [
 ];
 
 export const homeFaqs = [
-  { question: "Which languages does Phontus support?", answer: "Spanish ⇄ English at launch. More languages are in development. On screen, languages are always spelled out in words, so nobody has to decode an abbreviation." },
-  { question: "Do participants need headsets?", answer: "No. Each kit has an external directional microphone that focuses on the two people speaking and eliminates the background sound around them. Both people talk out loud, normally. Nothing is handed over, worn, or cleaned between conversations." },
-  { question: "What if AI interpreting is not enough for a conversation?", answer: "Request a certified human interpreter from the session screen. AI interpreting continues until they connect, and the transcript continues without a break." },
-  { question: "Does a caller need an app or an account?", answer: "No. Callers dial your existing or dedicated number and speak. Phontus interprets between the caller and your team on the line." },
-  { question: "Who controls transcripts and retention?", answer: "You do. Retention rules are set per site in the admin console, and session history is visible to the administrators you designate. The security page describes the current approach." },
-  { question: "Can we start at one site?", answer: "Yes. Most teams begin with one kit at the place where language comes up most, then add sites from the console. Kits arrive pre-configured." },
+  { question: "Which languages does Phontus support?", answer: "Spanish and English at launch, with more languages in development. We’ll discuss current availability for your deployment during a demo." },
+  { question: "Do participants need headsets?", answer: "No. The kits are designed for people to speak out loud, with a directional microphone focused on the conversation. Participants do not need to wear or share a headset." },
+  { question: "What if the conversation needs a human interpreter?", answer: "Your team can request a human interpreter from the session screen when additional support is needed. Talk to us about the support arrangements for your setting." },
+  { question: "Who controls transcripts and retention?", answer: "The organization operating Phontus sets session handling and access requirements. The platform supports site-level retention settings and administrator access to session history." },
+  { question: "Can we start with one kit?", answer: "Yes. Start with the counter, room or site where interpretation is needed, then plan additional kits around your team’s experience." },
 ];

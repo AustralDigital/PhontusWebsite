@@ -11,14 +11,14 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "sw
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
-  title: { default: "Phontus | Real-time Spanish ⇄ English interpreting", template: "%s | Phontus" },
+  title: { default: "Phontus | Interpretation for the physical world", template: "%s | Phontus" },
   description: siteConfig.description,
   applicationName: siteConfig.name,
   icons: { icon: "/brand/phontus-mark.svg", apple: "/brand/phontus-mark.svg" },
   openGraph: {
     type: "website",
     siteName: siteConfig.name,
-    title: "Phontus | Real-time Spanish ⇄ English interpreting",
+    title: "Phontus | Interpretation for the physical world",
     description: siteConfig.description,
     url: siteConfig.url,
     images: [{
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Phontus | Real-time Spanish ⇄ English interpreting",
+    title: "Phontus | Interpretation for the physical world",
     description: siteConfig.description,
     images: [{ url: "/images/phontus-kits-og-v2.webp", alt: "A Phontus interpreting kit in use." }],
   },

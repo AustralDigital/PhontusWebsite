@@ -1,0 +1,184 @@
+{
+  "results": [
+    {
+      "path": "/product?tab=clinical#details",
+      "width": 1440,
+      "overflow": false,
+      "images": [
+        {
+          "loaded": true,
+          "src": "/images/photography/clinical-corridor-landscape.webp"
+        }
+      ]
+    },
+    {
+      "path": "/product?tab=frontline#details",
+      "width": 1440,
+      "overflow": false,
+      "images": [
+        {
+          "loaded": true,
+          "src": "/images/photography/office-kit-landscape.webp"
+        }
+      ]
+    },
+    {
+      "path": "/solutions/healthcare",
+      "width": 1440,
+      "overflow": false,
+      "images": [
+        {
+          "loaded": true,
+          "src": "/images/photography/clinical-conversation-landscape.webp"
+        }
+      ]
+    },
+    {
+      "path": "/solutions/education",
+      "width": 1440,
+      "overflow": false,
+      "images": [
+        {
+          "loaded": true,
+          "src": "/images/photography/school-conversation-landscape.webp"
+        }
+      ]
+    },
+    {
+      "path": "/solutions/hospitality",
+      "width": 1440,
+      "overflow": false,
+      "images": [
+        {
+          "loaded": true,
+          "src": "/images/photography/hotel-conversation-landscape.webp"
+        }
+      ]
+    },
+    {
+      "path": "/about",
+      "width": 1440,
+      "overflow": false,
+      "images": [
+        {
+          "loaded": true,
+          "src": "/images/photography/reception-conversation-landscape.webp"
+        }
+      ]
+    },
+    {
+      "path": "/how-it-works",
+      "width": 1440,
+      "overflow": false,
+      "images": [
+        {
+          "loaded": true,
+          "src": "/images/photography/reception-conversation-landscape.webp"
+        }
+      ]
+    },
+    {
+      "check": "hardware setting changes",
+      "width": 1440,
+      "pass": true
+    },
+    {
+      "path": "/product?tab=clinical#details",
+      "width": 390,
+      "overflow": false,
+      "images": [
+        {
+          "loaded": true,
+          "src": "/images/photography/clinical-corridor-portrait.webp"
+        }
+      ]
+    },
+    {
+      "path": "/product?tab=frontline#details",
+      "width": 390,
+      "overflow": false,
+      "images": [
+        {
+          "loaded": true,
+          "src": "/images/photography/office-kit-portrait.webp"
+        }
+      ]
+    },
+    {
+      "path": "/solutions/healthcare",
+      "width": 390,
+      "overflow": false,
+      "images": [
+        {
+          "loaded": true,
+          "src": "/images/photography/clinical-conversation-portrait.webp"
+        }
+      ]
+    },
+    {
+      "path": "/solutions/education",
+      "width": 390,
+      "overflow": false,
+      "images": [
+        {
+          "loaded": true,
+          "src": "/images/photography/school-conversation-portrait.webp"
+        }
+      ]
+    },
+    {
+      "path": "/solutions/hospitality",
+      "width": 390,
+      "overflow": false,
+      "images": [
+        {
+          "loaded": true,
+          "src": "/images/photography/hotel-conversation-portrait.webp"
+        }
+      ]
+    },
+    {
+      "path": "/about",
+      "width": 390,
+      "overflow": false,
+      "images": [
+        {
+          "loaded": true,
+          "src": "/images/photography/reception-conversation-portrait.webp"
+        }
+      ]
+    },
+    {
+      "path": "/how-it-works",
+      "width": 390,
+      "overflow": false,
+      "images": [
+        {
+          "loaded": true,
+          "src": "/images/photography/reception-conversation-portrait.webp"
+        }
+      ]
+    },
+    {
+      "check": "hardware setting changes",
+      "width": 390,
+      "pass": true
+    },
+    {
+      "check": "homepage overflow",
+      "width": 360,
+      "pass": true
+    },
+    {
+      "check": "homepage overflow",
+      "width": 1280,
+      "pass": true
+    },
+    {
+      "check": "homepage overflow",
+      "width": 1920,
+      "pass": true
+    }
+  ],
+  "errors": []
+}

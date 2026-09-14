@@ -17,7 +17,7 @@ export default function ContactPage() {
         <div className="contact-page__intro" data-reveal>
           <Eyebrow>Request a demo</Eyebrow>
           <h1>Tell us where language comes up.</h1>
-          <p>We will bring the setup that fits your setting — a Clinical Kit, a Frontline Kit, the Phone Line — and run a real session with your team on the call.</p>
+          <p>We will bring the setup that fits your setting — a Clinical Kit, a Interpreting Kit, the Phone Line — and run a real session with your team on the call.</p>
           <div className="contact-steps">
             {[
               "You tell us the setting and where the conversations happen.",

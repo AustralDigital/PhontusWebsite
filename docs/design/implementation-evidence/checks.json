@@ -1,0 +1,84 @@
+{
+  "results": [
+    {
+      "name": "Mobile menu opens",
+      "ok": true
+    },
+    {
+      "name": "Close control focused",
+      "ok": true
+    },
+    {
+      "name": "Reverse Tab remains in dialog",
+      "ok": true
+    },
+    {
+      "name": "Forward Tab wraps to close",
+      "ok": true
+    },
+    {
+      "name": "Escape closes and restores focus",
+      "ok": true
+    },
+    {
+      "name": "Main restored after menu",
+      "ok": true
+    },
+    {
+      "name": "Hardware side view selected",
+      "ok": true
+    },
+    {
+      "name": "FAQ opens",
+      "ok": true
+    },
+    {
+      "name": "FAQ closes",
+      "ok": true
+    },
+    {
+      "name": "Legacy clinical deep link",
+      "ok": true
+    },
+    {
+      "name": "Keyboard moves product selection",
+      "ok": true
+    },
+    {
+      "name": "End selects final product tab",
+      "ok": true
+    },
+    {
+      "name": "Home selects first product tab",
+      "ok": true
+    },
+    {
+      "name": "Platform anchor exists",
+      "ok": true
+    },
+    {
+      "name": "Invalid form focuses first field",
+      "ok": true
+    },
+    {
+      "name": "Errors associated with inputs",
+      "ok": true
+    },
+    {
+      "name": "Mocked delivery success",
+      "ok": true
+    },
+    {
+      "name": "Mocked delivery failure shows email fallback",
+      "ok": true
+    },
+    {
+      "name": "Reduced motion content stays visible",
+      "ok": true
+    }
+  ],
+  "intercepted": 2,
+  "errors": [
+    "Failed to load resource: the server responded with a status of 503 (Service Unavailable)"
+  ]
+}

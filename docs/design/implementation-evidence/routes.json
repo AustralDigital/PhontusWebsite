@@ -1,0 +1,242 @@
+[
+  {
+    "route": "/product?tab=clinical#details",
+    "width": 1440,
+    "title": "The Phontus system | Phontus",
+    "h1": "Built for the room.Connected beyond it.",
+    "overflow": false,
+    "canonical": "https://www.phontus.live/product"
+  },
+  {
+    "route": "/product?tab=clinical#details",
+    "width": 390,
+    "title": "The Phontus system | Phontus",
+    "h1": "Built for the room.Connected beyond it.",
+    "overflow": false,
+    "canonical": "https://www.phontus.live/product"
+  },
+  {
+    "route": "/product?tab=frontline#details",
+    "width": 1440,
+    "title": "The Phontus system | Phontus",
+    "h1": "Built for the room.Connected beyond it.",
+    "overflow": false,
+    "canonical": "https://www.phontus.live/product"
+  },
+  {
+    "route": "/product?tab=frontline#details",
+    "width": 390,
+    "title": "The Phontus system | Phontus",
+    "h1": "Built for the room.Connected beyond it.",
+    "overflow": false,
+    "canonical": "https://www.phontus.live/product"
+  },
+  {
+    "route": "/product#platform",
+    "width": 1440,
+    "title": "The Phontus system | Phontus",
+    "h1": "Built for the room.Connected beyond it.",
+    "overflow": false,
+    "canonical": "https://www.phontus.live/product"
+  },
+  {
+    "route": "/product#platform",
+    "width": 390,
+    "title": "The Phontus system | Phontus",
+    "h1": "Built for the room.Connected beyond it.",
+    "overflow": false,
+    "canonical": "https://www.phontus.live/product"
+  },
+  {
+    "route": "/solutions",
+    "width": 1440,
+    "title": "At work in your world | Phontus",
+    "h1": "Different places.A shared understanding.",
+    "overflow": false,
+    "canonical": "https://www.phontus.live/solutions"
+  },
+  {
+    "route": "/solutions",
+    "width": 390,
+    "title": "At work in your world | Phontus",
+    "h1": "Different places.A shared understanding.",
+    "overflow": false,
+    "canonical": "https://www.phontus.live/solutions"
+  },
+  {
+    "route": "/solutions/healthcare",
+    "width": 1440,
+    "title": "Healthcare | Phontus",
+    "h1": "Care that starts on time.",
+    "overflow": false,
+    "canonical": "https://www.phontus.live/solutions/healthcare"
+  },
+  {
+    "route": "/solutions/healthcare",
+    "width": 390,
+    "title": "Healthcare | Phontus",
+    "h1": "Care that starts on time.",
+    "overflow": false,
+    "canonical": "https://www.phontus.live/solutions/healthcare"
+  },
+  {
+    "route": "/solutions/business-operations#field-operations",
+    "width": 1440,
+    "title": "Business and field operations | Phontus",
+    "h1": "Work that cannot wait for a callback.",
+    "overflow": false,
+    "canonical": "https://www.phontus.live/solutions/business-operations"
+  },
+  {
+    "route": "/solutions/business-operations#field-operations",
+    "width": 390,
+    "title": "Business and field operations | Phontus",
+    "h1": "Work that cannot wait for a callback.",
+    "overflow": false,
+    "canonical": "https://www.phontus.live/solutions/business-operations"
+  },
+  {
+    "route": "/solutions/education",
+    "width": 1440,
+    "title": "Schools and districts | Phontus",
+    "h1": "Families reached the first time.",
+    "overflow": false,
+    "canonical": "https://www.phontus.live/solutions/education"
+  },
+  {
+    "route": "/solutions/education",
+    "width": 390,
+    "title": "Schools and districts | Phontus",
+    "h1": "Families reached the first time.",
+    "overflow": false,
+    "canonical": "https://www.phontus.live/solutions/education"
+  },
+  {
+    "route": "/solutions/hospitality",
+    "width": 1440,
+    "title": "Hotels and hospitality | Phontus",
+    "h1": "Service that does not need a translator app.",
+    "overflow": false,
+    "canonical": "https://www.phontus.live/solutions/hospitality"
+  },
+  {
+    "route": "/solutions/hospitality",
+    "width": 390,
+    "title": "Hotels and hospitality | Phontus",
+    "h1": "Service that does not need a translator app.",
+    "overflow": false,
+    "canonical": "https://www.phontus.live/solutions/hospitality"
+  },
+  {
+    "route": "/how-it-works",
+    "width": 1440,
+    "title": "How the conversation works | Phontus",
+    "h1": "Start with a conversation.",
+    "overflow": false,
+    "canonical": "https://www.phontus.live/how-it-works"
+  },
+  {
+    "route": "/how-it-works",
+    "width": 390,
+    "title": "How the conversation works | Phontus",
+    "h1": "Start with a conversation.",
+    "overflow": false,
+    "canonical": "https://www.phontus.live/how-it-works"
+  },
+  {
+    "route": "/about",
+    "width": 1440,
+    "title": "Why Phontus | Phontus",
+    "h1": "Understanding belongswhere people meet.",
+    "overflow": false,
+    "canonical": "https://www.phontus.live/about"
+  },
+  {
+    "route": "/about",
+    "width": 390,
+    "title": "Why Phontus | Phontus",
+    "h1": "Understanding belongswhere people meet.",
+    "overflow": false,
+    "canonical": "https://www.phontus.live/about"
+  },
+  {
+    "route": "/security",
+    "width": 1440,
+    "title": "Security | Phontus",
+    "h1": "Security is a practice, not a claim.",
+    "overflow": false,
+    "canonical": "https://www.phontus.live/security"
+  },
+  {
+    "route": "/security",
+    "width": 390,
+    "title": "Security | Phontus",
+    "h1": "Security is a practice, not a claim.",
+    "overflow": false,
+    "canonical": "https://www.phontus.live/security"
+  },
+  {
+    "route": "/contact",
+    "width": 1440,
+    "title": "Request a demo | Phontus",
+    "h1": "Tell us where language comes up.",
+    "overflow": false,
+    "canonical": "https://www.phontus.live/contact"
+  },
+  {
+    "route": "/contact",
+    "width": 390,
+    "title": "Request a demo | Phontus",
+    "h1": "Tell us where language comes up.",
+    "overflow": false,
+    "canonical": "https://www.phontus.live/contact"
+  },
+  {
+    "route": "/privacy",
+    "width": 1440,
+    "title": "Privacy | Phontus",
+    "h1": "Privacy",
+    "overflow": false,
+    "canonical": "https://www.phontus.live/privacy"
+  },
+  {
+    "route": "/privacy",
+    "width": 390,
+    "title": "Privacy | Phontus",
+    "h1": "Privacy",
+    "overflow": false,
+    "canonical": "https://www.phontus.live/privacy"
+  },
+  {
+    "route": "/terms",
+    "width": 1440,
+    "title": "Terms of service | Phontus",
+    "h1": "Terms of service",
+    "overflow": false,
+    "canonical": "https://www.phontus.live/terms"
+  },
+  {
+    "route": "/terms",
+    "width": 390,
+    "title": "Terms of service | Phontus",
+    "h1": "Terms of service",
+    "overflow": false,
+    "canonical": "https://www.phontus.live/terms"
+  },
+  {
+    "route": "/accessibility",
+    "width": 1440,
+    "title": "Accessibility | Phontus",
+    "h1": "Accessibility",
+    "overflow": false,
+    "canonical": "https://www.phontus.live/accessibility"
+  },
+  {
+    "route": "/accessibility",
+    "width": 390,
+    "title": "Accessibility | Phontus",
+    "h1": "Accessibility",
+    "overflow": false,
+    "canonical": "https://www.phontus.live/accessibility"
+  }
+]

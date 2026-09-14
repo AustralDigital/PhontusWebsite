@@ -1,48 +1,98 @@
+import { photography } from "@/lib/photography";
 import type { Metadata } from "next";
-import { Container, Eyebrow, PageHero, SectionHeading } from "@/components/ui";
+import { Container, Eyebrow, PhotoFrame } from "@/components/ui";
 import { createMetadata } from "@/lib/metadata";
-
 export const metadata: Metadata = createMetadata(
-  "About",
-  "Phontus brings interpreting closer to the room, counter, campus, and worksite.",
+  "Why Phontus",
+  "Bringing interpretation closer to the people and places that need it. Discover the thinking behind Phontus.",
   "/about",
 );
-
+const principles = [
+  [
+    "Keep the person at the center",
+    "Technology should support the exchange, leaving people free to look at and speak to one another.",
+  ],
+  [
+    "Make the next step clear",
+    "The screen should say what is happening, in words both people can follow.",
+  ],
+  [
+    "Build for the place",
+    "A counter and a care setting have different needs. The hardware should fit naturally into each.",
+  ],
+  [
+    "Connect the whole system",
+    "The people running a deployment should have a shared view of its devices, sites and use.",
+  ],
+];
 export default function AboutPage() {
   return (
     <>
-      <PageHero
-        eyebrow="About"
-        title="Language barriers should not slow service down."
-        copy="Routine needs move faster than a complicated workflow can respond. Phontus brings interpreting closer to the room, the counter, the campus and the worksite, so the conversation can start when the person does."
-      />
-      <section className="section">
-        <Container className="split-grid split-grid--center" data-reveal>
+      <section className="page-hero">
+        <Container>
+          <Eyebrow>Why we’re building Phontus</Eyebrow>
+          <h1>
+            Understanding belongs
+            <br />
+            where people meet.
+          </h1>
+          <p>
+            A conversation at the front desk. A question in a clinic. A family
+            visiting a school. Language is part of the work, every day.
+          </p>
+        </Container>
+      </section>
+      <Container>
+        <PhotoFrame
+          className="about-photo"
+          {...photography.reception}
+          priority
+          sizes="90vw"
+        />
+      </Container>
+      <section className="editorial-section">
+        <Container className="about-story">
+          <Eyebrow>From real settings, for real settings</Eyebrow>
+          <h2>
+            Bring interpretation
+            <br />
+            closer to the conversation.
+          </h2>
           <div>
-            <Eyebrow>Where we started</Eyebrow>
-            <h2>Shaped in demanding real-world settings</h2>
-            <p>Our earliest testing took place with clinical teams, including dental and women&apos;s health settings. Those rooms taught us what to remove: headsets to hand out, devices to clean, decisions to make before a session can begin.</p>
-            <p>What is left is a kit that is already on, a microphone pointed at the two people talking, and a screen that says what is happening in words.</p>
-          </div>
-          <div className="hairline-grid hairline-grid--two facts-grid">
-            <div className="plain-tile"><strong>Early field testing</strong><span>Learning inside real workflows</span></div>
-            <div className="plain-tile"><strong>Spanish ⇄ English</strong><span>A focused launch, more languages coming</span></div>
-            <div className="plain-tile"><strong>Two kit formats</strong><span>Clinical and frontline delivery</span></div>
-            <div className="plain-tile"><strong>Phone Line</strong><span>Interpreting on your business number</span></div>
+            <p>
+              Our early work with clinical teams, including dental and women’s
+              health settings, helped shape a simple idea: interpretation should
+              be available where people already talk.
+            </p>
+            <p>
+              Phontus brings purpose-built hardware, AI interpretation, human
+              support and deployment management into one system. The environment
+              can change. The experience should remain familiar.
+            </p>
+            <p>
+              We’re starting with Spanish and English, with more languages in
+              development.
+            </p>
           </div>
         </Container>
       </section>
-      <section className="section section--white section--bordered">
+      <section className="editorial-section about-principles">
         <Container>
-          <SectionHeading eyebrow="What we hold to" title="What we will not compromise on." />
-          <div className="hairline-grid hairline-grid--four" data-reveal>
-            {[
-              ["The person stays at the center", "Technology supports the dialogue instead of becoming it."],
-              ["Languages are words", "Spelled out on screen, so nobody has to decode an abbreviation."],
-              ["The screen says what is happening", "In words, not just a color, so it reads from across a room."],
-              ["Fewer things to touch", "Nothing to hand over, install, or clean between visits."],
-            ].map(([title, copy], index) => (
-              <div className="principle-tile" key={title}><span className="mono">0{index + 1}</span><strong>{title}</strong><p>{copy}</p></div>
+          <div className="section-intro">
+            <Eyebrow>The principles behind the product</Eyebrow>
+            <h2>
+              Thoughtful technology.
+              <br />
+              Human priorities.
+            </h2>
+          </div>
+          <div className="operations-list">
+            {principles.map(([title, copy], index) => (
+              <article key={title} data-reveal>
+                <span className="index-number">0{index + 1}</span>
+                <h3>{title}</h3>
+                <p>{copy}</p>
+              </article>
             ))}
           </div>
         </Container>

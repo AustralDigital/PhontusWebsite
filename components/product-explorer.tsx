@@ -1,116 +1,149 @@
 "use client";
-
-import { Minus, Plus } from "lucide-react";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useMemo } from "react";
-import { ConsoleMock, SessionMock, PhoneLineMock } from "@/components/conversation-card";
-import { Badge, ButtonLink, CheckList, Container, PhotoFrame } from "@/components/ui";
+import Image from "next/image";
+import { useSearchParams } from "next/navigation";
+import {
+  ButtonLink,
+  CheckList,
+  Container,
+  Eyebrow,
+  PhotoFrame,
+} from "@/components/ui";
 import { productPanels, type ProductTab } from "@/lib/redesign-content";
-
-const validTabs = new Set<ProductTab>(["clinical", "frontline", "phone", "human", "console"]);
+import { PhoneCall, Users, MapPin, History, Settings2 } from "lucide-react";
+const validTabs = new Set<ProductTab>([
+  "clinical",
+  "frontline",
+  "phone",
+  "human",
+  "console",
+]);
+const orderedPanels = [
+  "frontline",
+  "clinical",
+  "human",
+  "console",
+  "phone",
+].map((id) => productPanels.find((p) => p.id === id)!);
 
 export function ProductExplorer() {
-  const searchParams = useSearchParams();
-  const pathname = usePathname();
-  const router = useRouter();
-  const selected = useMemo<ProductTab>(() => {
-    const value = searchParams.get("tab") as ProductTab | null;
-    return value && validTabs.has(value) ? value : "clinical";
-  }, [searchParams]);
-
+  const params = useSearchParams();
+  const value = params.get("tab") as ProductTab | null;
+  const selected: ProductTab =
+    value && validTabs.has(value) ? value : "frontline";
   const select = (id: ProductTab) => {
-    const params = new URLSearchParams(searchParams.toString());
-    params.set("tab", id);
-    router.replace(`${pathname}?${params.toString()}`, { scroll: false });
+    const url = new URL(window.location.href);
+    url.searchParams.set("tab", id);
+    url.hash = "details";
+    // Native history keeps this local view change immediate and preserves focus.
+    window.history.replaceState(
+      null,
+      "",
+      `${url.pathname}${url.search}${url.hash}`,
+    );
   };
-
+  const panel = orderedPanels.find((p) => p.id === selected)!;
   return (
     <>
-      <div className="product-tabs" role="tablist" aria-label="Phontus product details">
-        <Container>
-          {productPanels.map((panel) => (
+      <Container>
+        <div
+          className="product-tabs"
+          role="tablist"
+          aria-label="Explore the Phontus system"
+        >
+          {orderedPanels.map((p, index) => (
             <button
-              key={panel.id}
+              key={p.id}
+              id={`tab-${p.id}`}
               type="button"
               role="tab"
-              aria-selected={selected === panel.id}
-              aria-controls={`panel-${panel.id}`}
-              onClick={() => select(panel.id)}
+              tabIndex={selected === p.id ? 0 : -1}
+              aria-selected={selected === p.id}
+              aria-controls="product-detail-panel"
+              onClick={() => select(p.id)}
+              onKeyDown={(event) => {
+                let next = index;
+                if (event.key === "ArrowRight")
+                  next = (index + 1) % orderedPanels.length;
+                else if (event.key === "ArrowLeft")
+                  next =
+                    (index + orderedPanels.length - 1) % orderedPanels.length;
+                else if (event.key === "Home") next = 0;
+                else if (event.key === "End") next = orderedPanels.length - 1;
+                else return;
+                event.preventDefault();
+                select(orderedPanels[next].id);
+                document
+                  .getElementById(`tab-${orderedPanels[next].id}`)
+                  ?.focus();
+              }}
             >
-              {panel.label}
+              {p.label}
             </button>
           ))}
-        </Container>
-      </div>
-
-      <div className="product-accordion">
-        {productPanels.map((panel) => {
-          const open = selected === panel.id;
-          return (
-            <div key={panel.id}>
-              <button type="button" aria-expanded={open} onClick={() => select(panel.id)}>
-                <span>{panel.label}</span>
-                {open ? <Minus aria-hidden="true" /> : <Plus aria-hidden="true" />}
-              </button>
-              {open ? <ProductPanel id={panel.id} /> : null}
-            </div>
-          );
-        })}
-      </div>
-
-      <div className="product-panels">
-        <ProductPanel id={selected} />
-      </div>
-    </>
-  );
-}
-
-function ProductPanel({ id }: { id: ProductTab }) {
-  const panel = productPanels.find((item) => item.id === id)!;
-  const visual = panel.image ? (
-    <PhotoFrame src={panel.image} alt={panel.imageAlt ?? ""} />
-  ) : id === "phone" ? (
-    <PhoneLineMock />
-  ) : id === "console" ? (
-    <ConsoleMock />
-  ) : (
-    <SessionMock
-      human
-      elapsed="03:41"
-      lines={[
-        {
-          speaker: "Visitor",
-          language: "Spanish (US)",
-          time: "03:28",
-          original: "Quiero entender bien lo que dice el formulario antes de firmar.",
-          translation: "I want to understand exactly what the form says before I sign.",
-        },
-        {
-          speaker: "Front desk",
-          language: "English (US)",
-          time: "03:41",
-          original: "Of course. I am bringing in an interpreter to go through it with you.",
-          translation: "Por supuesto. Voy a traer a un intérprete para revisarlo con usted.",
-          source: "human",
-        },
-      ]}
-    />
-  );
-
-  return (
-    <section className="product-panel" id={`panel-${id}`} role="tabpanel">
-      <Container className={`split-grid split-grid--center ${id === "phone" ? "product-panel--reverse" : ""}`} data-reveal>
-        <div className="product-panel__visual">{visual}</div>
-        <div className="product-panel__copy">
-          <Badge tone={panel.badgeTone ?? "brand"}>{panel.badge}</Badge>
-          <h2>{panel.title}</h2>
-          <p>{panel.copy}</p>
-          <CheckList items={panel.features} />
-          {id === "clinical" || id === "frontline" || id === "phone" ? (
-            <ButtonLink href="/contact">Request a demo</ButtonLink>
-          ) : null}
         </div>
       </Container>
-    </section>
+      <section
+        className="product-panel"
+        id="product-detail-panel"
+        role="tabpanel"
+        aria-labelledby={`tab-${selected}`}
+        tabIndex={0}
+      >
+        <Container className="product-panel__grid">
+          <div
+            className={`product-panel__visual product-panel__visual--${selected}`}
+          >
+            {selected === "clinical" || selected === "frontline" ? (
+              <PhotoFrame src={panel.image!} mobileSrc={panel.imageMobile} alt={panel.imageAlt!} />
+            ) : selected === "human" ? (
+              <Image
+                src="/images/product/session-screen.webp"
+                width={1130}
+                height={848}
+                alt="Phontus session interface with a call interpreter control."
+                sizes="(max-width: 960px) 100vw, 45vw"
+              />
+            ) : selected === "phone" ? (
+              <div className="phone-explainer">
+                <PhoneCall aria-hidden="true" />
+                <span className="overline">Phontus Phone Line</span>
+                <h3>
+                  Your caller.
+                  <br />
+                  Your team.
+                  <br />A shared understanding.
+                </h3>
+                <p>Spanish ⇄ English interpretation on the line.</p>
+              </div>
+            ) : (
+              <div className="console-capabilities">
+                <Eyebrow>One operational view</Eyebrow>
+                {[
+                  [MapPin, "Sites & devices"],
+                  [Users, "Staff & access"],
+                  [History, "Session history"],
+                  [Settings2, "Retention settings"],
+                ].map(([Icon, label]) => {
+                  const I = Icon as typeof MapPin;
+                  return (
+                    <div key={label as string}>
+                      <I aria-hidden="true" />
+                      <span>{label as string}</span>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+          </div>
+          <div className="product-panel__copy">
+            <Eyebrow>{panel.badge}</Eyebrow>
+            <h2>{panel.title}</h2>
+            <p>{panel.copy}</p>
+            <CheckList items={panel.features} />
+            <ButtonLink href="/contact">See it in a demo</ButtonLink>
+          </div>
+        </Container>
+      </section>
+    </>
   );
 }

@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image, { getImageProps } from "next/image";
 import Link from "next/link";
 import { ArrowRight, Check } from "lucide-react";
 import type { HTMLAttributes, MouseEventHandler, ReactNode } from "react";
@@ -27,7 +27,9 @@ export function ButtonLink({
       onClick={onClick}
     >
       <span>{children}</span>
-      {arrow ? <ArrowRight aria-hidden="true" size={17} strokeWidth={1.75} /> : null}
+      {arrow ? (
+        <ArrowRight aria-hidden="true" size={17} strokeWidth={1.75} />
+      ) : null}
     </Link>
   );
 }
@@ -96,7 +98,13 @@ export function PageHero({
   );
 }
 
-export function Tag({ children, icon }: { children: ReactNode; icon?: ReactNode }) {
+export function Tag({
+  children,
+  icon,
+}: {
+  children: ReactNode;
+  icon?: ReactNode;
+}) {
   return (
     <span className="tag">
       {icon}
@@ -133,12 +141,32 @@ export function PhotoFrame({
   alt,
   className = "",
   priority = false,
+  sizes = "(max-width: 960px) 100vw, 50vw",
+  position,
+  mobileSrc,
 }: {
   src: string;
   alt: string;
   className?: string;
   priority?: boolean;
+  sizes?: string;
+  position?: string;
+  mobileSrc?: string;
 }) {
+  if (mobileSrc) {
+    const common = { alt, fill: true, sizes, style: { objectPosition: position }, loading: priority ? "eager" as const : "lazy" as const, fetchPriority: priority ? "high" as const : "auto" as const };
+    const { props: desktop } = getImageProps({ ...common, src });
+    const { props: mobile } = getImageProps({ ...common, src: mobileSrc, sizes: "(max-width: 760px) 100vw, 50vw" });
+    return (
+      <div className={`photo-frame photo-frame--responsive ${className}`}>
+        <picture>
+          <source media="(max-width: 760px)" srcSet={mobile.srcSet} sizes={mobile.sizes} />
+          {/* getImageProps supplies Next-optimized sources for both compositions. */}
+          <img {...desktop} alt={alt} />
+        </picture>
+      </div>
+    );
+  }
   return (
     <div className={`photo-frame ${className}`}>
       <Image
@@ -146,7 +174,8 @@ export function PhotoFrame({
         alt={alt}
         fill
         priority={priority}
-        sizes="(max-width: 760px) 100vw, 50vw"
+        sizes={sizes}
+        style={{ objectPosition: position }}
       />
     </div>
   );

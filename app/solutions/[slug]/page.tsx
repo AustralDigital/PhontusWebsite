@@ -45,11 +45,11 @@ export default async function SolutionPage({ params }: { params: Promise<{ slug:
             <div className="tag-row">{solution.tags.map((tag) => <Tag key={tag}>{tag}</Tag>)}</div>
             <Link className="text-link" href="/solutions">← All solutions</Link>
           </div>
-          <PhotoFrame src={solution.image} alt={solution.imageAlt} priority />
+          <PhotoFrame src={solution.image} mobileSrc={solution.imageMobile} alt={solution.imageAlt} priority />
         </Container>
       </section>
 
-      <section className="section">
+      <section className="section" id={slug === "business-operations" ? "field-operations" : undefined}>
         <Container>
           <SectionHeading eyebrow="What it covers" title="Conversations this covers" />
           <div className="hairline-grid hairline-grid--three" data-reveal>
@@ -80,7 +80,7 @@ export default async function SolutionPage({ params }: { params: Promise<{ slug:
             <h2>{solution.exchangeTitle}</h2>
             <p>{solution.exchangeCopy}</p>
           </div>
-          <SessionMock lines={solution.transcript} elapsed={solution.elapsed} />
+          <div><p className="overline transcript-example-label">Illustrative conversation</p><SessionMock lines={solution.transcript} elapsed={solution.elapsed} /></div>
         </Container>
       </section>
 

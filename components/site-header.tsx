@@ -9,6 +9,7 @@ import { siteConfig } from "@/lib/config";
 
 export function SiteHeader() {
   const pathname = usePathname();
+  const isCurrent = (href: string) => pathname === href || (href === "/product" && pathname.startsWith("/products/")) || (href === "/solutions" && pathname.startsWith("/solutions/"));
   const [open, setOpen] = useState(false);
   const dialog = useRef<HTMLDivElement>(null);
   const trigger = useRef<HTMLButtonElement>(null);
@@ -81,7 +82,7 @@ export function SiteHeader() {
               <Link
                 key={item.label}
                 href={item.href}
-                aria-current={pathname === item.href ? "page" : undefined}
+                aria-current={isCurrent(item.href) ? "page" : undefined}
               >
                 {item.label}
               </Link>
@@ -134,6 +135,7 @@ export function SiteHeader() {
               <Link
                 key={item.label}
                 href={item.href}
+                aria-current={isCurrent(item.href) ? "page" : undefined}
                 onClick={() => setOpen(false)}
               >
                 <span className="index-number">0{index + 1}</span>

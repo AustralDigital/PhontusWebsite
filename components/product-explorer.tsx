@@ -1,100 +1,38 @@
-"use client";
 import Image from "next/image";
-import { useSearchParams } from "next/navigation";
-import {
-  ButtonLink,
-  CheckList,
-  Container,
-  Eyebrow,
-  PhotoFrame,
-} from "@/components/ui";
+import Link from "next/link";
+import { ButtonLink, CheckList, Container, Eyebrow, PhotoFrame } from "@/components/ui";
 import { productPanels, type ProductTab } from "@/lib/redesign-content";
+import { productDestinations } from "@/lib/products";
 import { PhoneCall, Users, MapPin, History, Settings2 } from "lucide-react";
-const validTabs = new Set<ProductTab>([
-  "clinical",
-  "frontline",
-  "phone",
-  "human",
-  "console",
-]);
-const orderedPanels = [
-  "frontline",
-  "clinical",
-  "human",
-  "console",
-  "phone",
-].map((id) => productPanels.find((p) => p.id === id)!);
 
-export function ProductExplorer() {
-  const params = useSearchParams();
-  const value = params.get("tab") as ProductTab | null;
-  const selected: ProductTab =
-    value && validTabs.has(value) ? value : "frontline";
-  const select = (id: ProductTab) => {
-    const url = new URL(window.location.href);
-    url.searchParams.set("tab", id);
-    url.hash = "details";
-    // Native history keeps this local view change immediate and preserves focus.
-    window.history.replaceState(
-      null,
-      "",
-      `${url.pathname}${url.search}${url.hash}`,
-    );
-  };
-  const panel = orderedPanels.find((p) => p.id === selected)!;
+const orderedPanels = ["frontline", "clinical", "phone", "human", "console"] as const;
+
+export function ProductNavigation({ selected }: { selected?: ProductTab }) {
   return (
-    <>
-      <Container>
-        <div
-          className="product-tabs"
-          role="tablist"
-          aria-label="Explore the Phontus system"
-        >
-          {orderedPanels.map((p, index) => (
-            <button
-              key={p.id}
-              id={`tab-${p.id}`}
-              type="button"
-              role="tab"
-              tabIndex={selected === p.id ? 0 : -1}
-              aria-selected={selected === p.id}
-              aria-controls="product-detail-panel"
-              onClick={() => select(p.id)}
-              onKeyDown={(event) => {
-                let next = index;
-                if (event.key === "ArrowRight")
-                  next = (index + 1) % orderedPanels.length;
-                else if (event.key === "ArrowLeft")
-                  next =
-                    (index + orderedPanels.length - 1) % orderedPanels.length;
-                else if (event.key === "Home") next = 0;
-                else if (event.key === "End") next = orderedPanels.length - 1;
-                else return;
-                event.preventDefault();
-                select(orderedPanels[next].id);
-                document
-                  .getElementById(`tab-${orderedPanels[next].id}`)
-                  ?.focus();
-              }}
-            >
-              {p.label}
-            </button>
-          ))}
-        </div>
-      </Container>
-      <section
-        className="product-panel"
-        id="product-detail-panel"
-        role="tabpanel"
-        aria-labelledby={`tab-${selected}`}
-        tabIndex={0}
-      >
-        <Container className="product-panel__grid">
+    <Container>
+      <nav className="product-tabs" aria-label="Explore the Phontus system">
+        {orderedPanels.map((id) => <Link key={id} href={productDestinations[id]} aria-current={selected === id ? "page" : undefined}>{productPanels.find((panel) => panel.id === id)!.label}</Link>)}
+      </nav>
+    </Container>
+  );
+}
+
+export function ProductExplorer({ selected, heading = "h2" }: { selected: ProductTab; heading?: "h1" | "h2" }) {
+  const panel = productPanels.find((item) => item.id === selected)!;
+  const Heading = heading;
+  return (
+    <section className="product-panel" id="product-detail-panel">
+      <Container className="product-panel__grid">
+          <div className="product-panel__copy product-panel__intro">
+            <Eyebrow>{panel.badge}</Eyebrow>
+            <Heading>{panel.title}</Heading>
+            <p>{panel.copy}</p>
+          </div>
           <div
             className={`product-panel__visual product-panel__visual--${selected}`}
           >
             {selected === "clinical" || selected === "frontline" ? (
-              <PhotoFrame src={panel.image!} mobileSrc={panel.imageMobile} alt={panel.imageAlt!} />
+              <PhotoFrame src={panel.image!} mobileSrc={panel.imageMobile} alt={panel.imageAlt!} priority />
             ) : selected === "human" ? (
               <Image
                 src="/images/product/session-screen.webp"
@@ -107,12 +45,12 @@ export function ProductExplorer() {
               <div className="phone-explainer">
                 <PhoneCall aria-hidden="true" />
                 <span className="overline">Phontus Phone Line</span>
-                <h3>
+                <p className="phone-explainer__statement">
                   Your caller.
                   <br />
                   Your team.
                   <br />A shared understanding.
-                </h3>
+                </p>
                 <p>Spanish ⇄ English interpretation on the line.</p>
               </div>
             ) : (
@@ -135,15 +73,14 @@ export function ProductExplorer() {
               </div>
             )}
           </div>
-          <div className="product-panel__copy">
-            <Eyebrow>{panel.badge}</Eyebrow>
-            <h2>{panel.title}</h2>
-            <p>{panel.copy}</p>
+          <div className="product-panel__copy product-panel__features">
             <CheckList items={panel.features} />
-            <ButtonLink href="/contact">See it in a demo</ButtonLink>
           </div>
-        </Container>
-      </section>
-    </>
+          <div className="product-panel__copy product-panel__action">
+            <p className="product-availability">Spanish ⇄ English at launch</p>
+            <ButtonLink href="/contact">Request a demo</ButtonLink>
+          </div>
+      </Container>
+    </section>
   );
 }

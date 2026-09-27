@@ -1,12 +1,12 @@
 export const siteConfig = {
   name: "Phontus",
   description:
-    "Purpose-built hardware, AI interpretation and human support. One system for conversations in the physical world.",
+    "Language-access infrastructure for the physical world. Dedicated hardware, AI and human interpretation, phone conversations and one management platform.",
   email: "hello@phontus.live",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.phontus.live",
   nav: [
     { label: "Products", href: "/product" },
-    { label: "Platform", href: "/product#platform" },
+    { label: "Platform", href: "/platform" },
     { label: "Industries", href: "/solutions" },
     { label: "Technology", href: "/how-it-works" },
     { label: "Company", href: "/about" },
@@ -16,17 +16,17 @@ export const siteConfig = {
 export const productLinks = [
   {
     label: "Clinical Kit",
-    href: "/product?tab=clinical#details",
+    href: "/products/clinical-kit",
     copy: "A mobile cart for the point of care.",
   },
   {
     label: "Interpreting Kit",
-    href: "/product?tab=frontline#details",
+    href: "/products/interpreting-kit",
     copy: "A compact kit for counters and desks.",
   },
   {
     label: "Phone Line",
-    href: "/product?tab=phone#details",
+    href: "/products/phone-line",
     copy: "Interpreting on your business number.",
   },
 ] as const;
@@ -56,17 +56,18 @@ export const solutionLinks = [
 
 export const footerColumns = [
   {
-    title: "Product",
+    title: "Products",
     links: [
       { label: "Overview", href: "/product" },
-      { label: "Clinical Kit", href: "/product?tab=clinical#details" },
-      { label: "Interpreting Kit", href: "/product?tab=frontline#details" },
-      { label: "Phone Line", href: "/product?tab=phone#details" },
+      { label: "Clinical Kit", href: "/products/clinical-kit" },
+      { label: "Interpreting Kit", href: "/products/interpreting-kit" },
+      { label: "Phone Line", href: "/products/phone-line" },
+      { label: "Platform", href: "/platform" },
       { label: "How it works", href: "/how-it-works" },
     ],
   },
   {
-    title: "Solutions",
+    title: "Industries",
     links: solutionLinks.map(({ label, href }) => ({ label, href })),
   },
   {

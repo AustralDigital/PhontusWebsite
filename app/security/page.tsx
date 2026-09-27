@@ -1,49 +1,44 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ShieldCheck, Timer, Users, Wifi } from "lucide-react";
-import { Container, PageHero } from "@/components/ui";
+import { Container, Eyebrow, PageHero } from "@/components/ui";
 import { createMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = createMetadata(
   "Security",
-  "How Phontus approaches controlled access, encrypted transmission, and configurable session handling.",
+  "Phontus security practices: encrypted transmission, site-level access, managed device enrollment and configurable transcript retention.",
   "/security",
 );
 
-const practices = [
-  { icon: ShieldCheck, title: "Controlled access", copy: "Sites, staff accounts and device enrollment are managed by the administrators you designate. Access is granted per site, not per organization." },
-  { icon: Wifi, title: "Secure transmission", copy: "Session traffic is encrypted in transit between the kit, the phone line and the interpreting service." },
-  { icon: Timer, title: "Session handling you set", copy: "Transcript retention is configured per site in the admin console. What is kept, for how long, and who can read it is your decision." },
-  { icon: Users, title: "Nothing for a visitor to install", copy: "A visitor never creates an account, installs anything, or hands over a device. The fewer things a person has to touch, the less there is to protect." },
+// These capabilities are explicitly stated in the existing security page and product content.
+const capabilities = [
+  { title: "Encryption in transit", scope: "Session traffic", copy: "Session traffic is encrypted in transit between the kit, the Phone Line and the interpreting service." },
+  { title: "Site-level access controls", scope: "People & permissions", copy: "Designated administrators manage staff accounts and access by site. Transcript access follows the organization’s settings." },
+  { title: "Managed device enrollment", scope: "Sites & devices", copy: "Your administrators manage sites and device enrollment through the admin console, alongside staff accounts." },
+  { title: "Configurable transcript retention", scope: "Session handling", copy: "Transcript retention is set per site in the admin console. Your organization decides what is kept, for how long and who can read it." },
 ];
 
 export default function SecurityPage() {
   return (
     <>
-      <PageHero
-        eyebrow="Security"
-        title="Security is a practice, not a claim."
-        copy="Phontus is built around controlled access, encrypted transmission and session handling you configure. This page describes where things stand today, and it changes as the work does."
-      />
-      <section className="section">
+      <PageHero eyebrow="Security" title="Security is a practice, not a claim." copy="Language access is part of your operations. So are the decisions about access, devices and data. Here is how Phontus supports those decisions." />
+      <section className="section section--compact">
         <Container>
-          <div className="hairline-grid hairline-grid--two" data-reveal>
-            {practices.map(({ icon: Icon, title, copy }) => (
-              <article className="change-card" key={title}>
-                <span className="icon-tile"><Icon aria-hidden="true" /></span>
-                <h3>{title}</h3><p>{copy}</p>
-              </article>
-            ))}
-          </div>
+          <div className="section-heading"><Eyebrow>Current capabilities</Eyebrow><h2>Specific controls.<br />Clear responsibilities.</h2><p>The organization operating Phontus controls its sites, staff access and transcript settings.</p></div>
+          <dl className="security-capabilities">
+            {capabilities.map(({ title, scope, copy }) => <div key={title}><dt><span className="overline">{scope}</span><strong>{title}</strong></dt><dd>{copy}</dd></div>)}
+          </dl>
           <div className="split-grid split-grid--start security-review" data-reveal>
             <div>
-              <h2>Where we are today</h2>
-              <p>Phontus is built for organizations that have to answer security questions before they can say yes. Rather than list certifications, this page sets out what is in place, what is in progress, and what a review with your team would cover. Ask us and we will tell you exactly where we stand.</p>
-              <Link className="text-link" href="/contact">Request our current security summary →</Link>
+              <Eyebrow>Review your deployment</Eyebrow>
+              <h2>Get the detail<br />your team needs.</h2>
+              <p>A security review should cover your actual data flow and requirements. Ask for the current security summary and discuss the details below before deployment.</p>
+              <p>Our privacy documentation identifies open questions about audio handling, retention defaults, deletion timing and subprocessors. Review those with us for your setting.</p>
+              <Link className="text-link" href="/contact">Request a security discussion →</Link>
             </div>
             <div className="review-list">
-              <strong>What a review covers</strong>
-              {["Data flow for a kit session and a phone session", "Retention configuration and deletion behavior", "Administrator roles and access boundaries", "Device enrollment and loss handling", "Subprocessors, and where each one sits in the flow"].map((item) => <span key={item}>{item}</span>)}
+              <strong>What to review together</strong>
+              {["Data flow for kit sessions and phone conversations", "Audio processing and any audio retention", "Transcript defaults and deletion requests", "Administrator roles and site access boundaries", "Device enrollment and loss handling", "Subprocessors and where data is processed"].map((item) => <span key={item}>{item}</span>)}
+              <Link className="text-link" href="/privacy">Read the privacy documentation →</Link>
             </div>
           </div>
         </Container>

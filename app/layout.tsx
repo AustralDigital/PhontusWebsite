@@ -11,14 +11,14 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "sw
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
-  title: { default: "Phontus | Interpretation for the physical world", template: "%s | Phontus" },
+  title: { default: "Phontus | Language-access infrastructure", template: "%s | Phontus" },
   description: siteConfig.description,
   applicationName: siteConfig.name,
   icons: { icon: "/brand/phontus-mark.svg", apple: "/brand/phontus-mark.svg" },
   openGraph: {
     type: "website",
     siteName: siteConfig.name,
-    title: "Phontus | Interpretation for the physical world",
+    title: "Phontus | Language-access infrastructure",
     description: siteConfig.description,
     url: siteConfig.url,
     images: [{
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Phontus | Interpretation for the physical world",
+    title: "Phontus | Language-access infrastructure",
     description: siteConfig.description,
     images: [{ url: "/images/phontus-kits-og-v2.webp", alt: "A Phontus interpreting kit in use." }],
   },
@@ -58,8 +58,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       <body>
         <a className="skip-link" href="#main-content">Skip to content</a>
         <SiteHeader />
-        <main id="main-content">{children}</main>
-        <FinalCTA />
+        <main id="main-content">{children}<FinalCTA /></main>
         <SiteFooter />
         <SiteBehavior />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />

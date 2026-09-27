@@ -8,19 +8,21 @@ import {
   SystemOverview,
   HumanSection,
   PlatformSection,
-  TerminologySection,
   EnterpriseSection,
 } from "@/components/system-sections";
 import { WorkplaceStories } from "@/components/workplace-stories";
 import { ProductFamily } from "@/components/product-family";
 import { OperationalProof } from "@/components/operational-proof";
+import { DifferentiationSection, PhoneSection, RolloutSection } from "@/components/access-sections";
+import { ConversationDemo } from "@/components/conversation-demo";
+import { PilotStories } from "@/components/pilot-stories";
 import { FAQ } from "@/components/faq";
 import { homeFaqs } from "@/lib/redesign-content";
 import { createMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = createMetadata(
-  "Phontus | Interpretation for the physical world",
-  "Purpose-built interpreting hardware, AI interpretation, human support and one management platform. Meet the Phontus system.",
+  "Phontus | Language-access infrastructure for the physical world",
+  "Dedicated interpreting hardware, real-time AI, human interpreters and phone interpretation. One platform for language access across your organization.",
 );
 
 export default function HomePage() {
@@ -29,23 +31,22 @@ export default function HomePage() {
       <section className="system-hero">
         <Container className="system-hero__grid">
           <div className="system-hero__copy">
-            <Eyebrow>Interpretation for the physical world</Eyebrow>
+            <Eyebrow>Language access for the physical world</Eyebrow>
             <h1>
-              Understand <br />
-              anyone.
+              Interpretation,
               <span>
-                Wherever <br />
-                work happens.
+                built into the places people talk.
               </span>
             </h1>
             <p>
-              Purpose-built hardware. AI interpretation. Human support. One
-              system for the conversations that happen face to face.
+              Purpose-built interpreting hardware with real-time AI and human
+              interpreters on demand — for clinics, schools, service desks,
+              hospitality teams and operations.
             </p>
             <div className="hero-actions">
-              <ButtonLink href="/contact">See Phontus in action</ButtonLink>
-              <Link href="#system" className="text-link">
-                Explore the system <ArrowDown aria-hidden="true" />
+              <ButtonLink href="/contact">Request a demo</ButtonLink>
+              <Link href="#conversation" className="text-link">
+                See how Phontus works <ArrowDown aria-hidden="true" />
               </Link>
             </div>
             <small>Spanish ⇄ English at launch</small>
@@ -60,7 +61,7 @@ export default function HomePage() {
             <figcaption>
               <span>Meet the Phontus Interpreting Kit</span>
               <Link
-                href="/product?tab=frontline#details"
+                href="/products/interpreting-kit"
                 aria-label="Explore the Phontus Interpreting Kit"
               >
                 <ArrowUpRight aria-hidden="true" />
@@ -70,13 +71,14 @@ export default function HomePage() {
         </Container>
         <Container>
           <div className="hero-baseline">
-            <span>Built for the conversation.</span>
+            <span>Say it in your own language.</span>
             <span>
               Healthcare · Education · Business · Field operations · Hospitality
             </span>
           </div>
         </Container>
       </section>
+      <DifferentiationSection />
       <section className="editorial-section hardware-section" id="hardware">
         <Container>
           <div className="hardware-section__heading" data-reveal>
@@ -107,7 +109,7 @@ export default function HomePage() {
                 </p>
                 <Link
                   className="text-link"
-                  href="/product?tab=clinical#details"
+                  href="/products/clinical-kit"
                 >
                   Explore the Clinical Kit <ArrowUpRight aria-hidden="true" />
                 </Link>
@@ -120,23 +122,30 @@ export default function HomePage() {
                   to understand.
                 </h3>
                 <p>
-                  The Interpreting Kit fits the desks and shared spaces where
-                  conversations begin.
+                  A directional microphone focuses on the conversation. A
+                  readable transcript helps both people follow it. The
+                  Interpreting Kit stays ready at the desk.
                 </p>
+                <Link className="text-link" href="/products/interpreting-kit">
+                  Explore the Interpreting Kit <ArrowUpRight aria-hidden="true" />
+                </Link>
               </div>
             </div>
             <HardwareViews />
           </div>
         </Container>
       </section>
-      <SystemOverview />
+      <ConversationDemo />
       <HumanSection />
+      <SystemOverview />
+      <PhoneSection />
       <WorkplaceStories />
       <ProductFamily />
       <PlatformSection />
-      <TerminologySection />
       <EnterpriseSection />
+      <PilotStories />
       <OperationalProof />
+      <RolloutSection />
       <section className="editorial-section home-faq">
         <Container className="faq-section">
           <div data-reveal>
@@ -155,9 +164,7 @@ export default function HomePage() {
               Talk to Phontus <ArrowUpRight aria-hidden="true" />
             </Link>
           </div>
-          <FAQ
-            items={homeFaqs.filter((item) => !item.question.includes("caller"))}
-          />
+          <FAQ items={homeFaqs} />
         </Container>
       </section>
     </>

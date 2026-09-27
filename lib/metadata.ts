@@ -16,7 +16,7 @@ export function createMetadata(
   const url = new URL(path, siteConfig.url);
 
   return {
-    title,
+    title: path === "/" ? { absolute: title } : title,
     description,
     alternates: { canonical: url },
     openGraph: {

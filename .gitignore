@@ -18,3 +18,7 @@ npm-debug.log*
 
 # OS files
 .DS_Store
+
+# Browser QA artifacts
+/test-results/
+/playwright-report/

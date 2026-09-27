@@ -7,6 +7,7 @@ import {
   TerminologySection,
 } from "@/components/system-sections";
 import { createMetadata } from "@/lib/metadata";
+import { ConversationDemo } from "@/components/conversation-demo";
 export const metadata: Metadata = createMetadata(
   "How the conversation works",
   "Confirm the languages, speak naturally and request a human interpreter when needed. Explore the Phontus interpretation system.",
@@ -68,6 +69,7 @@ export default function HowItWorksPage() {
         </Container>
       </section>
       <HumanSection />
+      <ConversationDemo />
       <SystemOverview />
       <TerminologySection />
     </>

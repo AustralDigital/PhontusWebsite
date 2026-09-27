@@ -1,5 +1,7 @@
 import { photography } from "@/lib/photography";
 import type { Metadata } from "next";
+import Link from "next/link";
+import { siteConfig } from "@/lib/config";
 import { Container, Eyebrow, PhotoFrame } from "@/components/ui";
 import { createMetadata } from "@/lib/metadata";
 export const metadata: Metadata = createMetadata(
@@ -65,15 +67,23 @@ export default function AboutPage() {
               be available where people already talk.
             </p>
             <p>
-              Phontus brings purpose-built hardware, AI interpretation, human
-              support and deployment management into one system. The environment
-              can change. The experience should remain familiar.
+              Phontus is language-access infrastructure for the physical world.
+              We bring purpose-built hardware, AI interpretation, human
+              interpreters, phone conversations and deployment management into
+              one system. The environment can change. The experience should
+              remain familiar.
             </p>
             <p>
               We’re starting with Spanish and English, with more languages in
               development.
             </p>
           </div>
+        </Container>
+      </section>
+      <section className="editorial-section">
+        <Container className="split-grid split-grid--start">
+          <div><Eyebrow>The people behind Phontus</Eyebrow><h2>Talk with the people<br />building it.</h2></div>
+          <div><p>We’re building around the practical questions: where a kit belongs, how a conversation starts and when a person should join. Our early work with clinical teams informs those decisions.</p><p>Tell us what your team encounters at the desk, in the room or on the phone. Let’s talk about where Phontus could fit.</p><Link className="text-link" href={`mailto:${siteConfig.email}`}>Meet us in a conversation →</Link></div>
         </Container>
       </section>
       <section className="editorial-section about-principles">

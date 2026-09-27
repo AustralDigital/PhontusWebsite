@@ -1,0 +1,44 @@
+{
+  "date": "2026-09-27",
+  "framework": "16.3.6",
+  "routes": 18,
+  "viewportWidths": [
+    375,
+    390,
+    430,
+    768,
+    1024,
+    1280,
+    1440,
+    1920
+  ],
+  "responsiveChecks": 144,
+  "results": {
+    "startTime": "2026-09-27T04:28:16.617Z",
+    "duration": 84085.023,
+    "expected": 24,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "checks": [
+    "one h1 per page",
+    "canonical and OpenGraph metadata",
+    "image loading",
+    "horizontal overflow",
+    "axe WCAG 2 A/AA, 2.1 AA and best practices",
+    "browser console and page errors",
+    "internal links and fragment targets",
+    "legacy product redirects",
+    "browser back navigation",
+    "404 routes",
+    "conversation and hardware controls",
+    "FAQ expansion",
+    "mobile focus trap and Escape",
+    "client and server form validation",
+    "mocked delivery success, failure and network failure",
+    "no-JavaScript product content",
+    "reduced motion"
+  ],
+  "emailDelivery": "Valid submissions intercepted; no external email sent"
+}

@@ -39,7 +39,7 @@ export const productPanels: Array<{
     copy: "A compact tabletop kit that lives where the conversation already happens: a service counter, a school office, a hotel desk, a worksite trailer. It sits between the two people and stays plugged in.",
     features: [
       "Compact format for a shared counter",
-      "External directional microphone that rejects lobby noise",
+      "External directional microphone to help reduce surrounding noise",
       "No setup between conversations, nothing to reset",
       "Arrives pre-configured for the site it is going to",
     ],
@@ -55,7 +55,7 @@ export const productPanels: Array<{
     copy: "Interpreting built into your business number. Customers call the number they already have for you, your team answers as usual, and Phontus interprets between them on the line.",
     features: [
       "Your existing number or a dedicated one",
-      "No app, no account, no device on either end",
+      "No app or account for callers; no Phontus kit required",
       "Covers the calls that arrive when no kit is nearby",
       "Calls appear in the same session history as kit sessions",
     ],
@@ -118,7 +118,7 @@ export const solutions: Solution[] = [
   {
     slug: "healthcare",
     name: "Healthcare",
-    eyebrow: "Solutions · Healthcare",
+    eyebrow: "Industries · Healthcare",
     title: "Care that starts on time.",
     lead: "A patient arrives, checks in, is told where to go and what happens next. When those exchanges stall, everything scheduled after them runs late.",
     overviewCopy: "Check-in, care coordination, directions to the right department, scheduling and follow-up. The Clinical Kit rolls to where the patient is; the Phone Line covers the calls that come in before the visit.",
@@ -134,8 +134,13 @@ export const solutions: Solution[] = [
       "Discharge and follow-up instructions",
       "Calls before and after a visit",
     ],
-    recommendationTitle: "The cart for the room, the line for the call",
+    recommendationTitle: "At check-in, at the bedside and on the phone",
     recommendations: [
+      {
+        product: "Interpreting Kit",
+        role: "At the front desk",
+        copy: "A dedicated kit at reception for patient check-in, registration and scheduling. Staff can start the conversation where the patient arrives.",
+      },
       {
         product: "Clinical Kit",
         role: "In the room",
@@ -148,7 +153,7 @@ export const solutions: Solution[] = [
       },
     ],
     exchangeTitle: "A first-time patient at the front desk",
-    exchangeCopy: "Four turns, about forty seconds. Nothing is handed over and nobody leaves the desk to find help.",
+    exchangeCopy: "An example of patient check-in: confirming an appointment, then explaining the next step.",
     elapsed: "00:38 elapsed",
     transcript: [
       { speaker: "Visitor", language: "Spanish (US)", time: "00:04", original: "Buenos días, tengo cita a las diez con la doctora Ruiz.", translation: "Good morning, I have a ten o'clock appointment with Dr Ruiz." },
@@ -158,7 +163,7 @@ export const solutions: Solution[] = [
     ],
     changes: [
       { title: "For the staff member", copy: "No hunting for a bilingual colleague, no waiting in a phone queue, no device handed across the desk. Start the session and keep working through the queue." },
-      { title: "For the patient", copy: "Nobody asks them to install anything, create an account, or hold someone else's equipment. They speak Spanish out loud and get an answer in the same minute." },
+      { title: "For the patient", copy: "Nobody asks them to install anything, create an account, or hold someone else's equipment. They speak Spanish out loud and hear the response in their own language." },
     ],
     questionsTitle: "Asked in clinics and hospitals",
     faqs: [
@@ -172,7 +177,7 @@ export const solutions: Solution[] = [
   {
     slug: "business-operations",
     name: "Business and field operations",
-    eyebrow: "Solutions · Business and field operations",
+    eyebrow: "Industries · Business and field operations",
     title: "Work that cannot wait for a callback.",
     lead: "A customer at the counter, a driver at the dock, an installer at a door. These conversations happen once, in person, and there is no second attempt on the schedule.",
     overviewCopy: "Customer service, pickup and delivery, installations, safety briefings and shift coordination. The Interpreting Kit sits at the counter or in the trailer; the Phone Line handles the dispatch calls.",
@@ -189,7 +194,7 @@ export const solutions: Solution[] = [
     ],
     recommendationTitle: "The kit where people meet, the line where they call",
     recommendations: [
-      { product: "Interpreting Kit", role: "At the counter or in the trailer", copy: "Compact enough for a shared counter and visible from both sides. The directional microphone is the reason it works in a loud room: it listens to the two people in front of it and rejects the rest." },
+      { product: "Interpreting Kit", role: "At the counter or in the trailer", copy: "Compact enough for a shared counter and visible from both sides. The directional microphone focuses on the two people speaking and helps reduce surrounding noise." },
       { product: "Phone Line", role: "For dispatch and inbound calls", copy: "Delivery windows, service calls and schedule changes arrive by phone. Interpreting on your existing number means the caller does not have to find someone who speaks English first." },
     ],
     exchangeTitle: "Confirming a delivery window at the counter",
@@ -217,10 +222,10 @@ export const solutions: Solution[] = [
   {
     slug: "education",
     name: "Schools and districts",
-    eyebrow: "Solutions · Schools and districts",
+    eyebrow: "Industries · Schools and districts",
     title: "Families reached the first time.",
     lead: "Enrollment, an attendance question, a bus change, a form that has to come back signed. Reaching a family once is worth more than leaving three messages.",
-    overviewCopy: "Enrollment, front-office questions, attendance, transportation, events and routine family communication. A Interpreting Kit at the office window, the Phone Line for the calls home.",
+    overviewCopy: "Enrollment, front-office questions, attendance, transportation, events and routine family communication. An Interpreting Kit at the office window, the Phone Line for the calls home.",
     tags: ["Interpreting Kit", "Phone Line"],
     image: photography.education.src,
     imageMobile: photography.education.mobileSrc,
@@ -236,8 +241,8 @@ export const solutions: Solution[] = [
     elapsed: "00:41 elapsed",
     transcript: [
       { speaker: "Parent", language: "Spanish (US)", time: "00:05", original: "Vengo a inscribir a mi hija. ¿Qué documentos necesito?", translation: "I am here to enroll my daughter. Which documents do I need?" },
-      { speaker: "Front office", language: "English (US)", time: "00:14", original: "Proof of address and her immunisation record. Do you have those today?", translation: "Comprobante de domicilio y su registro de vacunas. ¿Los tiene hoy?" },
-      { speaker: "Parent", language: "Spanish (US)", time: "00:26", original: "Tengo las vacunas. El comprobante lo puedo traer mañana.", translation: "I have the immunisations. I can bring the proof of address tomorrow." },
+      { speaker: "Front office", language: "English (US)", time: "00:14", original: "Proof of address and her immunization record. Do you have those today?", translation: "Comprobante de domicilio y su registro de vacunas. ¿Los tiene hoy?" },
+      { speaker: "Parent", language: "Spanish (US)", time: "00:26", original: "Tengo las vacunas. El comprobante lo puedo traer mañana.", translation: "I have the immunizations. I can bring the proof of address tomorrow." },
       { speaker: "Front office", language: "English (US)", time: "00:35", original: "That is fine. I will start the file now so tomorrow is quick.", translation: "Está bien. Empiezo el expediente ahora para que mañana sea rápido." },
     ],
     changes: [
@@ -256,7 +261,7 @@ export const solutions: Solution[] = [
   {
     slug: "hospitality",
     name: "Hotels and hospitality",
-    eyebrow: "Solutions · Hotels and hospitality",
+    eyebrow: "Industries · Hotels and hospitality",
     title: "Service that does not need a translator app.",
     lead: "A guest at check-in, a request at eleven at night, a housekeeping question between shifts. Hospitality is judged on exchanges that take under a minute.",
     overviewCopy: "Check-in, directions, service requests and coordination between shifts and departments. The kit stays on the desk, in view of both the guest and the agent.",
@@ -299,5 +304,6 @@ export const homeFaqs = [
   { question: "Do participants need headsets?", answer: "No. The kits are designed for people to speak out loud, with a directional microphone focused on the conversation. Participants do not need to wear or share a headset." },
   { question: "What if the conversation needs a human interpreter?", answer: "Your team can request a human interpreter from the session screen when additional support is needed. Talk to us about the support arrangements for your setting." },
   { question: "Who controls transcripts and retention?", answer: "The organization operating Phontus sets session handling and access requirements. The platform supports site-level retention settings and administrator access to session history." },
+  { question: "Does the caller need an app or account?", answer: "No. The Phone Line interprets conversations on your existing business number or a dedicated one. Callers do not need an app, an account or a Phontus kit." },
   { question: "Can we start with one kit?", answer: "Yes. Start with the counter, room or site where interpretation is needed, then plan additional kits around your team’s experience." },
 ];

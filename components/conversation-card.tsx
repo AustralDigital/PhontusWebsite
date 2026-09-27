@@ -26,16 +26,16 @@ export function LanguagePair({ active = true }: { active?: boolean }) {
   );
 }
 
-export function TranscriptTurn({ line }: { line: TranscriptLine }) {
+export function TranscriptTurn({ line, showTime = true }: { line: TranscriptLine; showTime?: boolean }) {
   return (
     <article className="transcript-turn">
       <div>
         <strong>{line.speaker}</strong>
-        <span>{line.language} · {line.time}</span>
+        <span>{line.language}{showTime ? ` · ${line.time}` : ""}</span>
         {line.source === "human" ? <Badge tone="human">Human</Badge> : null}
       </div>
-      <p>{line.original}</p>
-      <p>{line.translation}</p>
+      <p lang={line.language.startsWith("Spanish") ? "es" : "en"}>{line.original}</p>
+      <p lang={line.language.startsWith("Spanish") ? "en" : "es"}>{line.translation}</p>
     </article>
   );
 }
@@ -62,30 +62,32 @@ export function SessionMock({
   elapsed = "02:18",
   human = false,
   compact = false,
+  illustrative = false,
 }: {
   lines?: TranscriptLine[];
   elapsed?: string;
   human?: boolean;
   compact?: boolean;
+  illustrative?: boolean;
 }) {
   const [phase, setPhase] = useState(0);
 
   useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (illustrative || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const timer = window.setInterval(() => setPhase((value) => (value + 1) % phases.length), 1600);
     return () => window.clearInterval(timer);
-  }, []);
+  }, [illustrative]);
 
   return (
     <div className={`session-mock ${compact ? "session-mock--compact" : ""}`}>
       <div className="session-mock__bar">
-        <Badge tone={human ? "human" : "live"}>{human ? "Human interpreter" : phases[phase]}</Badge>
-        <span className="mono">{elapsed}</span>
+        <Badge tone={human ? "human" : "live"}>{illustrative ? "Illustrative exchange" : human ? "Human interpreter" : phases[phase]}</Badge>
+        {!illustrative ? <span className="mono">{elapsed}</span> : null}
         <AudioLines aria-hidden="true" className={phase === 0 ? "is-active" : ""} />
       </div>
       <div className="session-mock__body">
         {!compact ? <LanguagePair /> : null}
-        {lines.map((line) => <TranscriptTurn line={line} key={`${line.speaker}-${line.time}`} />)}
+        {lines.map((line) => <TranscriptTurn line={line} showTime={!illustrative} key={`${line.speaker}-${line.time}`} />)}
       </div>
       {compact ? (
         <div className="session-mock__actions">

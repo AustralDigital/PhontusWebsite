@@ -1,11 +1,14 @@
 import type { MetadataRoute } from "next";
 import { siteConfig } from "@/lib/config";
 import { solutions } from "@/lib/redesign-content";
+import { products } from "@/lib/products";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const routes = [
     "",
     "/product",
+    "/platform",
+    ...products.map(({ slug }) => `/products/${slug}`),
     "/solutions",
     "/how-it-works",
     "/security",

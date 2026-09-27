@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { PhoneIncoming, Smartphone, UserRound, Users } from "lucide-react";
+import { PhoneIncoming, Monitor, UserRound, Users } from "lucide-react";
 import { notFound } from "next/navigation";
 import { SessionMock } from "@/components/conversation-card";
 import { FAQ } from "@/components/faq";
 import { ButtonLink, Container, Eyebrow, PhotoFrame, SectionHeading, Tag } from "@/components/ui";
 import { solutions } from "@/lib/redesign-content";
+import { productLinks } from "@/lib/config";
 import { siteConfig } from "@/lib/config";
 import { createMetadata } from "@/lib/metadata";
 
@@ -29,7 +30,7 @@ export default async function SolutionPage({ params }: { params: Promise<{ slug:
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Solutions", item: `${siteConfig.url}/solutions` },
+      { "@type": "ListItem", position: 1, name: "Industries", item: `${siteConfig.url}/solutions` },
       { "@type": "ListItem", position: 2, name: solution.name, item: `${siteConfig.url}/solutions/${solution.slug}` },
     ],
   };
@@ -43,7 +44,7 @@ export default async function SolutionPage({ params }: { params: Promise<{ slug:
             <h1>{solution.title}</h1>
             <p>{solution.lead}</p>
             <div className="tag-row">{solution.tags.map((tag) => <Tag key={tag}>{tag}</Tag>)}</div>
-            <Link className="text-link" href="/solutions">← All solutions</Link>
+            <Link className="text-link" href="/solutions">← All industries</Link>
           </div>
           <PhotoFrame src={solution.image} mobileSrc={solution.imageMobile} alt={solution.imageAlt} priority />
         </Container>
@@ -51,7 +52,7 @@ export default async function SolutionPage({ params }: { params: Promise<{ slug:
 
       <section className="section" id={slug === "business-operations" ? "field-operations" : undefined}>
         <Container>
-          <SectionHeading eyebrow="What it covers" title="Conversations this covers" />
+          <SectionHeading eyebrow="Everyday workflows" title="The moments where language matters" />
           <div className="hairline-grid hairline-grid--three" data-reveal>
             {solution.coverage.map((item) => <div className="coverage-tile" key={item}>{item}</div>)}
           </div>
@@ -62,11 +63,12 @@ export default async function SolutionPage({ params }: { params: Promise<{ slug:
         <Container>
           <SectionHeading eyebrow="What we recommend" title={solution.recommendationTitle} />
           <div className="card-grid card-grid--two" data-reveal>
-            {solution.recommendations.map((item, index) => (
+            {solution.recommendations.map((item) => (
               <article className="recommendation-card" key={item.product}>
-                <div><span className="icon-tile">{index === 0 ? <Smartphone aria-hidden="true" /> : <PhoneIncoming aria-hidden="true" />}</span><h3>{item.product}</h3></div>
+                <div><span className="icon-tile">{item.product === "Phone Line" ? <PhoneIncoming aria-hidden="true" /> : <Monitor aria-hidden="true" />}</span><h3>{item.product}</h3></div>
                 <span className="overline">{item.role}</span>
                 <p>{item.copy}</p>
+                <Link className="text-link" href={productLinks.find((product) => product.label === item.product)!.href}>Explore the {item.product} →</Link>
               </article>
             ))}
           </div>
@@ -80,7 +82,7 @@ export default async function SolutionPage({ params }: { params: Promise<{ slug:
             <h2>{solution.exchangeTitle}</h2>
             <p>{solution.exchangeCopy}</p>
           </div>
-          <div><p className="overline transcript-example-label">Illustrative conversation</p><SessionMock lines={solution.transcript} elapsed={solution.elapsed} /></div>
+          <div><p className="overline transcript-example-label">Illustrative conversation</p><SessionMock lines={solution.transcript} illustrative /></div>
         </Container>
       </section>
 

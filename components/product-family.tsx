@@ -19,7 +19,7 @@ export function ProductFamily() {
           <article data-reveal>
             <Link
               className="product-family__image"
-              href="/product?tab=frontline#details"
+              href="/products/interpreting-kit"
               aria-label="Explore the Phontus Interpreting Kit"
             >
               <PhotoFrame {...photography.receptionKit}
@@ -35,7 +35,7 @@ export function ProductFamily() {
               </div>
               <Link
                 className="round-link"
-                href="/product?tab=frontline#details"
+                href="/products/interpreting-kit"
                 aria-label="Explore the Interpreting Kit"
               >
                 <ArrowUpRight aria-hidden="true" />
@@ -46,7 +46,7 @@ export function ProductFamily() {
           <article data-reveal>
             <Link
               className="product-family__image product-family__image--clinical"
-              href="/product?tab=clinical#details"
+              href="/products/clinical-kit"
               aria-label="Explore the Phontus Clinical Kit"
             >
               <PhotoFrame {...photography.clinicalExamRoom}
@@ -60,7 +60,7 @@ export function ProductFamily() {
               </div>
               <Link
                 className="round-link"
-                href="/product?tab=clinical#details"
+                href="/products/clinical-kit"
                 aria-label="Explore the Clinical Kit"
               >
                 <ArrowUpRight aria-hidden="true" />

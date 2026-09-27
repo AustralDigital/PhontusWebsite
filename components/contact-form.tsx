@@ -1,6 +1,7 @@
 "use client";
 
 import { ArrowRight, CheckCircle2 } from "lucide-react";
+import Link from "next/link";
 import { useState, type FormEvent } from "react";
 import { contactSchema, settingOptions } from "@/lib/contact-schema";
 import { siteConfig } from "@/lib/config";
@@ -70,7 +71,9 @@ export function ContactForm() {
   const errorFor = (name: string) => errors[name]?.[0];
 
   return (
-    <form className="contact-form" noValidate onSubmit={onSubmit} data-reveal>
+    <form className="contact-form" id="demo-request" aria-labelledby="demo-form-heading" noValidate onSubmit={onSubmit} data-reveal>
+      <h2 id="demo-form-heading">Tell us about your team.</h2>
+      <p className="form-intro">All fields are required. A little context helps us tailor the demo.</p>
       <div className="form-row">
         <Field
           label="First name"
@@ -98,10 +101,11 @@ export function ContactForm() {
         placeholder="Where you work"
         error={errorFor("organization")}
       />
-      <label className="form-field">
-        <span>Setting</span>
+      <div className="form-field">
+        <label htmlFor="setting">Setting</label>
         <select
           name="setting"
+          id="setting"
           defaultValue=""
           aria-invalid={Boolean(errorFor("setting"))}
           aria-describedby={errorFor("setting") ? "setting-error" : undefined}
@@ -121,11 +125,13 @@ export function ContactForm() {
             {errorFor("setting")}
           </small>
         ) : null}
-      </label>
-      <label className="form-field">
-        <span>Where do language barriers show up?</span>
+      </div>
+      <div className="form-field">
+        <label htmlFor="message">Where do language barriers show up?</label>
         <textarea
           name="message"
+          id="message"
+          maxLength={2000}
           rows={4}
           placeholder="Front desk at two clinics, plus the calls that come in before appointments."
           aria-invalid={Boolean(errorFor("message"))}
@@ -137,7 +143,7 @@ export function ContactForm() {
             {errorFor("message")}
           </small>
         ) : null}
-      </label>
+      </div>
       <button
         className="button button--primary form-submit"
         type="submit"
@@ -150,11 +156,12 @@ export function ContactForm() {
         Prefer email?{" "}
         <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>
       </small>
+      <small className="form-email-note">Questions about data handling? <Link href="/privacy">Read our privacy documentation.</Link></small>
       <div className="form-status" aria-live="polite">
         {status === "success" ? (
           <p className="form-status--success">
             <CheckCircle2 aria-hidden="true" /> Thanks — we received your
-            request and will be in touch.
+            request. We’ll be in touch to arrange your demo.
           </p>
         ) : null}
         {status === "fallback" ? (
@@ -182,13 +189,15 @@ function Field({
   error?: string;
 }) {
   return (
-    <label className="form-field">
-      <span>{label}</span>
+    <div className="form-field">
+      <label htmlFor={name}>{label}</label>
       <input
         name={name}
+        id={name}
         type={type}
         placeholder={placeholder}
         required
+        maxLength={name === "firstName" || name === "lastName" ? 80 : 160}
         autoComplete={
           name === "firstName"
             ? "given-name"
@@ -206,6 +215,6 @@ function Field({
           {error}
         </small>
       ) : null}
-    </label>
+    </div>
   );
 }

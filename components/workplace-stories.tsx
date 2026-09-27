@@ -60,6 +60,7 @@ export function WorkplaceStories({
 }: {
   introduction?: boolean;
 }) {
+  const Heading = introduction ? "h3" : "h2";
   return (
     <section className="workplaces" id="industries">
       <Container>
@@ -99,14 +100,14 @@ export function WorkplaceStories({
               </div>
               <div className="workplace__copy" data-reveal>
                 <Eyebrow>{place.name}</Eyebrow>
-                <h3>
+                <Heading className="workplace__title">
                   {place.title.split("\n").map((line, i) => (
                     <span key={line}>
                       {i > 0 && <br />}
                       {line}
                     </span>
                   ))}
-                </h3>
+                </Heading>
                 <p>{place.copy}</p>
                 <Link className="text-link" href={place.href}>
                   Phontus for {place.name.toLowerCase()}{" "}

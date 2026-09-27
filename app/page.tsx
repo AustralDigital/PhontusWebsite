@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowDown, ArrowUpRight } from "lucide-react";
 import { Container, Eyebrow, PhotoFrame, ButtonLink } from "@/components/ui";
-import { HardwareViews } from "@/components/hardware-views";
+import { HardwareShowcase } from "@/components/hardware-showcase";
 import {
   SystemOverview,
   HumanSection,
@@ -94,45 +94,7 @@ export default function HomePage() {
               other.
             </p>
           </div>
-          <div className="hardware-section__grid">
-            <div className="hardware-section__details" data-reveal>
-              <div className="hardware-detail">
-                <span className="index-number">01 / At the point of care</span>
-                <h3>
-                  Bring the system
-                  <br />
-                  to the person.
-                </h3>
-                <p>
-                  The Clinical Kit brings the session screen and organized
-                  storage together on a mobile cart.
-                </p>
-                <Link
-                  className="text-link"
-                  href="/products/clinical-kit"
-                >
-                  Explore the Clinical Kit <ArrowUpRight aria-hidden="true" />
-                </Link>
-              </div>
-              <div className="hardware-detail hardware-detail--small">
-                <span className="index-number">02 / At the counter</span>
-                <h3>
-                  A dedicated place
-                  <br />
-                  to understand.
-                </h3>
-                <p>
-                  A directional microphone focuses on the conversation. A
-                  readable transcript helps both people follow it. The
-                  Interpreting Kit stays ready at the desk.
-                </p>
-                <Link className="text-link" href="/products/interpreting-kit">
-                  Explore the Interpreting Kit <ArrowUpRight aria-hidden="true" />
-                </Link>
-              </div>
-            </div>
-            <HardwareViews />
-          </div>
+          <HardwareShowcase />
         </Container>
       </section>
       <ConversationDemo />

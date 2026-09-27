@@ -91,11 +91,11 @@ test("conversation, hardware views and FAQ work with keyboard controls", async (
   await page.getByRole("button", { name: "Replay conversation" }).click();
   await expect(page.locator("#conversation-example")).toContainText("Buenos días");
   await page.getByRole("button", { name: "Previous conversation step" }).isDisabled().then((value) => expect(value).toBe(true));
-  await page.getByRole("button", { name: "Product view", exact: true }).click();
-  await expect(page.locator(".hardware-viewer img")).toHaveAttribute("alt", /Isolated front view/);
-  await page.getByRole("button", { name: "Side view", exact: true }).focus();
+  const hardware = page.locator("#hardware");
+  await hardware.getByRole("button", { name: "In the exam room", exact: true }).focus();
   await page.keyboard.press("Space");
-  await expect(page.locator(".hardware-viewer img")).toHaveAttribute("alt", /Side view/);
+  await expect(hardware.locator("img")).toHaveAttribute("alt", /in an exam room/);
+  await expect(hardware.getByRole("button", { name: /Product view|Side view/ })).toHaveCount(0);
   const faq = page.getByRole("button", { name: "Does the caller need an app or account?" });
   await faq.click();
   await expect(faq).toHaveAttribute("aria-expanded", "true");
@@ -170,4 +170,66 @@ test("core product content renders without JavaScript and reduced motion stays s
   await page.goto("/");
   expect(await page.locator(".reveal-pending").count()).toBe(0);
   expect(await page.locator("html").evaluate((el) => getComputedStyle(el).scrollBehavior)).toBe("auto");
+});
+
+for (const width of [375, 768, 1440]) {
+  test(`hardware family changes product and use setting at ${width}px`, async ({ page }, testInfo) => {
+    await page.setViewportSize({ width, height: 1000 });
+    await page.goto("/#hardware");
+    const hardware = page.locator("#hardware");
+    const photo = hardware.locator("figure img");
+    const environments = hardware.getByRole("group", { name: /environments$/ });
+    const imagePosition = () => hardware.evaluate((section) => {
+      const image = section.querySelector(".hardware-viewer__image")!.getBoundingClientRect();
+      return { top: image.top - section.getBoundingClientRect().top, height: image.height };
+    });
+    const initialPosition = await imagePosition();
+    const stories = [
+      { name: "Clinical Kit", headline: /Bring the system/, settings: ["At the doorway", "In the exam room"], href: "/products/clinical-kit" },
+      { name: "Frontline Kit", headline: /Understanding where/, settings: ["At reception", "At check-in"], href: "/contact" },
+      { name: "Interpreting Kit", headline: /A place built/, settings: ["In the office", "At reception"], href: "/products/interpreting-kit" },
+    ];
+    for (const [index, story] of stories.entries()) {
+      const select = hardware.getByRole("button", { name: `${String(index + 1).padStart(2, "0")} ${story.name}`, exact: true });
+      await select.focus();
+      await page.keyboard.press("Enter");
+      await expect(select).toBeFocused();
+      await expect(select).toHaveAttribute("aria-pressed", "true");
+      await expect(hardware.locator(".hardware-showcase__index button[aria-pressed='true']")).toHaveCount(1);
+      await expect(hardware.getByRole("heading", { level: 3 })).toHaveText(story.headline);
+      await expect(hardware.getByRole("link")).toHaveAttribute("href", story.href);
+      expect(await imagePosition()).toEqual(initialPosition);
+      await expect(environments).toHaveAccessibleName(`${story.name} environments`);
+      await expect(environments.getByRole("button").first()).toHaveAttribute("aria-pressed", "true");
+      let previousImage = "";
+      for (const setting of story.settings) {
+        await environments.getByRole("button", { name: setting, exact: true }).click();
+        await expect(environments.getByRole("button", { name: setting, exact: true })).toHaveAttribute("aria-pressed", "true");
+        await expect(hardware.locator("figcaption")).toContainText(story.name);
+        await expect(hardware.locator("figcaption")).toContainText(setting);
+        await expect(hardware.getByRole("status")).toHaveText(`${story.name} — ${setting}`);
+        await expect(photo).toHaveJSProperty("complete", true);
+        expect(await photo.evaluate((image) => (image as HTMLImageElement).naturalWidth)).toBeGreaterThan(0);
+        const src = await photo.getAttribute("src");
+        expect(src).not.toBe(previousImage);
+        expect(src).not.toContain("%2Fproduct%2F");
+        previousImage = src!;
+        expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+      }
+      await hardware.screenshot({ path: testInfo.outputPath(`${story.name.toLowerCase().replaceAll(" ", "-")}-${width}.jpg`), style: ".site-header, .skip-link { visibility: hidden; }" });
+    }
+    await hardware.getByRole("button", { name: "01 Clinical Kit", exact: true }).click();
+    await expect(environments.getByRole("button", { name: "At the doorway", exact: true })).toHaveAttribute("aria-pressed", "true");
+    await expect(hardware.getByRole("button", { name: /front view|side view|product view|angle/i })).toHaveCount(0);
+    const accessibility = await new AxeBuilder({ page }).include("#hardware").withTags(["wcag2a", "wcag2aa", "wcag21aa", "best-practice"]).analyze();
+    expect(accessibility.violations).toEqual([]);
+  });
+}
+
+test("Clinical Kit detail retains its dedicated product views", async ({ page }) => {
+  await page.goto("/products/clinical-kit");
+  await page.getByRole("button", { name: "Product view", exact: true }).click();
+  await expect(page.locator(".hardware-viewer img")).toHaveAttribute("alt", /Isolated front view/);
+  await page.getByRole("button", { name: "Side view", exact: true }).click();
+  await expect(page.locator(".hardware-viewer img")).toHaveAttribute("alt", /Side view/);
 });

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ProductNavigation } from "@/components/product-explorer";
 import { ButtonLink } from "@/components/ui";
-import { DetailRows, Directory, HumanHandoff, PhonePreview, WebsiteCTA, WebsiteHero, WebsiteLink } from "@/components/website-sections";
+import { DetailRows, Directory, HumanHandoff, PhonePreview, PhotoSpace, WebsiteCTA, WebsiteHero, WebsiteLink } from "@/components/website-sections";
 import { products } from "@/lib/products";
 import { createMetadata } from "@/lib/metadata";
 import { productDetails } from "@/lib/website-copy";
@@ -27,7 +27,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
   return (
     <>
       <WebsiteHero label={`${product.title} · ${detail.label}`} title={detail.title} copy={detail.copy}
-        availability side={phone ? <PhonePreview /> : undefined}>
+        availability side={phone ? <PhonePreview /> : <PhotoSpace size={product.id === "clinical" ? "clinical" : "kit"} />}>
         <ButtonLink href="/contact">Request a demo</ButtonLink>
       </WebsiteHero>
       <ProductNavigation selected={product.id} />

@@ -1,4 +1,4 @@
-import { DetailRows, WebsiteCTA, WebsiteHero } from "@/components/website-sections";
+import { DetailRows, WebsiteCTA, WebsiteHero, WebsitePhotoBand } from "@/components/website-sections";
 import { createMetadata } from "@/lib/metadata";
 
 const intro = "We’re building Phontus to make it easier for organizations to offer live interpretation where people already talk, from a clinic reception desk to a school office.";
@@ -9,6 +9,7 @@ export default function AboutPage() {
   return (
     <>
       <WebsiteHero label="About Phontus" title="Why we built Phontus" copy={intro} />
+      <WebsitePhotoBand size="about" />
       <DetailRows label="Why Phontus exists" title="Designed around real conversations"
         copy="Early work with dental and women’s health teams helped shape how Phontus fits into the routines of frontline staff." items={[
           ["Help people speak directly", "A shared screen helps two people speak directly to each other and follow the conversation."],

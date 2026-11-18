@@ -130,26 +130,28 @@ export function SiteHeader() {
               <X aria-hidden="true" />
             </button>
           </div>
-          <nav aria-label="Mobile navigation">
-            {siteConfig.nav.map((item) => (
-              <Link
-                key={item.label}
-                href={item.href}
-                aria-current={isCurrent(item.href) ? "page" : undefined}
-                onClick={() => setOpen(false)}
-              >
-                {item.label}
-                <ArrowUpRight aria-hidden="true" />
-              </Link>
-            ))}
-          </nav>
-          <Link
-            className="button button--primary"
-            href="/contact"
-            onClick={() => setOpen(false)}
-          >
-            Request a demo <ArrowUpRight aria-hidden="true" />
-          </Link>
+          <div className="mobile-nav__panel">
+            <nav aria-label="Mobile navigation">
+              {siteConfig.nav.map((item) => (
+                <Link
+                  key={item.label}
+                  href={item.href}
+                  aria-current={isCurrent(item.href) ? "page" : undefined}
+                  onClick={() => setOpen(false)}
+                >
+                  {item.label}
+                  <ArrowUpRight aria-hidden="true" />
+                </Link>
+              ))}
+            </nav>
+            <Link
+              className="button button--primary"
+              href="/contact"
+              onClick={() => setOpen(false)}
+            >
+              Request a demo <ArrowUpRight aria-hidden="true" />
+            </Link>
+          </div>
         </div>
       )}
     </>

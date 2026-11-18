@@ -5,7 +5,7 @@ import { notFound } from "next/navigation";
 import { SessionMock } from "@/components/conversation-card";
 import { FAQ } from "@/components/faq";
 import { ButtonLink, CheckList, Container } from "@/components/ui";
-import { WebsiteCTA, WebsiteHero, WebsiteIntro, WebsiteLink } from "@/components/website-sections";
+import { PhotoSpace, WebsiteCTA, WebsiteHero, WebsiteIntro, WebsiteLink } from "@/components/website-sections";
 import { solutions } from "@/lib/redesign-content";
 import { productLinks } from "@/lib/config";
 import { siteConfig } from "@/lib/config";
@@ -47,7 +47,7 @@ export default async function SolutionPage({ params }: { params: Promise<{ slug:
 
   return (
     <>
-      <WebsiteHero label={solution.eyebrow} title={copy.title} copy={copy.lead}>
+      <WebsiteHero label={solution.eyebrow} title={copy.title} copy={copy.lead} side={<PhotoSpace size="industry" />}>
         <ButtonLink href="/contact">Request a demo</ButtonLink>
         <WebsiteLink href="/solutions">All industries</WebsiteLink>
       </WebsiteHero>

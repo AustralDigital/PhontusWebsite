@@ -12,6 +12,15 @@ type ButtonLinkProps = {
   onClick?: MouseEventHandler<HTMLAnchorElement>;
 };
 
+export function RollingLabel({ label }: { label: string }) {
+  return (
+    <span className="rolling-label">
+      <span>{label}</span>
+      <span aria-hidden="true">{label}</span>
+    </span>
+  );
+}
+
 export function ButtonLink({
   href,
   children,
@@ -26,7 +35,9 @@ export function ButtonLink({
       href={href}
       onClick={onClick}
     >
-      <span>{children}</span>
+      {(variant === "secondary" || variant === "inverse") && typeof children === "string"
+        ? <RollingLabel label={children} />
+        : <span>{children}</span>}
       {arrow ? (
         <ArrowRight aria-hidden="true" size={17} strokeWidth={1.75} />
       ) : null}

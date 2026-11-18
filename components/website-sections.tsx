@@ -1,7 +1,7 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 import {
-  ArrowRight, Building2, Globe2, GraduationCap, Headphones, HeartPulse,
+  ArrowRight, ArrowUpRight, Building2, Globe2, GraduationCap, Headphones, HeartPulse,
   History, LockKeyhole, Monitor, Phone, Users, Warehouse,
 } from "lucide-react";
 import { ButtonLink, Container, Eyebrow } from "@/components/ui";
@@ -56,7 +56,25 @@ export function WebsiteIntro({ label, title, copy, children }: {
 }
 
 export function WebsiteLink({ href, children }: { href: string; children: ReactNode }) {
-  return <Link className="text-link website-link" href={href}>{children}<ArrowRight size={17} aria-hidden="true" /></Link>;
+  return <Link className="text-link website-link" href={href}><span>{children}</span><ArrowRight size={17} aria-hidden="true" /></Link>;
+}
+
+export function PhotoSpace({ size, desktopOnly = false }: {
+  size: "home" | "about" | "clinical" | "kit" | "industry" | "card";
+  desktopOnly?: boolean;
+}) {
+  return <div className={desktopOnly ? "website-photo-space website-photo-space--desktop" : "website-photo-space"} data-photo-slot={size} aria-hidden="true" />;
+}
+
+export function WebsitePhotoBand({ size }: { size: "home" | "about" }) {
+  return (
+    <div className="website-section website-photo-band">
+      <Container>
+        <PhotoSpace size={size} />
+        {size === "home" ? <WebsiteLink href="/products/interpreting-kit">Explore the kit</WebsiteLink> : null}
+      </Container>
+    </div>
+  );
 }
 
 export function IndustryShortcuts() {
@@ -96,12 +114,22 @@ export function Directory({ variant, intro = false, exclude }: {
           {links.map((item, index) => {
             if (item.href === exclude) return null;
             const Icon = icons[index];
+            const showPhotoSpace = !exclude && item.href !== "/products/phone-line";
             return (
-              <Link href={item.href} className="website-directory__card" key={item.href}>
-                <span className="website-directory__icon"><Icon size={22} aria-hidden="true" /></span>
-                <span className="website-directory__arrow"><ArrowRight size={17} aria-hidden="true" /></span>
-                {intro || exclude ? <h3>{item.label}</h3> : <h2>{item.label}</h2>}
-                <p>{item.copy}</p>
+              <Link href={item.href} className="website-directory__card website-directory__card--directory" key={item.href}>
+                {showPhotoSpace ? <PhotoSpace size="card" desktopOnly={!products && intro} /> : null}
+                {!showPhotoSpace && !exclude ? (
+                  <div className="website-directory__phone">
+                    <Phone size={24} aria-hidden="true" />
+                    <span>Spanish and English</span>
+                  </div>
+                ) : null}
+                <div className="website-directory__body">
+                  <span className="website-directory__icon"><Icon size={22} aria-hidden="true" /></span>
+                  <span className="website-directory__arrow"><ArrowUpRight size={17} aria-hidden="true" /></span>
+                  {intro || exclude ? <h3>{item.label}</h3> : <h2>{item.label}</h2>}
+                  <p>{item.copy}</p>
+                </div>
               </Link>
             );
           })}

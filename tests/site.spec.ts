@@ -83,16 +83,17 @@ test("legacy product links redirect and product navigation supports browser hist
 test("conversation and FAQ work with keyboard controls", async ({ page }) => {
   await page.goto("/");
   await page.getByRole("button", { name: "Play example" }).click();
+  const active = page.locator('#conversation-example [aria-hidden="false"]');
   const next = page.getByRole("button", { name: "Next turn" });
   await next.focus();
   await page.keyboard.press("Enter");
-  await expect(page.locator("#conversation-example blockquote")).toHaveAttribute("lang", "en");
-  await expect(page.locator("#conversation-example")).toContainText("Good morning");
+  await expect(active.locator("blockquote")).toHaveAttribute("lang", "en");
+  await expect(active).toContainText("Good morning");
   await next.click();
   await next.click();
-  await expect(page.locator("#conversation-example")).toContainText("Por supuesto");
+  await expect(active).toContainText("Por supuesto");
   await page.getByRole("button", { name: "Replay example" }).click();
-  await expect(page.locator("#conversation-example")).toContainText("Buenos días");
+  await expect(active).toContainText("Buenos días");
   await expect(page.getByRole("button", { name: "Previous turn" })).toBeDisabled();
   await expect(page.getByText(/English and Spanish are available by default/)).toBeVisible();
   await expect(page.getByText(/Modern Standard Arabic.*Korean/)).toBeVisible();
@@ -187,4 +188,82 @@ test("product and industry cards are keyboard accessible and legacy photography 
   await expect(page).toHaveURL(/\/solutions\/education/);
   expect((await request.get("/images/phontus-kits-og-v2.webp")).status()).toBe(404);
   expect((await request.get("/reference/reference_image.png")).status()).toBe(404);
+});
+
+test("empty photo spaces follow the desktop and mobile page layouts", async ({ page }) => {
+  const slots = [
+    { path: "/", desktop: ["home", ...Array(6).fill("card")], mobile: ["home", "card", "card"] },
+    { path: "/about", desktop: ["about"], mobile: ["about"] },
+    { path: "/product", desktop: ["card", "card"], mobile: ["card", "card"] },
+    { path: "/products/clinical-kit", desktop: ["clinical"], mobile: ["clinical"] },
+    { path: "/products/interpreting-kit", desktop: ["kit"], mobile: ["kit"] },
+    { path: "/products/phone-line", desktop: [], mobile: [] },
+    { path: "/solutions", desktop: Array(4).fill("card"), mobile: Array(4).fill("card") },
+    ...["healthcare", "education", "business-operations", "hospitality"].map(slug => ({
+      path: `/solutions/${slug}`, desktop: ["industry"], mobile: ["industry"],
+    })),
+  ];
+
+  for (const { path, desktop, mobile } of slots) {
+    await page.goto(path);
+    for (const [width, expected] of [[1440, desktop], [390, mobile]] as const) {
+      await page.setViewportSize({ width, height: 900 });
+      const visible = page.locator("[data-photo-slot]:visible");
+      const found = await visible.evaluateAll(nodes => nodes.map(node => ({
+        slot: node.getAttribute("data-photo-slot"),
+        hidden: node.getAttribute("aria-hidden"),
+        empty: !node.hasChildNodes(),
+        height: node.getBoundingClientRect().height,
+      })));
+      expect(found.map(node => node.slot), `${path} at ${width}px`).toEqual(expected);
+      expect(found.every(node => node.hidden === "true" && node.empty && node.height >= 163)).toBe(true);
+    }
+  }
+});
+
+test("the prototype interactions animate with motion enabled and settle with reduced motion", async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: "no-preference" });
+  await page.setViewportSize({ width: 1440, height: 960 });
+  await page.goto("/");
+  await expect(page.locator(".website-hero__copy")).toHaveCSS("animation-name", "website-home-enter");
+  await expect(page.locator('[data-photo-slot="home"]')).toHaveCSS("animation-delay", "0.09s");
+
+  const card = page.getByRole("region", { name: "Phontus products" }).getByRole("link", { name: /Clinical Kit/ });
+  await card.hover();
+  await expect(card).toHaveCSS("transform", "matrix(1, 0, 0, 1, 0, -4)");
+  await expect(card.locator(".website-directory__arrow svg")).toHaveCSS("transform", "matrix(1, 0, 0, 1, 2, -2)");
+
+  const kitLink = page.getByRole("link", { name: "Explore the kit", exact: true });
+  await kitLink.hover();
+  await expect(kitLink.locator("svg")).toHaveCSS("transform", "matrix(1, 0, 0, 1, 4, 0)");
+
+  const play = page.getByRole("button", { name: "Play example" });
+  await play.hover();
+  const roll = play.locator(".rolling-label > span").first();
+  await expect.poll(() => roll.evaluate(node => new DOMMatrix(getComputedStyle(node).transform).m42)).toBeLessThan(-1);
+  await play.click();
+  await page.getByRole("button", { name: "Next turn" }).click();
+  const track = page.locator(".website-session__track");
+  await expect(track).toHaveCSS("transition-duration", "0.26s");
+  await expect.poll(() => track.evaluate(node =>
+    Math.abs(new DOMMatrix(getComputedStyle(node).transform).m41 + node.getBoundingClientRect().width),
+  )).toBeLessThan(1);
+
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await expect(track).toHaveCSS("transition-duration", "0s");
+  await expect(page.locator(".website-hero__copy")).toHaveCSS("animation-name", "none");
+  await card.hover();
+  await expect(card).toHaveCSS("transform", "none");
+
+  await page.emulateMedia({ reducedMotion: "no-preference" });
+  await page.setViewportSize({ width: 390, height: 860 });
+  await page.getByRole("button", { name: "Open navigation" }).click();
+  const panel = page.locator(".mobile-nav__panel");
+  await expect(panel).toHaveCSS("animation-name", "website-menu-open");
+  const header = await page.locator(".mobile-nav__head").boundingBox();
+  const menu = await panel.boundingBox();
+  expect(header).not.toBeNull();
+  expect(menu?.y).toBe((header?.y ?? 0) + (header?.height ?? 0));
+  await page.keyboard.press("Escape");
+  await expect(page.getByRole("button", { name: "Open navigation" })).toBeFocused();
 });

@@ -2,7 +2,7 @@ import { ButtonLink, Container } from "@/components/ui";
 import { ConversationDemo } from "@/components/conversation-demo";
 import { FAQ } from "@/components/faq";
 import {
-  Directory, IndustryShortcuts, PlatformSummary, WebsiteCTA, WebsiteHero, WebsiteIntro, WebsiteLink,
+  Directory, IndustryShortcuts, PlatformSummary, WebsiteCTA, WebsiteHero, WebsiteIntro, WebsiteLink, WebsitePhotoBand,
 } from "@/components/website-sections";
 import { createMetadata } from "@/lib/metadata";
 import { homeFaqs } from "@/lib/redesign-content";
@@ -20,6 +20,7 @@ export default function HomePage() {
         <ButtonLink href="/contact">Request a demo</ButtonLink>
         <ButtonLink href="/how-it-works" variant="secondary">How it works</ButtonLink>
       </WebsiteHero>
+      <WebsitePhotoBand size="home" />
       <IndustryShortcuts />
       <Directory variant="products" intro />
       <ConversationDemo />

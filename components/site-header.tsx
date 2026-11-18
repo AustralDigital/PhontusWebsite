@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Menu, X, ArrowUpRight } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import { ButtonLink } from "@/components/ui";
 import { siteConfig } from "@/lib/config";
 
 export function SiteHeader() {
@@ -88,9 +89,7 @@ export function SiteHeader() {
               </Link>
             ))}
           </nav>
-          <Link href="/contact" className="button button--primary header-cta">
-            Request a demo <ArrowUpRight aria-hidden="true" size={17} />
-          </Link>
+          <ButtonLink href="/contact" className="header-cta">Request a demo</ButtonLink>
           <button
             ref={trigger}
             type="button"
@@ -144,13 +143,7 @@ export function SiteHeader() {
                 </Link>
               ))}
             </nav>
-            <Link
-              className="button button--primary"
-              href="/contact"
-              onClick={() => setOpen(false)}
-            >
-              Request a demo <ArrowUpRight aria-hidden="true" />
-            </Link>
+            <ButtonLink href="/contact" onClick={() => setOpen(false)}>Request a demo</ButtonLink>
           </div>
         </div>
       )}

@@ -6,6 +6,46 @@ export function SiteBehavior() {
   const pathname = usePathname();
   const previousPath = useRef(pathname);
   useEffect(() => {
+    const pressDuration = 90;
+    let press: { button: HTMLElement; pointer: number; start: number } | null = null;
+    let releaseTimer: number | undefined;
+
+    const reset = () => {
+      window.clearTimeout(releaseTimer);
+      press?.button.removeAttribute("data-button-pressed");
+      press = null;
+    };
+    const startPress = (event: PointerEvent) => {
+      if (event.pointerType === "mouse" || !event.isPrimary || !(event.target instanceof Element)) return;
+      const button = event.target.closest<HTMLElement>(".button:not(:disabled)");
+      if (!button?.querySelector(".rolling-label")) return;
+      reset();
+      button.setAttribute("data-button-pressed", "");
+      press = { button, pointer: event.pointerId, start: performance.now() };
+    };
+    const endPress = (event: PointerEvent) => {
+      if (press?.pointer !== event.pointerId) return;
+      if (event.type === "pointercancel") {
+        reset();
+        return;
+      }
+      releaseTimer = window.setTimeout(reset, Math.max(0, pressDuration - (performance.now() - press.start)));
+    };
+
+    window.addEventListener("pointerdown", startPress, true);
+    window.addEventListener("pointerup", endPress, true);
+    window.addEventListener("pointercancel", endPress, true);
+    window.addEventListener("blur", reset);
+    return () => {
+      reset();
+      window.removeEventListener("pointerdown", startPress, true);
+      window.removeEventListener("pointerup", endPress, true);
+      window.removeEventListener("pointercancel", endPress, true);
+      window.removeEventListener("blur", reset);
+    };
+  }, []);
+
+  useEffect(() => {
     const navigated = previousPath.current !== pathname;
     previousPath.current = pathname;
     const media = window.matchMedia("(prefers-reduced-motion: reduce)");

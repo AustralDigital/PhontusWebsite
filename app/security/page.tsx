@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Container, Eyebrow, PageHero } from "@/components/ui";
+import { ButtonLink, Container, Eyebrow, PageHero } from "@/components/ui";
 import { createMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = createMetadata(
@@ -21,7 +21,7 @@ export default function SecurityPage() {
   return (
     <>
       <PageHero eyebrow="Security" title="Security and data controls" copy="Manage who can access each site, which devices are enrolled, and how long transcripts are retained.">
-        <Link className="button button--secondary" href="/privacy">Read about privacy</Link>
+        <ButtonLink href="/privacy" variant="secondary" arrow={false}>Read about privacy</ButtonLink>
       </PageHero>
       <section className="section section--compact">
         <Container>

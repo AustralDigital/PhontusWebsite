@@ -267,3 +267,58 @@ test("the prototype interactions animate with motion enabled and settle with red
   await page.keyboard.press("Escape");
   await expect(page.getByRole("button", { name: "Open navigation" })).toBeFocused();
 });
+
+test("primary and secondary calls to action roll their labels and show a distinct pressed state", async ({ page, browser, baseURL }) => {
+  await page.emulateMedia({ reducedMotion: "no-preference" });
+  await page.goto("/");
+  const header = page.locator(".site-header").getByRole("link", { name: "Request a demo", exact: true });
+  const hero = page.locator(".website-hero");
+  const primary = hero.getByRole("link", { name: "Request a demo", exact: true });
+  const secondary = hero.getByRole("link", { name: "How it works", exact: true });
+
+  for (const action of [header, primary, secondary]) {
+    const incoming = action.locator('.rolling-label > [aria-hidden="true"]');
+    await expect(incoming).toHaveCSS("opacity", "0");
+    await action.hover();
+    await expect(incoming).toHaveCSS("opacity", "1");
+    await expect(action.locator("svg")).toHaveCSS("transform", "matrix(1, 0, 0, 1, 3, 0)");
+    await page.mouse.down();
+    await expect(action.locator("svg")).toHaveCSS("transform", "matrix(1, 0, 0, 1, 1, 0)");
+    await page.mouse.move(1, 1);
+    await page.mouse.up();
+    await expect(incoming).toHaveCSS("opacity", "0");
+  }
+
+  await primary.click();
+  await expect(page).toHaveURL(/\/contact$/);
+  const submit = page.locator("form").getByRole("button", { name: "Request a demo", exact: true });
+  await submit.hover();
+  await expect(submit.locator('.rolling-label > [aria-hidden="true"]')).toHaveCSS("opacity", "1");
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await expect(submit.locator(".rolling-label > :first-child")).toHaveCSS("opacity", "1");
+  await expect(submit.locator("svg")).toHaveCSS("transform", "none");
+
+  const touch = await browser.newContext({
+    baseURL, viewport: { width: 390, height: 844 }, isMobile: true,
+    hasTouch: true, reducedMotion: "no-preference",
+  });
+  try {
+    const phone = await touch.newPage();
+    await phone.goto("/");
+    await phone.getByRole("button", { name: "Open navigation" }).tap();
+    await phone.locator(".mobile-nav__panel").evaluate(node => Promise.all(node.getAnimations().map(animation => animation.finished)));
+    const mobileDemo = phone.getByRole("dialog").getByRole("link", { name: "Request a demo", exact: true });
+    const bounds = await mobileDemo.boundingBox();
+    if (!bounds) throw new Error("The mobile menu’s demo button is missing.");
+    const input = await touch.newCDPSession(phone);
+    await input.send("Input.dispatchTouchEvent", {
+      type: "touchStart", touchPoints: [{ x: bounds.x + bounds.width / 2, y: bounds.y + bounds.height / 2 }],
+    });
+    await expect(mobileDemo.locator('.rolling-label > [aria-hidden="true"]')).toHaveCSS("opacity", "1");
+    await expect(mobileDemo.locator("svg")).toHaveCSS("transform", "matrix(1, 0, 0, 1, 1, 0)");
+    await input.send("Input.dispatchTouchEvent", { type: "touchEnd", touchPoints: [] });
+    await expect(phone).toHaveURL(/\/contact$/);
+  } finally {
+    await touch.close();
+  }
+});

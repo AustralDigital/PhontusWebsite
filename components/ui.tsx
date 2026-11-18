@@ -35,9 +35,7 @@ export function ButtonLink({
       href={href}
       onClick={onClick}
     >
-      {(variant === "secondary" || variant === "inverse") && typeof children === "string"
-        ? <RollingLabel label={children} />
-        : <span>{children}</span>}
+      {typeof children === "string" ? <RollingLabel label={children} /> : <span>{children}</span>}
       {arrow ? (
         <ArrowRight aria-hidden="true" size={17} strokeWidth={1.75} />
       ) : null}

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useState, type FormEvent } from "react";
 import { contactSchema, settingOptions } from "@/lib/contact-schema";
 import { siteConfig } from "@/lib/config";
+import { RollingLabel } from "@/components/ui";
 
 type FieldErrors = Partial<Record<string, string[]>>;
 
@@ -149,7 +150,7 @@ export function ContactForm() {
         type="submit"
         disabled={status === "submitting"}
       >
-        {status === "submitting" ? "Sending…" : "Request a demo"}
+        <RollingLabel label={status === "submitting" ? "Sending…" : "Request a demo"} />
         <ArrowRight aria-hidden="true" />
       </button>
       <small className="form-email-note">

@@ -4,6 +4,7 @@
   --website-gutter: clamp(24px, 6.11vw, 88px);
   --website-section-space: clamp(54px, 6.67vw, 96px);
   --website-mint: #28e5b0;
+  --website-dark-raised: #18362e;
   --website-dark-rule: #33554a;
   --website-dark-text: #bed0c5;
   --website-settle: cubic-bezier(.32, .72, 0, 1);
@@ -288,23 +289,72 @@
 .contact-page h1 { font-size: clamp(42px, 5.2vw, 76px); }
 .contact-page .demo-agenda h2 { font-size: 22px; }
 .rolling-label { display: inline-block; position: relative; overflow: hidden; }
-.rolling-label > span { display: block; transform: translateY(var(--label-offset, 0)); transition: transform 200ms cubic-bezier(0, 0, .35, 1); }
-.rolling-label > [aria-hidden="true"] { position: absolute; inset: 100% 0 auto; }
-.button--secondary:has(.rolling-label) { background: var(--white); }
-.button:has(.rolling-label):is(:focus-visible, :active) {
-  --label-offset: -100%;
-  border-color: var(--green-800);
-  background: var(--green-50);
-  color: var(--green-950);
+.rolling-label > span {
+  display: block;
+  transform: translateY(var(--button-label-offset, 0%));
+  transition: transform var(--button-time) var(--button-ease), opacity var(--button-time) var(--button-ease);
 }
-.button:active .rolling-label > span { transition-duration: 85ms; }
+.rolling-label > :first-child { opacity: var(--button-label-rest, 1); }
+.rolling-label > [aria-hidden="true"] {
+  position: absolute;
+  inset: 100% 0 auto;
+  opacity: var(--button-label-enter, 0);
+}
+.button:has(.rolling-label) {
+  --button-time: 200ms;
+  --button-ease: cubic-bezier(0, 0, .35, 1);
+  background-color: var(--button-fill, var(--button-rest-fill, transparent));
+  color: var(--button-ink, var(--button-rest-ink, var(--text-primary)));
+  box-shadow: 0 0 0 var(--button-ring-width, 0) var(--button-ring, transparent);
+  transition: background-color var(--button-time) var(--button-ease),
+    color var(--button-time) var(--button-ease),
+    box-shadow var(--button-time) var(--button-ease);
+}
+.button:has(.rolling-label) > svg {
+  transform: translateX(var(--button-arrow-offset, 0px));
+  transition: transform var(--button-time) var(--button-ease);
+}
+.button--primary:has(.rolling-label) {
+  --button-rest-fill: var(--green-950);
+  --button-rest-ink: var(--white);
+  --button-hover-fill: var(--website-dark-raised);
+  --button-press-fill: var(--green-950);
+  --button-hover-ink: var(--white);
+  --button-hover-ring: #28e5b055;
+  --button-press-ring: #28e5b099;
+}
+.button--secondary:has(.rolling-label) { --button-rest-fill: var(--white); }
+.button--inverse:has(.rolling-label) { --button-rest-ink: var(--white); }
+.button--accent:has(.rolling-label) { --button-rest-fill: var(--yellow-300); }
+.button:has(.rolling-label):not(:disabled):is(:focus-visible, :active, [data-button-pressed]) {
+  --button-label-offset: -100%;
+  --button-label-rest: 0;
+  --button-label-enter: 1;
+  --button-arrow-offset: 3px;
+  --button-fill: var(--button-hover-fill, var(--green-100));
+  --button-ink: var(--button-hover-ink, var(--green-950));
+  --button-ring: var(--button-hover-ring, #28e5b065);
+  --button-ring-width: 3px;
+}
 @media (hover: hover) {
-  .button:has(.rolling-label):hover {
-    --label-offset: -100%;
-    border-color: var(--green-800);
-    background: var(--green-50);
-    color: var(--green-950);
+  .button:has(.rolling-label):not(:disabled):hover {
+    --button-label-offset: -100%;
+    --button-label-rest: 0;
+    --button-label-enter: 1;
+    --button-arrow-offset: 3px;
+    --button-fill: var(--button-hover-fill, var(--green-100));
+    --button-ink: var(--button-hover-ink, var(--green-950));
+    --button-ring: var(--button-hover-ring, #28e5b065);
+    --button-ring-width: 3px;
   }
+}
+.button:has(.rolling-label):not(:disabled):is(:active, [data-button-pressed]) {
+  --button-time: 90ms;
+  --button-ease: ease-out;
+  --button-arrow-offset: 1px;
+  --button-fill: var(--button-press-fill, var(--website-mint));
+  --button-ring: var(--button-press-ring, #08664e53);
+  --button-ring-width: 2px;
 }
 
 @media (max-width: 1100px) {
@@ -334,7 +384,10 @@
 }
 @media (prefers-reduced-motion: reduce) {
   .rolling-label > span,
+  .button:has(.rolling-label) > svg,
   .website-directory__card:is(:hover, :active),
   .website-directory__card:is(:hover, :active) .website-directory__arrow svg,
   .website-link:is(:hover, :focus-visible, :active) svg { transform: none; }
+  .rolling-label > :first-child { opacity: 1; }
+  .rolling-label > [aria-hidden="true"] { opacity: 0; }
 }

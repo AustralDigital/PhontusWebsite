@@ -1,77 +1,31 @@
-import { photography } from "@/lib/photography";
-import type { Metadata } from "next";
-import { Container, Eyebrow, PhotoFrame } from "@/components/ui";
-import {
-  HumanSection,
-  SystemOverview,
-  TerminologySection,
-} from "@/components/system-sections";
-import { createMetadata } from "@/lib/metadata";
+import { ButtonLink } from "@/components/ui";
 import { ConversationDemo } from "@/components/conversation-demo";
-export const metadata: Metadata = createMetadata(
-  "How the conversation works",
-  "Confirm the languages, speak naturally and request a human interpreter when needed. Explore the Phontus interpretation system.",
+import { DetailRows, HumanHandoff, WebsiteCTA, WebsiteHero } from "@/components/website-sections";
+import { createMetadata } from "@/lib/metadata";
+import { conversationSteps } from "@/lib/website-copy";
+
+export const metadata = createMetadata(
+  "How it works",
+  "Choose a language pair, take turns speaking, and request a human interpreter when needed.",
   "/how-it-works",
 );
+
 export default function HowItWorksPage() {
   return (
     <>
-      <section className="page-hero">
-        <Container>
-          <Eyebrow>The technology, made approachable</Eyebrow>
-          <h1>Start with a conversation.</h1>
-          <p>
-            Phontus brings the hardware, interpretation and support together.
-            Your team stays focused on the person in front of them.
-          </p>
-        </Container>
-      </section>
-      <Container>
-        <PhotoFrame
-          className="technology-photo"
-          {...photography.reception}
-          priority
-          sizes="90vw"
-        />
-      </Container>
-      <section className="editorial-section">
-        <Container>
-          <div className="section-intro">
-            <Eyebrow>A familiar rhythm</Eyebrow>
-            <h2>
-              Speak. Listen.
-              <br />
-              Keep the connection.
-            </h2>
-          </div>
-          <div className="how-steps">
-            {[
-              [
-                "Confirm the languages",
-                "Choose the languages for the conversation and start a session. Spanish and English are supported at launch.",
-              ],
-              [
-                "Speak naturally, one turn at a time",
-                "Speak to each other. Phontus interprets out loud and shows the exchange on screen, so both people can follow along.",
-              ],
-              [
-                "Bring in a person when needed",
-                "Request a human interpreter from the session when the conversation needs additional support.",
-              ],
-            ].map(([title, copy], index) => (
-              <article className="how-step" key={title} data-reveal>
-                <span className="index-number">0{index + 1}</span>
-                <h3>{title}</h3>
-                <p>{copy}</p>
-              </article>
-            ))}
-          </div>
-        </Container>
-      </section>
-      <HumanSection />
-      <ConversationDemo />
-      <SystemOverview />
-      <TerminologySection />
+      <WebsiteHero label="Technology" title="How Phontus interprets a conversation"
+        copy="Choose a language pair on a Phontus kit and start speaking. Phontus interprets aloud in both directions and displays the exchange on screen." availability>
+        <ButtonLink href="#conversation">See an example</ButtonLink>
+        <ButtonLink href="/contact" variant="secondary">Request a demo</ButtonLink>
+      </WebsiteHero>
+      <DetailRows label="The session" title="From setup to conversation" items={conversationSteps} count />
+      <ConversationDemo technology />
+      <HumanHandoff />
+      <DetailRows label="Channels" title="In person or on the phone" items={[
+        ["On a Phontus kit", "A shared screen and directional microphone help both people follow the conversation."],
+        ["On the Phone Line", "Callers use your business number. Your team can request a human interpreter during the call."],
+      ]} />
+      <WebsiteCTA title="See how a session works in your setting" />
     </>
   );
 }

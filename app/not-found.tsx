@@ -4,8 +4,8 @@ export default function NotFound() {
   return (
     <PageHero
       eyebrow="404"
-      title="This page moved out of view."
-      copy="The page you requested could not be found. Return to the Phontus homepage or get in touch with our team."
+      title="Page not found"
+      copy="Go back to the Phontus homepage or contact our team for help."
     >
       <div className="button-row">
         <ButtonLink href="/">Back to home</ButtonLink>

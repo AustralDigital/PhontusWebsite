@@ -23,7 +23,7 @@ export function SiteFooter() {
       <div className="site-footer__bottom">
         <div className="container">
           <span>© 2026 Phontus, Inc.</span>
-          <span>Spanish ⇄ English at launch</span>
+          <span>English and Spanish available</span>
         </div>
       </div>
     </footer>

@@ -1,18 +1,34 @@
-import type { Metadata } from "next";
-import { PlatformSection, SystemMap, EnterpriseSection } from "@/components/system-sections";
-import { RolloutSection } from "@/components/access-sections";
-import { ButtonLink, Container, Eyebrow } from "@/components/ui";
+import { ButtonLink } from "@/components/ui";
+import { AdminPreview, DetailRows, WebsiteCTA, WebsiteHero, WebsiteLink } from "@/components/website-sections";
 import { createMetadata } from "@/lib/metadata";
+import { platformPoints } from "@/lib/website-copy";
 
-export const metadata: Metadata = createMetadata("The Phontus platform", "Manage sites, people, interpreting devices, sessions, usage and transcript retention. One operational view for kits and phone interpretation.", "/platform");
+export const metadata = createMetadata(
+  "The Phontus platform",
+  "Manage sites, staff, devices, session history, and transcript retention from the Phontus admin console.",
+  "/platform",
+);
 
 export default function PlatformPage() {
   return (
     <>
-      <section className="page-hero platform-hero"><Container className="split-grid split-grid--center"><div><Eyebrow>The Phontus platform</Eyebrow><h1>Language access.<br />An everyday operation.</h1><p>Give administrators a shared view of the system your teams use. Sites, people, devices and phone sessions stay connected as you grow.</p><div className="button-row"><ButtonLink href="/contact">See the platform in a demo</ButtonLink></div></div><SystemMap /></Container></section>
-      <PlatformSection />
-      <EnterpriseSection />
-      <RolloutSection />
+      <WebsiteHero label="Platform" title="Manage Phontus across every site"
+        copy="Manage devices and staff access, review kit sessions and calls, and set transcript retention by site in the Phontus admin console." side={<AdminPreview />}>
+        <ButtonLink href="/contact">Request a demo</ButtonLink>
+      </WebsiteHero>
+      <DetailRows label="Administration" title="What administrators can manage" items={platformPoints} />
+      <DetailRows label="Rollout" title="Start with one site" copy="Choose one location where your team regularly needs interpretation." items={[
+        ["Set up your first location", "Choose the counter, room, or phone line where your team regularly needs interpretation."],
+        ["Give staff the right access", "Set up devices and staff accounts, and configure transcript retention for that site."],
+        ["Decide where to expand", "Use feedback and site usage to decide where to add another kit or line."],
+      ]} />
+      <DetailRows label="Security and retention" title="Control access and retention" dark items={[
+        ["Manage access by site", "Designated administrators decide which staff can access which sites."],
+        ["Set transcript retention", "Configure retention per site and review data handling for your deployment."],
+      ]}>
+        <WebsiteLink href="/security">Explore security</WebsiteLink>
+      </DetailRows>
+      <WebsiteCTA title="See the platform with your team" />
     </>
   );
 }

@@ -1,12 +1,11 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ProductExplorer, ProductNavigation } from "@/components/product-explorer";
-import { HardwareViews } from "@/components/hardware-views";
-import { HumanSection } from "@/components/system-sections";
-import { Container } from "@/components/ui";
+import { ProductNavigation } from "@/components/product-explorer";
+import { ButtonLink } from "@/components/ui";
+import { DetailRows, Directory, HumanHandoff, PhonePreview, WebsiteCTA, WebsiteHero, WebsiteLink } from "@/components/website-sections";
 import { products } from "@/lib/products";
 import { createMetadata } from "@/lib/metadata";
+import { productDetails } from "@/lib/website-copy";
 
 export function generateStaticParams() {
   return products.map(({ slug }) => ({ slug }));
@@ -16,21 +15,29 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const product = products.find((item) => item.slug === slug);
   if (!product) return {};
-  return createMetadata(product.title, product.description, `/products/${product.slug}`);
+  return createMetadata(product.title, productDetails[product.slug].copy, `/products/${product.slug}`);
 }
 
 export default async function ProductDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const product = products.find((item) => item.slug === slug);
   if (!product) notFound();
+  const detail = productDetails[product.slug];
+  const phone = product.id === "phone";
   return (
     <>
-      <Container><nav className="breadcrumb" aria-label="Breadcrumb"><Link href="/product">Products</Link><span aria-hidden="true">/</span><span aria-current="page">{product.title}</span></nav></Container>
-      <ProductExplorer selected={product.id} heading="h1" />
+      <WebsiteHero label={`${product.title} · ${detail.label}`} title={detail.title} copy={detail.copy}
+        availability side={phone ? <PhonePreview /> : undefined}>
+        <ButtonLink href="/contact">Request a demo</ButtonLink>
+      </WebsiteHero>
       <ProductNavigation selected={product.id} />
-      {product.id === "clinical" ? <section className="editorial-section"><Container className="split-grid split-grid--center"><div><h2>Bring the conversation<br />to the bedside.</h2><p>The session screen, storage and wheeled base move together. Explore the Clinical Kit in a care setting and on its own.</p></div><HardwareViews /></Container></section> : null}
-      <HumanSection />
-      <section className="section section--compact"><Container><div className="inline-cta"><div><h2>Part of your organization.<br />Part of one system.</h2><p>Manage sites, staff, device enrollment, retention and usage across kits and the Phone Line.</p></div><Link className="text-link" href="/platform">Explore the platform →</Link></div></Container></section>
+      <DetailRows title={phone ? "How an interpreted call works" : "How the kit works"} label={product.title} items={detail.points} count={phone} />
+      <DetailRows title={phone ? "Where the Phone Line fits" : "Where the kit fits"} items={detail.contexts}>
+        <WebsiteLink href={detail.fit}>Explore related use cases</WebsiteLink>
+      </DetailRows>
+      <HumanHandoff />
+      <Directory variant="products" exclude={`/products/${product.slug}`} />
+      <WebsiteCTA title={`See the ${product.title} in action`} copy="Bring an example from your work. We’ll walk through how the setup would handle it." />
     </>
   );
 }

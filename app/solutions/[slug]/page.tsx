@@ -1,14 +1,22 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { PhoneIncoming, Monitor, UserRound, Users } from "lucide-react";
+import { PhoneIncoming, Monitor } from "lucide-react";
 import { notFound } from "next/navigation";
 import { SessionMock } from "@/components/conversation-card";
 import { FAQ } from "@/components/faq";
-import { ButtonLink, Container, Eyebrow, PhotoFrame, SectionHeading, Tag } from "@/components/ui";
+import { ButtonLink, CheckList, Container } from "@/components/ui";
+import { WebsiteCTA, WebsiteHero, WebsiteIntro, WebsiteLink } from "@/components/website-sections";
 import { solutions } from "@/lib/redesign-content";
 import { productLinks } from "@/lib/config";
 import { siteConfig } from "@/lib/config";
 import { createMetadata } from "@/lib/metadata";
+import { industryDetails } from "@/lib/website-copy";
+
+function industryCopy(slug: string) {
+  return Object.hasOwn(industryDetails, slug)
+    ? industryDetails[slug as keyof typeof industryDetails]
+    : null;
+}
 
 export function generateStaticParams() {
   return solutions.map((solution) => ({ slug: solution.slug }));
@@ -17,14 +25,16 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
   const solution = solutions.find((item) => item.slug === slug);
-  if (!solution) return {};
-  return createMetadata(solution.name, solution.lead, `/solutions/${solution.slug}`);
+  const copy = industryCopy(slug);
+  if (!solution || !copy) return {};
+  return createMetadata(solution.name, copy.lead, `/solutions/${solution.slug}`);
 }
 
 export default async function SolutionPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const solution = solutions.find((item) => item.slug === slug);
-  if (!solution) notFound();
+  const copy = industryCopy(slug);
+  if (!solution || !copy) notFound();
 
   const breadcrumbData = {
     "@context": "https://schema.org",
@@ -37,85 +47,48 @@ export default async function SolutionPage({ params }: { params: Promise<{ slug:
 
   return (
     <>
-      <section className="solution-detail-hero">
-        <Container className="split-grid split-grid--center">
-          <div>
-            <Eyebrow>{solution.eyebrow}</Eyebrow>
-            <h1>{solution.title}</h1>
-            <p>{solution.lead}</p>
-            <div className="tag-row">{solution.tags.map((tag) => <Tag key={tag}>{tag}</Tag>)}</div>
-            <Link className="text-link" href="/solutions">← All industries</Link>
-          </div>
-          <PhotoFrame src={solution.image} mobileSrc={solution.imageMobile} alt={solution.imageAlt} priority />
+      <WebsiteHero label={solution.eyebrow} title={copy.title} copy={copy.lead}>
+        <ButtonLink href="/contact">Request a demo</ButtonLink>
+        <WebsiteLink href="/solutions">All industries</WebsiteLink>
+      </WebsiteHero>
+
+      <section className="website-section website-section--canvas" id={slug === "business-operations" ? "field-operations" : undefined}>
+        <Container className="website-split website-split--rows">
+          <WebsiteIntro label="Where Phontus fits" title="Conversations Phontus can support" copy={copy.summary} />
+          <div className="website-checklist"><CheckList items={solution.coverage} /></div>
         </Container>
       </section>
 
-      <section className="section" id={slug === "business-operations" ? "field-operations" : undefined}>
+      <section className="website-section">
         <Container>
-          <SectionHeading eyebrow="Everyday workflows" title="The moments where language matters" />
-          <div className="hairline-grid hairline-grid--three" data-reveal>
-            {solution.coverage.map((item) => <div className="coverage-tile" key={item}>{item}</div>)}
-          </div>
-        </Container>
-      </section>
-
-      <section className="section section--white section--bordered">
-        <Container>
-          <SectionHeading eyebrow="What we recommend" title={solution.recommendationTitle} />
-          <div className="card-grid card-grid--two" data-reveal>
+          <WebsiteIntro label="Recommended setup" title={solution.recommendationTitle} />
+          <div className="website-directory">
             {solution.recommendations.map((item) => (
-              <article className="recommendation-card" key={item.product}>
-                <div><span className="icon-tile">{item.product === "Phone Line" ? <PhoneIncoming aria-hidden="true" /> : <Monitor aria-hidden="true" />}</span><h3>{item.product}</h3></div>
-                <span className="overline">{item.role}</span>
+              <Link className="website-directory__card" key={item.product} href={productLinks.find((product) => product.label === item.product)!.href}>
+                <span className="website-directory__icon">{item.product === "Phone Line" ? <PhoneIncoming aria-hidden="true" /> : <Monitor aria-hidden="true" />}</span>
+                <h3>{item.product}</h3>
                 <p>{item.copy}</p>
-                <Link className="text-link" href={productLinks.find((product) => product.label === item.product)!.href}>Explore the {item.product} →</Link>
-              </article>
+              </Link>
             ))}
           </div>
         </Container>
       </section>
 
-      <section className="section">
-        <Container className="split-grid split-grid--start">
-          <div data-reveal>
-            <Eyebrow>One exchange</Eyebrow>
-            <h2>{solution.exchangeTitle}</h2>
-            <p>{solution.exchangeCopy}</p>
-          </div>
-          <div><p className="overline transcript-example-label">Illustrative conversation</p><SessionMock lines={solution.transcript} illustrative /></div>
+      <section className="website-section website-section--dark">
+        <Container className="website-split website-split--center">
+          <WebsiteIntro label="Example conversation" title={solution.exchangeTitle} copy={solution.exchangeCopy} />
+          <SessionMock lines={solution.transcript} illustrative />
         </Container>
       </section>
 
-      <section className="section section--white section--bordered">
-        <Container>
-          <SectionHeading eyebrow="What changes" title="What changes on both sides" />
-          <div className="hairline-grid hairline-grid--two" data-reveal>
-            {solution.changes.map((item, index) => (
-              <article className="change-card" key={item.title}>
-                <span className="icon-tile">{index === 0 ? <Users aria-hidden="true" /> : <UserRound aria-hidden="true" />}</span>
-                <h3>{item.title}</h3>
-                <p>{item.copy}</p>
-              </article>
-            ))}
-          </div>
-        </Container>
-      </section>
-
-      <section className="section section--bordered">
-        <Container className="split-grid split-grid--start faq-section">
-          <div data-reveal><Eyebrow>Questions</Eyebrow><h2>{solution.questionsTitle}</h2></div>
+      <section className="website-section website-section--canvas website-faq">
+        <Container className="website-split website-split--rows">
+          <WebsiteIntro title="Frequently asked questions"><WebsiteLink href="/contact">Talk to Phontus</WebsiteLink></WebsiteIntro>
           <FAQ items={solution.faqs} />
         </Container>
       </section>
 
-      <section className="section section--compact">
-        <Container>
-          <div className="inline-cta" data-reveal>
-            <div><h2>{solution.ctaTitle}</h2><p>{solution.ctaCopy}</p></div>
-            <ButtonLink href="/contact">Request a demo</ButtonLink>
-          </div>
-        </Container>
-      </section>
+      <WebsiteCTA title="Plan your first Phontus setup" />
 
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbData) }} />
     </>

@@ -139,17 +139,17 @@ export const solutions: Solution[] = [
       {
         product: "Interpreting Kit",
         role: "At the front desk",
-        copy: "A dedicated kit at reception for patient check-in, registration and scheduling. Staff can start the conversation where the patient arrives.",
+        copy: "A tabletop kit for patient check-in, registration, and scheduling at reception.",
       },
       {
         product: "Clinical Kit",
         role: "In the room",
-        copy: "The cart goes to the patient. In an exam room or at the bedside the screen sits where both people can read it standing, and the frame carries the cleaning supplies the room already requires.",
+        copy: "Bring the cart into the exam room or to the bedside. Both people can see the screen, and the cart has space for cleaning supplies.",
       },
       {
         product: "Phone Line",
         role: "Before and after the visit",
-        copy: "Much of a clinic's language work happens on the phone: confirming an appointment, explaining what to bring, following up. The line covers those calls without waiting for a cart to be free.",
+        copy: "Interpret calls about appointments, what to bring to a visit, and follow-up on your clinic’s phone line.",
       },
     ],
     exchangeTitle: "A first-time patient at the front desk",
@@ -167,9 +167,9 @@ export const solutions: Solution[] = [
     ],
     questionsTitle: "Asked in clinics and hospitals",
     faqs: [
-      { question: "Can one cart move between rooms during a shift?", answer: "Yes. The Clinical Kit is built to roll, and a session belongs to the site rather than to a room. Teams that cover several rooms usually start with one cart and add a second where the wait shows up." },
+      { question: "Can one cart move between rooms during a shift?", answer: "Yes. Staff can move the Clinical Kit between rooms. Sessions are associated with the site." },
       { question: "Who can read a transcript afterwards?", answer: "The administrators you designate, according to the retention rules you set per site in the admin console." },
-      { question: "Does the patient have to do anything?", answer: "No. They speak. There is no app, no account, no headset and nothing to sign before the conversation starts." },
+      { question: "Does the patient have to do anything?", answer: "Staff operate the kit. The patient speaks directly to the staff member and can follow the exchange on the shared screen." },
     ],
     ctaTitle: "See the Clinical Kit in a room like yours.",
     ctaCopy: "Twenty minutes, a real session, and an honest answer about whether the cart or the line fits first.",
@@ -194,11 +194,11 @@ export const solutions: Solution[] = [
     ],
     recommendationTitle: "The kit where people meet, the line where they call",
     recommendations: [
-      { product: "Interpreting Kit", role: "At the counter or in the trailer", copy: "Compact enough for a shared counter and visible from both sides. The directional microphone focuses on the two people speaking and helps reduce surrounding noise." },
-      { product: "Phone Line", role: "For dispatch and inbound calls", copy: "Delivery windows, service calls and schedule changes arrive by phone. Interpreting on your existing number means the caller does not have to find someone who speaks English first." },
+      { product: "Interpreting Kit", role: "At the counter or in the trailer", copy: "The tabletop kit fits a shared counter. Its directional microphone helps reduce surrounding noise." },
+      { product: "Phone Line", role: "For dispatch and inbound calls", copy: "Interpret conversations about delivery windows, service requests, and schedule changes on your existing business number." },
     ],
     exchangeTitle: "Confirming a delivery window at the counter",
-    exchangeCopy: "The exchange that decides whether someone waits at home all day.",
+    exchangeCopy: "A customer asks about a delivery, and a staff member helps find a time that works.",
     elapsed: "00:34 elapsed",
     transcript: [
       { speaker: "Customer", language: "Spanish (US)", time: "00:03", original: "Vine a preguntar cuándo llega mi pedido.", translation: "I came to ask when my order arrives." },
@@ -212,9 +212,9 @@ export const solutions: Solution[] = [
     ],
     questionsTitle: "Asked in counters and worksites",
     faqs: [
-      { question: "Does it work in a loud environment?", answer: "That is what the external directional microphone is for. It focuses on the two people speaking and helps reduce surrounding sound, which is why the kits no longer use headsets." },
-      { question: "Can we run kits across several locations?", answer: "Yes. Sites, devices and staff accounts are managed together in the admin console, and usage by site tells you where to add the next kit." },
-      { question: "What if there is no counter, just a truck?", answer: "The Interpreting Kit is a tabletop format, so it needs a surface and power. Where neither exists, the Phone Line covers the conversation instead." },
+      { question: "Does it work in a loud environment?", answer: "The kit’s directional microphone helps reduce surrounding noise. We can demonstrate the setup with a scenario from your workplace." },
+      { question: "Can we run kits across several locations?", answer: "Yes. Manage sites, devices, and staff access in the admin console, and review usage by location." },
+      { question: "What does the tabletop kit need on site?", answer: "The tabletop kit needs a stable surface and power. The Phone Line is an option for conversations that take place by phone." },
     ],
     ctaTitle: "Put a kit on your busiest counter.",
     ctaCopy: "Tell us where the queue backs up and we will show a session in that exact setting.",
@@ -233,11 +233,11 @@ export const solutions: Solution[] = [
     coverage: ["Enrollment and registration", "Front-office questions", "Attendance and tardiness", "Transportation changes", "Events, permissions and forms", "Routine calls home"],
     recommendationTitle: "Where families actually reach you",
     recommendations: [
-      { product: "Interpreting Kit", role: "At the front office window", copy: "A parent arrives with a question and an hour of their day. The kit sits on the office counter so the exchange finishes at the window instead of becoming an appointment." },
-      { product: "Phone Line", role: "For calls home", copy: "Attendance, transport and event calls go out by phone. Interpreting on the line means staff can make the call themselves rather than routing it to whoever in the building speaks Spanish." },
+      { product: "Interpreting Kit", role: "At the front office window", copy: "Keep a kit at the school office window for enrollment questions, forms, and day-to-day conversations with families." },
+      { product: "Phone Line", role: "For calls home", copy: "Use phone interpretation to contact families about attendance, transportation, and school events." },
     ],
     exchangeTitle: "A registration question at the office window",
-    exchangeCopy: "The conversation that decides whether a child starts school on Monday or the following week.",
+    exchangeCopy: "A parent asks which documents they need to enroll their child.",
     elapsed: "00:41 elapsed",
     transcript: [
       { speaker: "Parent", language: "Spanish (US)", time: "00:05", original: "Vengo a inscribir a mi hija. ¿Qué documentos necesito?", translation: "I am here to enroll my daughter. Which documents do I need?" },
@@ -253,7 +253,7 @@ export const solutions: Solution[] = [
     faqs: [
       { question: "Can each campus have its own kit?", answer: "Yes. Each site is configured separately in the admin console, with its own devices, staff accounts and retention rules." },
       { question: "Can staff use it for outbound calls home?", answer: "Yes. The Phone Line interprets in both directions, so a call a staff member places is interpreted the same way as one that comes in." },
-      { question: "Who can read what was said?", answer: "Only the administrators you designate, under the retention rules you set. If your district needs transcripts deleted on a shorter schedule, that is a per-site setting." },
+      { question: "Who can read what was said?", answer: "Your district manages who can access transcripts and sets how long each site keeps them." },
     ],
     ctaTitle: "Start at the office window that sees the most families.",
     ctaCopy: "We will run a session against a real enrollment conversation and size it from there.",
@@ -272,11 +272,11 @@ export const solutions: Solution[] = [
     coverage: ["Check-in and check-out", "Directions and recommendations", "Service and housekeeping requests", "Billing questions", "Coordination between departments", "Calls to the front desk"],
     recommendationTitle: "At the desk and on the line",
     recommendations: [
-      { product: "Interpreting Kit", role: "At the front desk", copy: "It sits on the desk in view of both the guest and the agent, so nobody reaches for a phone and holds it up to a stranger. The exchange stays a conversation between two people." },
-      { product: "Phone Line", role: "For in-house and inbound calls", copy: "Requests come from rooms and from outside the building at every hour. Interpreting on the line means the overnight agent handles them without waking anyone up." },
+      { product: "Interpreting Kit", role: "At the front desk", copy: "Set the kit where guests and staff can both see the screen during check-in and service requests." },
+      { product: "Phone Line", role: "For in-house and inbound calls", copy: "Interpret calls about reservations, directions, and requests from guests during their stay." },
     ],
     exchangeTitle: "A late check-out request at the desk",
-    exchangeCopy: "A small ask, answered immediately, that decides how the stay is remembered.",
+    exchangeCopy: "A guest asks for a later checkout and a place to leave their luggage.",
     elapsed: "00:29 elapsed",
     transcript: [
       { speaker: "Guest", language: "Spanish (US)", time: "00:03", original: "¿Puedo salir más tarde mañana? Mi vuelo es a las seis.", translation: "Can I check out later tomorrow? My flight is at six." },
@@ -290,9 +290,9 @@ export const solutions: Solution[] = [
     ],
     questionsTitle: "Asked in hotels",
     faqs: [
-      { question: "Does the guest have to interact with the device?", answer: "No. They speak to the agent. The screen shows what is happening so both people can follow it, but only the agent operates it." },
-      { question: "Can we put kits at more than one desk?", answer: "Yes. Each desk is a site in the admin console, with its own device and usage view." },
-      { question: "Does it work in a busy lobby?", answer: "The external directional microphone focuses on the guest and the agent and helps reduce surrounding noise. That is why the kits no longer use headsets." },
+      { question: "Does the guest have to interact with the device?", answer: "Staff operate the kit. Guests speak directly to staff and can follow the exchange on the screen." },
+      { question: "Can we put kits at more than one desk?", answer: "Yes. Enroll multiple kits and organize them by site in the admin console." },
+      { question: "Does it work in a busy lobby?", answer: "The kit’s directional microphone helps reduce surrounding noise so staff and guests can speak directly to each other." },
     ],
     ctaTitle: "See a check-in run in Spanish.",
     ctaCopy: "Twenty minutes on a call, using the conversations your front desk actually has.",
@@ -300,10 +300,10 @@ export const solutions: Solution[] = [
 ];
 
 export const homeFaqs = [
-  { question: "Which languages does Phontus support?", answer: "Spanish and English at launch, with more languages in development. We’ll discuss current availability for your deployment during a demo." },
-  { question: "Do participants need headsets?", answer: "No. The kits are designed for people to speak out loud, with a directional microphone focused on the conversation. Participants do not need to wear or share a headset." },
-  { question: "What if the conversation needs a human interpreter?", answer: "Your team can request a human interpreter from the session screen when additional support is needed. Talk to us about the support arrangements for your setting." },
-  { question: "Who controls transcripts and retention?", answer: "The organization operating Phontus sets session handling and access requirements. The platform supports site-level retention settings and administrator access to session history." },
-  { question: "Does the caller need an app or account?", answer: "No. The Phone Line interprets conversations on your existing business number or a dedicated one. Callers do not need an app, an account or a Phontus kit." },
-  { question: "Can we start with one kit?", answer: "Yes. Start with the counter, room or site where interpretation is needed, then plan additional kits around your team’s experience." },
+  { question: "Which languages does Phontus support?", answer: "English and Spanish are available by default. Phontus is previewing selected kit language pairs that include Modern Standard Arabic, Standard Mandarin, Japanese, Brazilian Portuguese, French, German, Hindi, and Korean. Ask us about the pair your team needs." },
+  { question: "Do participants need headsets?", answer: "Participants speak directly to each other. A directional microphone picks up the conversation, so participants can keep their hands free." },
+  { question: "What if the conversation needs a human interpreter?", answer: "Staff can request a human interpreter from the session screen. Ask us about interpreter availability for your setting." },
+  { question: "Who controls transcripts and retention?", answer: "Your organization sets transcript retention by site and manages who can access session history." },
+  { question: "Does the caller need an app or account?", answer: "Callers simply dial your business number or a dedicated line. The call itself is all they need to join." },
+  { question: "Can we start with one kit?", answer: "Yes. Start with one counter or room and use staff feedback and site usage to plan where to expand." },
 ];

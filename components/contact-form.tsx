@@ -72,8 +72,8 @@ export function ContactForm() {
 
   return (
     <form className="contact-form" id="demo-request" aria-labelledby="demo-form-heading" noValidate onSubmit={onSubmit} data-reveal>
-      <h2 id="demo-form-heading">Tell us about your team.</h2>
-      <p className="form-intro">All fields are required. A little context helps us tailor the demo.</p>
+      <h2 id="demo-form-heading">Tell us about your team</h2>
+      <p className="form-intro">All fields are required. Share a brief example so we can tailor your demo.</p>
       <div className="form-row">
         <Field
           label="First name"
@@ -98,7 +98,7 @@ export function ContactForm() {
       <Field
         label="Organization"
         name="organization"
-        placeholder="Where you work"
+        placeholder="Organization name"
         error={errorFor("organization")}
       />
       <div className="form-field">
@@ -127,13 +127,13 @@ export function ContactForm() {
         ) : null}
       </div>
       <div className="form-field">
-        <label htmlFor="message">Where do language barriers show up?</label>
+        <label htmlFor="message">Where would your team use interpretation?</label>
         <textarea
           name="message"
           id="message"
           maxLength={2000}
           rows={4}
-          placeholder="Front desk at two clinics, plus the calls that come in before appointments."
+          placeholder="For example, patient check-in or calls to confirm appointments."
           aria-invalid={Boolean(errorFor("message"))}
           aria-describedby={errorFor("message") ? "message-error" : undefined}
           required
@@ -160,8 +160,7 @@ export function ContactForm() {
       <div className="form-status" aria-live="polite">
         {status === "success" ? (
           <p className="form-status--success">
-            <CheckCircle2 aria-hidden="true" /> Thanks — we received your
-            request. We’ll be in touch to arrange your demo.
+            <CheckCircle2 aria-hidden="true" /> Demo request received. Our team will email you to schedule your demo.
           </p>
         ) : null}
         {status === "fallback" ? (

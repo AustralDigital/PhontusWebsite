@@ -1,38 +1,31 @@
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
-import { FinalCTA } from "@/components/final-cta";
 import { SiteBehavior } from "@/components/site-behavior";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { siteConfig } from "@/lib/config";
 import "./globals.css";
+import "./website.css";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
-  title: { default: "Phontus | Language-access infrastructure", template: "%s | Phontus" },
+  title: { default: "Phontus | Live interpretation for frontline teams", template: "%s | Phontus" },
   description: siteConfig.description,
   applicationName: siteConfig.name,
   icons: { icon: "/brand/phontus-mark.svg", apple: "/brand/phontus-mark.svg" },
   openGraph: {
     type: "website",
     siteName: siteConfig.name,
-    title: "Phontus | Language-access infrastructure",
+    title: "Phontus | Live interpretation for frontline teams",
     description: siteConfig.description,
     url: siteConfig.url,
-    images: [{
-      url: "/images/phontus-kits-og-v2.webp",
-      width: 1200,
-      height: 630,
-      alt: "Two people speaking naturally with a Phontus interpreting kit between them.",
-    }],
   },
   twitter: {
-    card: "summary_large_image",
-    title: "Phontus | Language-access infrastructure",
+    card: "summary",
+    title: "Phontus | Live interpretation for frontline teams",
     description: siteConfig.description,
-    images: [{ url: "/images/phontus-kits-og-v2.webp", alt: "A Phontus interpreting kit in use." }],
   },
 };
 
@@ -58,7 +51,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       <body>
         <a className="skip-link" href="#main-content">Skip to content</a>
         <SiteHeader />
-        <main id="main-content">{children}<FinalCTA /></main>
+        <main id="main-content">{children}</main>
         <SiteFooter />
         <SiteBehavior />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />

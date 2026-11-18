@@ -20,18 +20,20 @@ const capabilities = [
 export default function SecurityPage() {
   return (
     <>
-      <PageHero eyebrow="Security" title="Security is a practice, not a claim." copy="Language access is part of your operations. So are the decisions about access, devices and data. Here is how Phontus supports those decisions." />
+      <PageHero eyebrow="Security" title="Security and data controls" copy="Manage who can access each site, which devices are enrolled, and how long transcripts are retained.">
+        <Link className="button button--secondary" href="/privacy">Read about privacy</Link>
+      </PageHero>
       <section className="section section--compact">
         <Container>
-          <div className="section-heading"><Eyebrow>Current capabilities</Eyebrow><h2>Specific controls.<br />Clear responsibilities.</h2><p>The organization operating Phontus controls its sites, staff access and transcript settings.</p></div>
+          <div className="section-heading"><Eyebrow>Current capabilities</Eyebrow><h2>How sessions and access are managed</h2></div>
           <dl className="security-capabilities">
             {capabilities.map(({ title, scope, copy }) => <div key={title}><dt><span className="overline">{scope}</span><strong>{title}</strong></dt><dd>{copy}</dd></div>)}
           </dl>
           <div className="split-grid split-grid--start security-review" data-reveal>
             <div>
               <Eyebrow>Review your deployment</Eyebrow>
-              <h2>Get the detail<br />your team needs.</h2>
-              <p>A security review should cover your actual data flow and requirements. Ask for the current security summary and discuss the details below before deployment.</p>
+              <h2>Review your organization’s requirements</h2>
+              <p>Request the current security summary to review data handling, retention, and access with your team.</p>
               <p>Our privacy documentation identifies open questions about audio handling, retention defaults, deletion timing and subprocessors. Review those with us for your setting.</p>
               <Link className="text-link" href="/contact">Request a security discussion →</Link>
             </div>

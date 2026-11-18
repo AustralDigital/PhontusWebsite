@@ -21,7 +21,7 @@ export function SiteHeader() {
     document.body.style.overflow = "hidden";
     const background = Array.from(
       document.querySelectorAll<HTMLElement>(
-        "main, body > footer, body > .final-cta",
+        ".skip-link, .site-header, main, body > footer",
       ),
     );
     background.forEach((el) => {
@@ -131,14 +131,13 @@ export function SiteHeader() {
             </button>
           </div>
           <nav aria-label="Mobile navigation">
-            {siteConfig.nav.map((item, index) => (
+            {siteConfig.nav.map((item) => (
               <Link
                 key={item.label}
                 href={item.href}
                 aria-current={isCurrent(item.href) ? "page" : undefined}
                 onClick={() => setOpen(false)}
               >
-                <span className="index-number">0{index + 1}</span>
                 {item.label}
                 <ArrowUpRight aria-hidden="true" />
               </Link>
@@ -151,7 +150,6 @@ export function SiteHeader() {
           >
             Request a demo <ArrowUpRight aria-hidden="true" />
           </Link>
-          <p>Interpretation for the physical world.</p>
         </div>
       )}
     </>
